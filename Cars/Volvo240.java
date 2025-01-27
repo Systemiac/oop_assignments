@@ -1,5 +1,5 @@
+package cars;
 import java.awt.*;
-package oob_lab1;
 
 public class Volvo240 implements ICar {
 

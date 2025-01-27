@@ -1,6 +1,5 @@
+package cars;
 import java.awt.*;
-// import oob_lab1.ICar;
-package oob_lab1;
 
 public class Saab95 implements ICar {
 

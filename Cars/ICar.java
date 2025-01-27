@@ -1,4 +1,4 @@
-package oob_lab1;
+package cars;
 
 public interface ICar {
     int getNrDoors();
