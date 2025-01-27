@@ -1,6 +1,8 @@
 import java.awt.*;
+// import oob_lab1.ICar;
+package oob_lab1;
 
-public class Saab95{
+public class Saab95 implements ICar {
 
     public boolean turboOn;
     public int nrDoors; // Number of doors on the car
@@ -18,13 +20,17 @@ public class Saab95{
         stopEngine();
     }
     
+    @Override
     public int getNrDoors(){
         return nrDoors;
     }
+
+    @Override
     public double getEnginePower(){
         return enginePower;
     }
 
+    @Override
     public double getCurrentSpeed(){
         return currentSpeed;
     }
@@ -37,10 +43,12 @@ public class Saab95{
 	    color = clr;
     }
 
+    @Override
     public void startEngine(){
 	    currentSpeed = 0.1;
     }
 
+    @Override
     public void stopEngine(){
 	    currentSpeed = 0;
     }

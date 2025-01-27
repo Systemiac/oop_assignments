@@ -1,6 +1,7 @@
 import java.awt.*;
+package oob_lab1;
 
-public class Volvo240{
+public class Volvo240 implements ICar {
 
     public final static double trimFactor = 1.25;
     public int nrDoors; // Number of doors on the car
@@ -17,13 +18,17 @@ public class Volvo240{
         stopEngine();
     }
     
+    @Override
     public int getNrDoors(){
         return nrDoors;
     }
+
+    @Override
     public double getEnginePower(){
         return enginePower;
     }
 
+    @Override
     public double getCurrentSpeed(){
         return currentSpeed;
     }
@@ -36,10 +41,12 @@ public class Volvo240{
 	    color = clr;
     }
 
+    @Override
     public void startEngine(){
 	    currentSpeed = 0.1;
     }
 
+    @Override
     public void stopEngine(){
 	    currentSpeed = 0;
     }
