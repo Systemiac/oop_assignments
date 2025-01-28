@@ -1,57 +1,15 @@
 package cars;
 import java.awt.*;
 
-public class Saab95 implements ICar {
+public class Saab95 extends Car {
 
     private boolean turboOn;
-    private int nrDoors; // Number of doors on the car
-    private double enginePower; // Engine power of the car
-    private double currentSpeed; // The current speed of the car
-    private Color color; // Color of the car
-    private String modelName; // The car model name
     
     public Saab95(){
-        nrDoors = 2;
-        color = Color.red;
-        enginePower = 125;
+        super(2,Color.red,125, "Saab95");       
 	    turboOn = false;
-        modelName = "Saab95";
-        stopEngine();
     }
     
-    @Override
-    public int getNrDoors(){
-        return nrDoors;
-    }
-
-    @Override
-    public double getEnginePower(){
-        return enginePower;
-    }
-
-    @Override
-    public double getCurrentSpeed(){
-        return currentSpeed;
-    }
-
-    public Color getColor(){
-        return color;
-    }
-
-    public void setColor(Color clr){
-	    color = clr;
-    }
-
-    @Override
-    public void startEngine(){
-	    currentSpeed = 0.1;
-    }
-
-    @Override
-    public void stopEngine(){
-	    currentSpeed = 0;
-    }
-
     public void setTurboOn(){
 	    turboOn = true;
     }
@@ -60,27 +18,10 @@ public class Saab95 implements ICar {
 	    turboOn = false;
     }
     
+    @Override
     public double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;
         return enginePower * 0.01 * turbo;
-    }
-
-    public void incrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
-    }
-
-    public void decrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
-    }
-    
-    // TODO fix this method according to lab pm
-    public void gas(double amount){
-        incrementSpeed(amount);
-    }
-
-    // TODO fix this method according to lab pm
-    public void brake(double amount){
-        decrementSpeed(amount);
     }
 }

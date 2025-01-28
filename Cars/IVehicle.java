@@ -1,6 +1,6 @@
 package cars;
 
-public interface ICar {
+public interface IVehicle {
     int getNrDoors();
     double getEnginePower();
     double getCurrentSpeed();
