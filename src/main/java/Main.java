@@ -1,5 +1,3 @@
-package oob_lab1;
-
 import cars.Saab95;
 import cars.Volvo240;
 

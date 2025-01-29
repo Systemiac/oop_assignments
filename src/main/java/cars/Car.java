@@ -1,7 +1,10 @@
 package cars;
-import java.awt.*;
+import java.awt.Color;
 
-public abstract class Car implements IVehicle, Movable {
+import interfaces.Movable;
+import interfaces.Vehicle;
+
+public abstract class Car implements Vehicle, Movable {
     
     protected int nrDoors; // Number of doors on the car
     protected double currentSpeed; // The current speed of the car
@@ -23,6 +26,11 @@ public abstract class Car implements IVehicle, Movable {
         this.posY = 0;
         this.dir = Direction.north;
         stopEngine();
+    }
+
+    // denne, getModelName(), tycks saknats
+    public String getModelName() {
+        return modelName;
     }
 
     public abstract double speedFactor();
