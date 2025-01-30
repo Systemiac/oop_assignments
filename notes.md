@@ -13,7 +13,7 @@ oob_lab1/
 |   |   |   |   | - Car.java
 |   |   |   |   | - Saab95.java
 |   |   |   |   | - Volvo240.java
-|   |   |   | - interface/
+|   |   |   | - interfaces/
 |   |   |   |   | - Vehicle.java
 |   |   |   |   | - Movable.java
 |   | - test/
@@ -33,6 +33,8 @@ javac -d out -sourcepath src/main/java src/main/java/main.java
 ### Kör
 java -cp out Main
 
+### Testa med Maven
+mvn test, alternativt mvn clean test
 
 ## Viktiga funktioner i JUnit
 
@@ -52,7 +54,7 @@ java -cp out Main
 
 ### Assertioner: JUnit tillhandahåller metoder för att jämföra förväntade och faktiska resultat.
 
-- assertEquals(expected, actual): Kontrollerar att två värden är lika.
+- assertEquals(expected, actual): Kontrollerar att två värden är lika, och tillåter kommenatar. Ger möjlighet vi double/loat att testa dessas felmarginal (sparas inte helt korrekt i minnet)
 
 - assertTrue(condition): Kontrollerar att ett villkor är sant.
 

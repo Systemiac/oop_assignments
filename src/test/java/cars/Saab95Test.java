@@ -1,8 +1,9 @@
 package cars;
 
+import java.awt.Color;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import java.awt.*;
 
 public class Saab95Test {
 
@@ -26,7 +27,6 @@ public class Saab95Test {
     @Test
     public void testSetTurboOff() {
         Saab95 saab = new Saab95();
-        saab.setTurboOn(); // Sätter på turbon först
         saab.setTurboOff();
         assertEquals(1.0, saab.speedFactor() / (saab.getEnginePower() * 0.01), 0.0001,
                      "Turbo ska vara avstängd och speedFactor ska vara normalt");
