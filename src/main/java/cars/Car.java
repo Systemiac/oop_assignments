@@ -6,16 +6,17 @@ import interfaces.Vehicle;
 
 public abstract class Car implements Vehicle, Movable {
     
-    protected int nrDoors; // Number of doors on the car
-    protected double currentSpeed; // The current speed of the car
-    protected Color color; // Color of the car
-    protected double enginePower; // Engine power of the car
-    protected String modelName;
-    protected double posX, posY;
-    protected enum Direction {
+    private int nrDoors; // Number of doors on the car
+    private double currentSpeed; // The current speed of the car
+    private Color color; // Color of the car
+    private double enginePower; // Engine power of the car
+    private String modelName;
+    private double posX, posY;
+    public enum Direction {
         north, east, south, west;
     }
     private Direction dir;
+
  
     public Car(int nrDoors,Color color, double enginePower, String modelName){
         this.nrDoors=nrDoors;
@@ -55,6 +56,14 @@ public abstract class Car implements Vehicle, Movable {
 	    color = clr;
     }
 
+    public double getPosX(){
+        return posX;
+    }
+
+    public double getPosY(){
+	    return  posY;
+    }
+
     public void startEngine(){
 	    currentSpeed = 0.1;
     }
@@ -62,11 +71,17 @@ public abstract class Car implements Vehicle, Movable {
     public void stopEngine(){
 	    currentSpeed = 0;
     }
+    
+    //Just for testing
+    public int getDir(){
+        return dir.ordinal();
+    }
 
     public void move(){
         switch (dir) {
             case north:
                 posY -= currentSpeed;
+            
                 break;
             case west:
                 posX -= currentSpeed;
@@ -79,6 +94,8 @@ public abstract class Car implements Vehicle, Movable {
                 break;
         }
     }
+
+
 
     public void turnLeft() {
         switch (dir) {
@@ -130,11 +147,11 @@ public abstract class Car implements Vehicle, Movable {
         else System.out.println("Invalid input!");
     }
 
-    public void incrementSpeed(double amount){
+    private void incrementSpeed(double amount){
 	    currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
     
-    public void decrementSpeed(double amount){
+    private void decrementSpeed(double amount){
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 }
