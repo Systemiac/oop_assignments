@@ -3,65 +3,64 @@ package cars;
 import java.awt.Color;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-
-
-
-public class Volvo240Test{
+public class Volvo240Test {
 
     @Test
     public void testConstructor() {
         Volvo240 volvo = new Volvo240();
-        assertEquals(4, volvo.getNrDoors(), "Volvo240 ska ha 4 dörrar");
-        assertEquals(Color.black, volvo.getColor(), "Volvo240 ska vara svart");
-        assertEquals(100, volvo.getEnginePower(), "Volvo240 ska ha 100 hk");
-        assertEquals("Volvo240", volvo.getModelName(), "Modellnamnet ska vara Volvo240");
+        assertEquals(4, volvo.getNrDoors());
+        assertEquals(Color.black, volvo.getColor());
+        assertEquals(100, volvo.getEnginePower());
+        assertEquals("Volvo240", volvo.getModelName());
     }
 
     @Test
-    public void testSpeedFactor(){
+    public void testSpeedFactor() {
         Volvo240 volvo = new Volvo240();
-        double expectedFactor = 100 * 0.01 *1.25;
-        assertEquals(expectedFactor, volvo.speedFactor(), "Speedfactor ska vara 1.25 vid start");
+        double expectedFactor = 100 * 0.01 * 1.25;
+        assertEquals(expectedFactor, volvo.speedFactor());
 
     }
 
     @Test
-    public void testSetColor(){
+    public void testSetColor() {
         Volvo240 volvo = new Volvo240();
         volvo.setColor(Color.pink);
         assertEquals(volvo.getColor(), Color.pink);
     }
 
     @Test
-    public void testGetCurrentSpeed(){
+    public void testGetCurrentSpeed() {
         Volvo240 volvo = new Volvo240();
         assertEquals(volvo.getCurrentSpeed(), 0);
     }
 
     @Test
-    public void testStartEngine(){
+    public void testStartEngine() {
         Volvo240 volvo = new Volvo240();
         volvo.startEngine();
         assertEquals(volvo.getCurrentSpeed(), 0.1);
     }
 
     @Test
-    public void testGetPosX(){
+    public void testGetPosX() {
         Volvo240 volvo = new Volvo240();
         assertEquals(volvo.getPosX(), 0);
     }
 
     @Test
-    public void testGetPosY(){
+    public void testGetPosY() {
         Volvo240 volvo = new Volvo240();
-        
+
         assertEquals(volvo.getPosY(), 0);
     }
 
     @Test
-    public void testMoveNorth(){
+    public void testMoveNorth() {
         Volvo240 volvo = new Volvo240();
         volvo.startEngine();
         volvo.move();
@@ -71,7 +70,7 @@ public class Volvo240Test{
     }
 
     @Test
-    public void testMoveSouth(){
+    public void testMoveSouth() {
         Volvo240 volvo = new Volvo240();
         volvo.turnLeft();
         volvo.turnLeft();
@@ -83,7 +82,7 @@ public class Volvo240Test{
     }
 
     @Test
-    public void testMoveWest(){
+    public void testMoveWest() {
         Volvo240 volvo = new Volvo240();
         volvo.turnLeft();
         volvo.startEngine();
@@ -94,7 +93,7 @@ public class Volvo240Test{
     }
 
     @Test
-    public void testMoveEast(){
+    public void testMoveEast() {
         Volvo240 volvo = new Volvo240();
         volvo.turnRight();
         volvo.startEngine();
@@ -105,7 +104,7 @@ public class Volvo240Test{
     }
 
     @Test
-    public void testTurnLeft(){
+    public void testTurnLeft() {
         Volvo240 volvo = new Volvo240();
         volvo.turnLeft();
         assertEquals(volvo.getDir(), 3);
@@ -118,7 +117,7 @@ public class Volvo240Test{
     }
 
     @Test
-    public void testTurnRight(){
+    public void testTurnRight() {
         Volvo240 volvo = new Volvo240();
         volvo.turnRight();
         assertEquals(volvo.getDir(), 1);
@@ -129,4 +128,50 @@ public class Volvo240Test{
         volvo.turnRight();
         assertEquals(volvo.getDir(), 0);
     }
+
+    @Test
+    public void testGas() {
+        Volvo240 volvo = new Volvo240();
+        volvo.startEngine();
+        volvo.gas(0.5);
+        assertTrue(volvo.getCurrentSpeed() > 0.1);
+        double speedAfterInvalidGas = volvo.getCurrentSpeed();
+        volvo.gas(1.5);
+        assertEquals(speedAfterInvalidGas, volvo.getCurrentSpeed());
+    }
+
+    @Test
+    public void testBrake() {
+        Volvo240 volvo = new Volvo240();
+        volvo.startEngine();
+        volvo.gas(1.0);
+        double speedBeforeBrake = volvo.getCurrentSpeed();
+        volvo.brake(0.5);
+        assertTrue(volvo.getCurrentSpeed() < speedBeforeBrake);
+        double speedAfterInvalidBrake = volvo.getCurrentSpeed();
+        volvo.brake(1.5);
+        assertEquals(speedAfterInvalidBrake, volvo.getCurrentSpeed());
+    }
+
+    @Test
+    public void testSpeedLimit() {
+        Volvo240 volvo = new Volvo240();
+        volvo.startEngine();
+        for (int i = 0; i < 100; i++) {
+            volvo.gas(1.0);
+        }
+        assertEquals(volvo.getEnginePower(), volvo.getCurrentSpeed());
+    }
+
+    @Test
+    public void testBrakeToZero() {
+        Volvo240 volvo = new Volvo240();
+        volvo.startEngine();
+        volvo.gas(1.0);
+        for (int i = 0; i < 100; i++) {
+            volvo.brake(1.0);
+        }
+        assertEquals(0, volvo.getCurrentSpeed());
+    }
+
 }
