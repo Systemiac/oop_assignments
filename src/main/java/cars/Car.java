@@ -1,10 +1,10 @@
 package cars;
 import java.awt.Color;
 
+import interfaces.MotorVehicle;
 import interfaces.Movable;
-import interfaces.Vehicle;
 
-public abstract class Car implements Vehicle, Movable {
+public abstract class Car implements MotorVehicle, Movable {
     
     private int nrDoors; // Number of doors on the car
     private double currentSpeed; // The current speed of the car
