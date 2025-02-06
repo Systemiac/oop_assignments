@@ -1,15 +1,15 @@
 package cars;
 import java.awt.Color;
 
-import interfaces.MotorVehicle;
+import interfaces.Vehicle;
 import interfaces.Movable;
 
-public abstract class Car implements MotorVehicle, Movable {
+public abstract class Car implements Vehicle, Movable {
     
-    private int nrDoors; // Number of doors on the car
-    private double currentSpeed; // The current speed of the car
-    private Color color; // Color of the car
-    private double enginePower; // Engine power of the car
+    private int nrDoors;
+    private double currentSpeed;
+    private Color color; 
+    private double enginePower; 
     private String modelName;
     private double posX, posY;
     public enum Direction {
@@ -29,12 +29,9 @@ public abstract class Car implements MotorVehicle, Movable {
         stopEngine();
     }
 
-    // denne, getModelName(), tycks saknats
     public String getModelName() {
         return modelName;
     }
-
-    public abstract double speedFactor();
 
     public int getNrDoors(){
         return nrDoors;
@@ -64,6 +61,10 @@ public abstract class Car implements MotorVehicle, Movable {
 	    return  posY;
     }
 
+    public int getDir(){
+        return dir.ordinal();
+    }
+
     public void startEngine(){
 	    currentSpeed = 0.1;
     }
@@ -71,17 +72,13 @@ public abstract class Car implements MotorVehicle, Movable {
     public void stopEngine(){
 	    currentSpeed = 0;
     }
-    
-    //Just for testing
-    public int getDir(){
-        return dir.ordinal();
-    }
 
-    public void move(){
+    public abstract double speedFactor();
+    
+    public void {
         switch (dir) {
             case north:
-                posY -= currentSpeed;
-            
+                posY -= currentSpeed;        
                 break;
             case west:
                 posX -= currentSpeed;
@@ -94,8 +91,6 @@ public abstract class Car implements MotorVehicle, Movable {
                 break;
         }
     }
-
-
 
     public void turnLeft() {
         switch (dir) {

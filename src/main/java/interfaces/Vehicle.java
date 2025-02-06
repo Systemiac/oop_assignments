@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface MotorVehicle {
+public interface Vehicle {
     int getNrDoors();
     double getEnginePower();
     double getCurrentSpeed();

@@ -7,7 +7,7 @@ public class Scania extends Car{
     private final int maxAngle = 70;
 
     public Scania(){
-        super(2,Color.red,540, "Scania");  
+        super(2, Color.red, 540, "Scania");  
         this.cargoBedAngle=0;
     }
 
@@ -24,7 +24,7 @@ public class Scania extends Car{
             return 0;
         }
     }
-    
+
     public void lowerCargoBed(int degree){
         if(cargoChecker() && cargoBedAngle - degree > minAngle && degree > 0){
             cargoBedAngle -= degree;
