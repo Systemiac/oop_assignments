@@ -1,5 +1,6 @@
 import vehicles.Saab95;
 import vehicles.Volvo240;
+import vehicles.Scania;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,5 +9,11 @@ public class Main {
 
         System.out.println("Saab95 har " + saab.getNrDoors() + " dörrar.");
         System.out.println("Volvo240 har " + volvo.getNrDoors() + " dörrar.");
+
+        Scania scania = new Scania();
+        System.out.println(scania.getCargoBedAngle());
+        scania.raiseCargoBed(5);
+        System.out.println(scania.getCargoBedAngle());
+
     }
 }

@@ -20,6 +20,7 @@ public abstract class VehiclePrototype implements Movable, Engine, Chassi {
         this.modelName = modelName;
         this.engine = new EngineHandler(enginePower);
         this.movement = new MovementHandler();
+        stopEngine();
     }
 
     public String getModelName() {
@@ -58,7 +59,7 @@ public abstract class VehiclePrototype implements Movable, Engine, Chassi {
         movement.turnLeft();
     }
 
-    @Override
+    
     public void turnRight() {
         movement.turnRight();
     }
@@ -87,6 +88,7 @@ public abstract class VehiclePrototype implements Movable, Engine, Chassi {
     public void stopEngine() {
         engine.stopEngine();
     }
+
     public double getPosX() {
         return movement.getPosX();
     }

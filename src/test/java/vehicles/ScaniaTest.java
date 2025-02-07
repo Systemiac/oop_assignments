@@ -8,59 +8,32 @@ import java.awt.Color;
 
 class ScaniaTest {
 
-    private VehiclePrototype testCar;
+    private Scania scania;
 
     @BeforeEach
     void setUp() {
-        testCar = new VehiclePrototype(2, Color.RED, 100, "TestCar") {
-            @Override
-            public double speedFactor() {
-                return 1.5;
-            }
-        };
+        scania = new Scania();
     }
 
     @Test
-    void testCarInitialization() {
-        assertEquals(4, testCar.getNrDoors());
-        assertEquals(100, testCar.getEnginePower());
-        assertEquals(Color.RED, testCar.getColor());
-        assertEquals("TestCar", testCar.getModelName());
+    public void testConstructor() {
+        assertEquals(2, scania.getNrDoors(), "Scania ska ha 2 dörrar");
+        assertEquals(Color.blue, scania.getColor(), "Scania ska vara blå");
+        assertEquals(540, scania.getEnginePower(), "Scania ska ha 540 hk");
+        assertEquals("Scania", scania.getModelName(), "Modellnamnet ska vara Scania");
     }
 
     @Test
-    void testMoveNorth() {
-        testCar.startEngine();
-        testCar.move();
-        assertTrue(testCar.getPosY() < 0);
+    public void testGetCargoBedAngle() {
+        assertEquals(scania.getCargoBedAngle(), 0);
+    }
+    
+    @Test
+    public void testSpeedFactor() {
+        assertEquals(5.40, scania.speedFactor());
+        scania.raiseCargoBed(45);
+        
+        assertEquals(0, scania.speedFactor());
     }
 
-    @Test
-    void testMoveEastAfterTurnRight() {
-        testCar.startEngine();
-        testCar.turnRight();
-        testCar.move();
-        assertTrue(testCar.getPosX() > 0);
-    }
-
-    @Test
-    void testMoveSouthAfterTwoTurns() {
-        testCar.startEngine();
-        testCar.turnRight();
-        testCar.turnRight();
-        testCar.move();
-        assertTrue(testCar.getPosY() > 0);
-    }
-
-    @Test
-    void testTurnLeft() {
-        testCar.turnLeft();
-        assertEquals(3, testCar.getDir());
-    }
-
-    @Test
-    void testTurnRight() {
-        testCar.turnRight();
-        assertEquals(1, testCar.getDir());
-    }
 }

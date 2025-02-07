@@ -60,18 +60,26 @@ public class Volvo240Test {
     }
 
     @Test
-    public void testMoveNorth() {
+    public void testMove() {
+        //Test north
         Volvo240 volvo = new Volvo240();
         volvo.startEngine();
         volvo.move();
         assertEquals(volvo.getPosY(), -0.1);
         assertEquals(volvo.getPosX(), 0);
 
-    }
+        
+        //Test West
+        volvo = new Volvo240();
+        volvo.turnLeft();
+        volvo.startEngine();
+        volvo.move();
+        assertEquals(volvo.getPosY(), 0);
+        assertEquals(volvo.getPosX(), -0.1);
 
-    @Test
-    public void testMoveSouth() {
-        Volvo240 volvo = new Volvo240();
+        
+        //Test south
+        volvo = new Volvo240();
         volvo.turnLeft();
         volvo.turnLeft();
         volvo.startEngine();
@@ -79,29 +87,17 @@ public class Volvo240Test {
         assertEquals(volvo.getPosY(), 0.1);
         assertEquals(volvo.getPosX(), 0);
 
-    }
-
-    @Test
-    public void testMoveWest() {
-        Volvo240 volvo = new Volvo240();
-        volvo.turnLeft();
-        volvo.startEngine();
-        volvo.move();
-        assertEquals(volvo.getPosY(), 0);
-        assertEquals(volvo.getPosX(), -0.1);
-
-    }
-
-    @Test
-    public void testMoveEast() {
-        Volvo240 volvo = new Volvo240();
+        
+         
+        //Test East
+        volvo = new Volvo240();
         volvo.turnRight();
         volvo.startEngine();
         volvo.move();
         assertEquals(volvo.getPosY(), 0);
         assertEquals(volvo.getPosX(), 0.1);
-
     }
+
 
     @Test
     public void testTurnLeft() {
@@ -138,6 +134,8 @@ public class Volvo240Test {
         double speedAfterInvalidGas = volvo.getCurrentSpeed();
         volvo.gas(1.5);
         assertEquals(speedAfterInvalidGas, volvo.getCurrentSpeed());
+        volvo.gas(-1.5);
+        assertEquals(speedAfterInvalidGas, volvo.getCurrentSpeed()); 
     }
 
     @Test
@@ -151,6 +149,8 @@ public class Volvo240Test {
         double speedAfterInvalidBrake = volvo.getCurrentSpeed();
         volvo.brake(1.5);
         assertEquals(speedAfterInvalidBrake, volvo.getCurrentSpeed());
+        volvo.brake(-1.5);
+        assertEquals(speedAfterInvalidBrake, volvo.getCurrentSpeed()); 
     }
 
     @Test
