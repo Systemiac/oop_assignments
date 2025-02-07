@@ -1,5 +1,5 @@
-import cars.Saab95;
-import cars.Volvo240;
+import vehicles.Saab95;
+import vehicles.Volvo240;
 
 public class Main {
     public static void main(String[] args) {
