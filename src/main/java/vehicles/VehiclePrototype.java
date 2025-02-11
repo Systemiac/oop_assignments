@@ -31,6 +31,7 @@ public abstract class VehiclePrototype implements Movable, Engine, Chassi {
         return nrDoors;
     }
 
+
     public Color getColor() {
         return color;
     }
