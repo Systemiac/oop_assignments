@@ -14,12 +14,16 @@ abstract class Truck extends VehiclePrototype implements CargoBed {
         this.minAngle = 0;
     }
 
+    protected boolean cargoChecker() {
+        if (getCurrentSpeed() == 0) {
+            return true;
+        } else {
+            System.out.println("Can't change cargoBedAngle while moving");
+            return false;
+        }
+    }
+
     public int getCargoBedAngle(){
         return cargoBedAngle;
     }
-
-    public abstract void raiseCargoBed();
-
-    public abstract void lowerCargoBed();
-
 }

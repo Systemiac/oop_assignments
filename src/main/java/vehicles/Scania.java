@@ -17,8 +17,5 @@ public class Scania extends CargoTruck {
         }
     }
 
-    public void lowerCargoBed(int degree){
-        lowerCargoBed(degree);
-
-    }
+    
 }

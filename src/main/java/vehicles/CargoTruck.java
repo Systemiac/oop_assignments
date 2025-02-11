@@ -11,7 +11,7 @@ public abstract class CargoTruck extends Truck {
         super(nrDoors, color, enginePower, modelName);
     }
 
-    @Override
+    
     public void lowerCargoBed(int degree) {
         if (cargoChecker() && cargoBedAngle - degree >= minAngle && degree > 0) {
             cargoBedAngle -= degree;
