@@ -1,6 +1,6 @@
 package vehicles;
 
-class EngineHandler {
+public class EngineHandler {
     private double enginePower;
     private double currentSpeed;
 

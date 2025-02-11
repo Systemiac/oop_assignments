@@ -31,6 +31,22 @@ public abstract class VehiclePrototype implements Movable, Engine, Chassi {
         return nrDoors;
     }
 
+    
+    public void setPos(double x, double y){
+        movement.setPos(x,y);
+    }
+
+    public double getPosX() {
+        return movement.getPosX();
+    }
+    
+    public double getPosY() {
+        return movement.getPosY();
+    }
+    
+    public int getDir() {
+        return movement.getDir();
+    }
 
     public Color getColor() {
         return color;
@@ -60,7 +76,6 @@ public abstract class VehiclePrototype implements Movable, Engine, Chassi {
         movement.turnLeft();
     }
 
-    
     public void turnRight() {
         movement.turnRight();
     }
@@ -69,7 +84,7 @@ public abstract class VehiclePrototype implements Movable, Engine, Chassi {
         if (0 <= amount && amount <= 1) {
             engine.incrementSpeed(amount, speedFactor());
         } else
-            System.out.println("Invalid input!");
+            System.out.println("Invalid input: " + amount);
     }
 
     public void brake(double amount) {
@@ -77,7 +92,7 @@ public abstract class VehiclePrototype implements Movable, Engine, Chassi {
         if (0 <= amount && amount <= 1) {
             engine.decrementSpeed(amount, speedFactor());
         } else
-            System.out.println("Invalid input!");
+            System.out.println("Invalid input: " + amount);
     }
 
     @Override
@@ -90,16 +105,6 @@ public abstract class VehiclePrototype implements Movable, Engine, Chassi {
         engine.stopEngine();
     }
 
-    public double getPosX() {
-        return movement.getPosX();
-    }
-    
-    public double getPosY() {
-        return movement.getPosY();
-    }
-    
-    public int getDir() {
-        return movement.getDir();
-    }
+
     
 }

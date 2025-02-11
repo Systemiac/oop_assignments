@@ -15,6 +15,12 @@ public class MovementHandler {
         this.dir = Direction.north;
     }
 
+    public void setPos(double x, double y){
+        posX = x;
+        posY = y;
+    }
+
+
     public double getPosX(){
         return posX;
     }

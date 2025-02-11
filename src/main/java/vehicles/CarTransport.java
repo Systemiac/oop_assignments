@@ -3,34 +3,28 @@ package vehicles;
 import java.awt.Color;
 
 import java.util.Stack;
-import java.awt.geom.Ellipse2D;
 
-public class CarTransport extends Truck {
-    private int maximumAmountOfCars;
-    private int cargoBedAngle;
-    private int minAngle;
-    private int maxAngle;
+
+public abstract class CarTransport extends Truck {
+    private int maxCars;
+
     private Stack<Car> loadedCars = new Stack<>();
-    Ellipse2D.Double pickUpArea = new Ellipse2D.Double(this.getPosX(), this.getPosY(), 100, 100);
 
-    public CarTransport() {
-        super(2, Color.green, 540, "Scania p410");
-        this.maximumAmountOfCars = 8;
-        lowerCargoBed();
+    public CarTransport(int nrDoors, Color color, double enginePower, String modelName, int maxCars) {
+        super(nrDoors,color,enginePower,modelName);
+        this.maxCars = maxCars;
+        this.cargoBedAngle=0;
     }
 
     @Override
-    public void move(){
-        
-    }
-
-    public double speedFactor() {
-        if (getCargoBedAngle() == 0) {
-            return getEnginePower() * 0.01;
-        } else {
-            return 0;
+    public void move() {
+        super.move();
+        for (Car car : loadedCars) {
+            car.setPos(getPosX(), getPosY());
         }
     }
+
+   
 
     public void raiseCargoBed() {
         if (cargoChecker() && cargoBedAngle == minAngle) {
@@ -44,22 +38,31 @@ public class CarTransport extends Truck {
         }
     }
 
-    public void loadCarTransport(Car car) {
+    public void loadCar(Car car) {
 
-        if (loadedCars.size() < maximumAmountOfCars
+        if (loadedCars.size() < maxCars
                 && getCurrentSpeed() == 0
                 && cargoBedAngle == maxAngle
-                && pickUpArea.contains(car.getPosX(), car.getPosY())) {
+                && calculateDistance(getPosX(), getPosY(), car.getPosX(), car.getPosY()) < 100) {
 
             loadedCars.push(car);
 
         }
     }
+    
+    private static double calculateDistance(double x1, double y1, double x2, double y2) {
+        double dx = x2 - x1;
+        double dy = y2 - y1;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
 
-    public void unloadCarTransport() {
+    public void unloadCar() {
         if (loadedCars.size() > 0 && getCurrentSpeed() == 0 && cargoBedAngle == maxAngle) {
             loadedCars.pop();
         }
     }
 
+    public int getCarAmount(){
+        return loadedCars.size();
+    }
 }
