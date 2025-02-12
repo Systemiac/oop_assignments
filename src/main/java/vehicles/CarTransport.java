@@ -1,7 +1,6 @@
 package vehicles;
 
 import java.awt.Color;
-
 import java.util.Stack;
 
 
@@ -46,7 +45,6 @@ public abstract class CarTransport extends Truck {
                 && calculateDistance(getPosX(), getPosY(), car.getPosX(), car.getPosY()) < 100) {
 
             loadedCars.push(car);
-
         }
     }
     

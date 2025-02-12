@@ -1,7 +1,6 @@
 vehicles\MovementHandler.class
 vehicles\CargoTruck.class
 vehicles\Car.class
-vehicles\MovementHandler$1.class
 vehicles\Volvo240.class
 interfaces\Engine.class
 interfaces\Movable.class

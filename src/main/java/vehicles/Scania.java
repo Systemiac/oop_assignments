@@ -7,6 +7,7 @@ public class Scania extends CargoTruck {
         super(2, Color.BLUE, 540, "Scania");
     }
 
+    @Override
     public double speedFactor() {
         if (getCargoBedAngle() == 0) {
             return getEnginePower() * 0.01;

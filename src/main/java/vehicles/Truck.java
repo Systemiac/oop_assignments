@@ -1,5 +1,6 @@
 package vehicles;
 import java.awt.Color;
+
 import interfaces.CargoBed;
 
 abstract class Truck extends VehiclePrototype implements CargoBed {
@@ -22,10 +23,9 @@ abstract class Truck extends VehiclePrototype implements CargoBed {
         }
     }
 
+    @Override
     public int getCargoBedAngle(){
         return cargoBedAngle;
 
     }
-
-    
 }
