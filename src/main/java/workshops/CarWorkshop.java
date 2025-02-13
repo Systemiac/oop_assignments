@@ -2,9 +2,9 @@ package workshops;
 
 import java.util.List;
 import java.util.ArrayList;
-import vehicles.Car;
+import vehicles.CarPrototype;
 
-public class CarWorkshop<C extends Car> {
+public class CarWorkshop<C extends CarPrototype> {
     private final List<C> cars;
     private final int maxCars;
 
@@ -13,7 +13,7 @@ public class CarWorkshop<C extends Car> {
         this.maxCars = maxCars;
     }
 
-    public void loadCar(C car) {
+    public void addCarToWorkshop(C car) {
         if (cars.size() < maxCars) {
             cars.add(car);
         } else {
@@ -21,7 +21,7 @@ public class CarWorkshop<C extends Car> {
         }
     }
 
-    public C unloadCar(C car) {
+    public C removeCarFromWorkshop(C car) {
         if (cars.contains(car)) {
             cars.remove(car);
             return car;
@@ -31,7 +31,7 @@ public class CarWorkshop<C extends Car> {
         }
     }
 
-    public int getCarAmount() {
+    public int getCarAmountInWorkshop() {
         return cars.size();
     }
 

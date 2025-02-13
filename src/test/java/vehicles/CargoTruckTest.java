@@ -30,7 +30,7 @@ public class CargoTruckTest {
         assertEquals(0, truckPrototype.getCargoBedAngle());
         truckPrototype.lowerCargoBed(-10);
         assertEquals(0, truckPrototype.getCargoBedAngle());
-        truckPrototype.startEngine();
+        truckPrototype.getEngine().startEngine();
         truckPrototype.lowerCargoBed(10);
         assertEquals(0, truckPrototype.getCargoBedAngle());
     }
@@ -45,7 +45,7 @@ public class CargoTruckTest {
         assertEquals(50, truckPrototype.getCargoBedAngle()); 
         truckPrototype.raiseCargoBed(40);
         assertEquals(70, truckPrototype.getCargoBedAngle());
-        truckPrototype.startEngine();
+        truckPrototype.getEngine().startEngine();
         truckPrototype.raiseCargoBed(10);
         assertEquals(70, truckPrototype.getCargoBedAngle());
     }
@@ -53,7 +53,7 @@ public class CargoTruckTest {
     @Test
     void cargoChecker() {
         assertTrue(truckPrototype.cargoChecker());
-        truckPrototype.startEngine();
+        truckPrototype.getEngine().startEngine();
         truckPrototype.gas(0.1);
         assertFalse(truckPrototype.cargoChecker());
     }

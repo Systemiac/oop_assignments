@@ -1,7 +1,7 @@
 package vehicles;
 import java.awt.Color;
 
-public class Volvo240 extends Car {
+public class Volvo240 extends CarPrototype {
 
     private final static double trimFactor = 1.25;
 

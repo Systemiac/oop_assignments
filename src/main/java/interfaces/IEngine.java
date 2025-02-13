@@ -1,8 +1,7 @@
 package interfaces;
 
-public interface Engine {
+public interface IEngine {
     double getEnginePower();
-    double getCurrentSpeed();
     void startEngine();
     void stopEngine();
 }

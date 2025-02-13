@@ -3,28 +3,23 @@ package vehicles;
 import java.awt.Color;
 import java.util.Stack;
 
-
-public abstract class CarTransport extends Truck {
+public abstract class CarTransport extends TruckPrototype {
     private int maxCars;
 
-    private Stack<Car> loadedCars = new Stack<>();
+    private Stack<CarPrototype> loadedCars = new Stack<>();
 
     public CarTransport(int nrDoors, Color color, double enginePower, String modelName, int maxCars) {
-        super(nrDoors,color,enginePower,modelName);
+        super(nrDoors, color, enginePower, modelName);
         this.maxCars = maxCars;
-        this.cargoBedAngle=0;
+        this.cargoBedAngle = 0;
     }
 
-    @Override
-    public void move() {
-        super.move();
-        for (Car car : loadedCars) {
-            car.setPos(getPosX(), getPosY());
-        }
+    // properties
+    public int getCarAmount() {
+        return loadedCars.size();
     }
 
-   
-
+    // methods
     public void raiseCargoBed() {
         if (cargoChecker() && cargoBedAngle == minAngle) {
             cargoBedAngle = maxAngle;
@@ -37,7 +32,7 @@ public abstract class CarTransport extends Truck {
         }
     }
 
-    public void loadCar(Car car) {
+    public void loadCar(CarPrototype car) {
 
         if (loadedCars.size() < maxCars
                 && getCurrentSpeed() == 0
@@ -47,7 +42,7 @@ public abstract class CarTransport extends Truck {
             loadedCars.push(car);
         }
     }
-    
+
     private static double calculateDistance(double x1, double y1, double x2, double y2) {
         double dx = x2 - x1;
         double dy = y2 - y1;
@@ -60,7 +55,11 @@ public abstract class CarTransport extends Truck {
         }
     }
 
-    public int getCarAmount(){
-        return loadedCars.size();
+    @Override
+    public void move() {
+        super.move();
+        for (CarPrototype car : loadedCars) {
+            car.setPos(getPosX(), getPosY());
+        }
     }
 }

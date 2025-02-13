@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface Chassi {
+public interface IChassi {
     int getNrDoors();
     java.awt.Color getColor();
 }

@@ -1,7 +1,8 @@
 package vehicles;
+import interfaces.IMovable;
 
-public class MovementHandler {
-    
+public class MovementHandler implements IMovable {
+    private double speed;
     private double posX, posY;
     
     public enum Direction {
@@ -13,13 +14,13 @@ public class MovementHandler {
         this.posX = 0;
         this.posY = 0;
         this.dir = Direction.north;
+        this.speed = 0;
     }
 
     public void setPos(double x, double y){
         posX = x;
         posY = y;
     }
-
 
     public double getPosX(){
         return posX;
@@ -33,7 +34,6 @@ public class MovementHandler {
         return dir.ordinal();
     }
 
-    // S: ändrade currentSpeed() till parameter
     public void move(double currentSpeed) {
         switch (dir) {
             case north:
@@ -83,5 +83,31 @@ public class MovementHandler {
                 dir = Direction.south;
                 break;
         }
+    }
+
+    public double getSpeed(){
+        return speed;
+    }
+    public void move() {
+        move(engine.getCurrentSpeed());
+    }
+
+
+
+    @Override
+    public void gas(double amount) {
+        if (0 <= amount && amount <= 1) {
+            engine.incrementSpeed(amount, speedFactor());
+        } else
+            System.out.println("Invalid input: " + amount);
+    }
+    
+    @Override
+    public void brake(double amount) {
+
+        if (0 <= amount && amount <= 1) {
+            engine.decrementSpeed(amount, speedFactor());
+        } else
+            System.out.println("Invalid input: " + amount);
     }
 }

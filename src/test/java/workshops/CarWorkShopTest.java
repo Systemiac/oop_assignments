@@ -1,6 +1,6 @@
 package workshops;
 
-import vehicles.Car;
+import vehicles.CarPrototype;
 import vehicles.Volvo240;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CarWorkShopTest {
-    private CarWorkshop<Car> testWorkshop;
+    private CarWorkshop<CarPrototype> testWorkshop;
     private CarWorkshop<Volvo240> volvoWorkshop;
     private Volvo240 testVolvo;
 
@@ -21,31 +21,31 @@ public class CarWorkShopTest {
 
     @Test
     public void testConstructor() {
-        assertEquals(0, testWorkshop.getCarAmount());
+        assertEquals(0, testWorkshop.getCarAmountInWorkshop());
     }
 
     @Test
     public void loadCar() {
-        testWorkshop.loadCar(testVolvo);
-        assertEquals(1, testWorkshop.getCarAmount());
-        testWorkshop.loadCar(testVolvo);
-        assertEquals(1, testWorkshop.getCarAmount());
+        testWorkshop.addCarToWorkshop(testVolvo);
+        assertEquals(1, testWorkshop.getCarAmountInWorkshop());
+        testWorkshop.addCarToWorkshop(testVolvo);
+        assertEquals(1, testWorkshop.getCarAmountInWorkshop());
     }
 
     @Test
     void testUnloadCar() {
-        volvoWorkshop.loadCar(testVolvo);
-        Volvo240 aCar = volvoWorkshop.unloadCar(testVolvo);
+        volvoWorkshop.addCarToWorkshop(testVolvo);
+        Volvo240 aCar = volvoWorkshop.removeCarFromWorkshop(testVolvo);
         assertNotNull(aCar);
-        assertEquals(null, volvoWorkshop.unloadCar(testVolvo));
+        assertEquals(null, volvoWorkshop.removeCarFromWorkshop(testVolvo));
     }
 
     @Test
     void testCarAmount() {
-        volvoWorkshop.loadCar(testVolvo);
-        Volvo240 aCar = volvoWorkshop.unloadCar(testVolvo);
-        volvoWorkshop.loadCar(aCar);
-        assertEquals(1, volvoWorkshop.getCarAmount());
+        volvoWorkshop.addCarToWorkshop(testVolvo);
+        Volvo240 aCar = volvoWorkshop.removeCarFromWorkshop(testVolvo);
+        volvoWorkshop.addCarToWorkshop(aCar);
+        assertEquals(1, volvoWorkshop.getCarAmountInWorkshop());
     }
 
     @Test

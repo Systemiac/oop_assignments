@@ -1,12 +1,8 @@
 package vehicles;
-
 import java.awt.Color;
+import interfaces.IChassi;
 
-import interfaces.Chassi;
-import interfaces.Engine;
-import interfaces.Movable;
-
-public abstract class VehiclePrototype implements Movable, Engine, Chassi {
+public abstract class VehiclePrototype implements IChassi {
 
     private int nrDoors;
     private Color color;
@@ -20,11 +16,19 @@ public abstract class VehiclePrototype implements Movable, Engine, Chassi {
         this.modelName = modelName;
         this.engine = new EngineHandler(enginePower);
         this.movement = new MovementHandler();
-        stopEngine();
     }
 
+    // properties
     public String getModelName() {
         return modelName;
+    }
+
+    public EngineHandler getEngine() {
+        return engine;
+    }
+    
+    public MovementHandler getMovement() {
+        return movement;
     }
 
     @Override
@@ -56,61 +60,6 @@ public abstract class VehiclePrototype implements Movable, Engine, Chassi {
     public void setColor(Color clr) {
         color = clr;
     }
-
-    @Override
-    public double getEnginePower() {
-        return engine.getEnginePower();
-    }
-
-    @Override
-    public double getCurrentSpeed() {
-        return engine.getCurrentSpeed();
-    }
-
+    
     public abstract double speedFactor();
-
-    @Override
-    public void move() {
-        movement.move(engine.getCurrentSpeed());
-    }
-
-    @Override
-    public void turnLeft() {
-        movement.turnLeft();
-    }
-
-    @Override
-    public void turnRight() {
-        movement.turnRight();
-    }
-
-    @Override
-    public void gas(double amount) {
-        if (0 <= amount && amount <= 1) {
-            engine.incrementSpeed(amount, speedFactor());
-        } else
-            System.out.println("Invalid input: " + amount);
-    }
-    
-    @Override
-    public void brake(double amount) {
-
-        if (0 <= amount && amount <= 1) {
-            engine.decrementSpeed(amount, speedFactor());
-        } else
-            System.out.println("Invalid input: " + amount);
-    }
-
-    @Override
-    public void startEngine() {
-        engine.startEngine();
-    }
-
-    @Override
-    public void stopEngine() {
-        engine.stopEngine();
-    }
-
-
-    
 }

@@ -1,14 +1,12 @@
 package vehicles;
 import java.awt.Color;
 
-import interfaces.CargoBed;
-
-abstract class Truck extends VehiclePrototype implements CargoBed {
+abstract class TruckPrototype extends VehiclePrototype {
     protected int cargoBedAngle;
     protected static final int maxAngle =70;
     protected static final int minAngle = 0;
     
-    public Truck(int nrDoors, Color color, double enginePower, String modelName) {
+    public TruckPrototype(int nrDoors, Color color, double enginePower, String modelName) {
         super(nrDoors, color, enginePower, modelName);
         this.cargoBedAngle=0;
     
@@ -23,9 +21,15 @@ abstract class Truck extends VehiclePrototype implements CargoBed {
         }
     }
 
-    @Override
     public int getCargoBedAngle(){
         return cargoBedAngle;
+    }
 
+    public int getMaxAngle(){
+        return maxAngle;
+    }
+
+    public int getMinAngle() {
+        return minAngle;
     }
 }

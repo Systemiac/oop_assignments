@@ -6,13 +6,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CarTransportTest {
-    private CarTransport cTransport;
-    private Car testCar1;
-    private Car testCar2;
+    private CarTransport carTransport;
+    private CarPrototype testCar1;
+    private CarPrototype testCar2;
 
     @BeforeEach
     void setup() {
-        cTransport = new CarTransport(2, Color.WHITE, 540, "TestTruck", 5) {
+        carTransport = new CarTransport(2, Color.WHITE, 540, "TestTruck", 5) {
             @Override
             public double speedFactor() {
                 return 1.5;
@@ -22,53 +22,58 @@ public class CarTransportTest {
         testCar2 = new Saab95();
     }
 
-    @Test 
-    public void testMove(){
-           cTransport.loadCar(testCar1);
-           cTransport.loadCar(testCar2);
-           cTransport.move();
-           
-           assertEquals(cTransport.getPosY(), testCar1.getPosY());
-           assertEquals(cTransport.getPosX(), testCar1.getPosX());
-           assertEquals(cTransport.getPosX(), testCar2.getPosX());
-           assertEquals(cTransport.getPosY(), testCar2.getPosY());
+    @Test
+    public void testMove() {
+        carTransport.loadCar(testCar1);
+        carTransport.loadCar(testCar2);
+        carTransport.move();
+
+        assertEquals(carTransport.getPosY(), testCar1.getPosY());
+        assertEquals(carTransport.getPosX(), testCar1.getPosX());
+        assertEquals(carTransport.getPosX(), testCar2.getPosX());
+        assertEquals(carTransport.getPosY(), testCar2.getPosY());
     }
 
-    @Test 
-    public void testRaiseCargoBed(){
-        cTransport.lowerCargoBed();
-        cTransport.raiseCargoBed();
-        assertEquals(70, cTransport.getCargoBedAngle());
-    }
-
-    @Test 
-    public void testLowerCargoBed(){
-        cTransport.raiseCargoBed();
-        cTransport.lowerCargoBed();
-        assertEquals(0,cTransport.getCargoBedAngle());
-    }
-
-    
-    @Test 
-    public void testLoadCarTransport(){
-        cTransport.raiseCargoBed();
-        assertEquals(0,cTransport.getCarAmount());
-        cTransport.loadCar(testCar1);
-        assertEquals(1,cTransport.getCarAmount());
+    @Test
+    public void testRaiseCargoBed() {
+        carTransport.setCurrentSpeed(1);
+        assertFalse(carTransport.cargoChecker());
+        carTransport.setCurrentSpeed(0); 
         
+        carTransport.raiseCargoBed();
+        assertEquals(carTransport.getMaxAngle(), carTransport.getCargoBedAngle());
+        carTransport.lowerCargoBed();
+        assertEquals(carTransport.getMinAngle(), carTransport.getCargoBedAngle());
+        assertTrue(carTransport.cargoChecker());
+    }
+
+    @Test
+    public void testLowerCargoBed() {
+        carTransport.raiseCargoBed();
+        carTransport.lowerCargoBed();
+        assertEquals(0, carTransport.getCargoBedAngle());
+    }
+
+    @Test
+    public void testLoadCarTransport() {
+        carTransport.raiseCargoBed();
+        assertEquals(0, carTransport.getCarAmount());
+        carTransport.loadCar(testCar1);
+        assertEquals(1, carTransport.getCarAmount());
+
     }
 
     @Test
     void testUnloadCar() {
-        cTransport.raiseCargoBed();
-        cTransport.loadCar(testCar1);
-        assertEquals(1, cTransport.getCarAmount());
-        cTransport.unloadCar();
-        assertEquals(0,cTransport.getCarAmount());
+        carTransport.raiseCargoBed();
+        carTransport.loadCar(testCar1);
+        assertEquals(1, carTransport.getCarAmount());
+        carTransport.unloadCar();
+        assertEquals(0, carTransport.getCarAmount());
     }
 
-    @Test   
+    @Test
     public void testGetCarAmount() {
-        assertEquals(0, cTransport.getCarAmount());
+        assertEquals(0, carTransport.getCarAmount());
     }
 }

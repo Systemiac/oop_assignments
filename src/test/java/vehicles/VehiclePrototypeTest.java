@@ -23,14 +23,14 @@ class VehiclePrototypeTest {
     @Test
     void testMoveNorth() {
         assertEquals(0, testVehicle.getDir(), "Norr?");
-        testVehicle.startEngine();
+        testVehicle.getEngine().startEngine();
         testVehicle.move();
         assertTrue(testVehicle.getPosY() < 0);
     }
 
     @Test
     void testMoveEastAfterTurnRight() {
-        testVehicle.startEngine();
+        testVehicle.getEngine().startEngine();
         testVehicle.turnRight();
         testVehicle.move();
         assertTrue(testVehicle.getPosX() > 0);
@@ -38,7 +38,7 @@ class VehiclePrototypeTest {
 
     @Test
     void testMoveSouthAfterTwoTurns() {
-        testVehicle.startEngine();
+        testVehicle.getEngine().startEngine();
         testVehicle.turnRight();
         testVehicle.turnRight();
         testVehicle.move();
@@ -59,20 +59,20 @@ class VehiclePrototypeTest {
 
     @Test
     public void testStartEngine() {
-        testVehicle.startEngine();
+        testVehicle.getEngine().startEngine();
         assertEquals(testVehicle.getCurrentSpeed(), 0.1);
     }
 
     @Test
     void testStopEngine() {
-        testVehicle.startEngine();
-        testVehicle.stopEngine();
+        testVehicle.getEngine().startEngine();
+        testVehicle.getEngine().stopEngine();
         assertEquals(0, testVehicle.getCurrentSpeed(), 0.01);
     }
 
     @Test
     public void testBrake() {
-        testVehicle.startEngine();
+        testVehicle.getEngine().startEngine();
         testVehicle.gas(1.0);
         double speedBeforeBrake = testVehicle.getCurrentSpeed();
         
@@ -91,7 +91,7 @@ class VehiclePrototypeTest {
     
     @Test
     public void testGas() {
-        testVehicle.startEngine();
+        testVehicle.getEngine().startEngine();
         
         testVehicle.gas(0.5);
         assertTrue(testVehicle.getCurrentSpeed() > 0.1);

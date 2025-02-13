@@ -1,12 +1,18 @@
 package vehicles;
 
-public class EngineHandler {
+import interfaces.IEngine;
+import interfaces.IMovable;
+
+public class EngineHandler implements IEngine {
     private double enginePower;
     private double currentSpeed;
 
     public EngineHandler(double enginePower) {
         this.enginePower = enginePower;
-        this.currentSpeed = 0;
+    }
+
+    public double getCurrentSpeed() {
+        return currentSpeed;
     }
 
     public void startEngine() {
@@ -21,16 +27,17 @@ public class EngineHandler {
         return enginePower;
     }
 
-    public double getCurrentSpeed() {
-        return currentSpeed;
+    public void setCurrentSpeed(double currentSpeed) {
+        this.currentSpeed = currentSpeed;
     }
 
-    // S: ändrade speedFactor() till parameter
-    public void incrementSpeed(double amount, double speedFactor) {
-        currentSpeed = Math.min(currentSpeed + speedFactor * amount, enginePower);
+    public void incrementSpeed(double amount, double speedFactor, IMovable vehicle) {
+        double newSpeed = vehicle.speed() + speedFactor * amount;
+        currentSpeed = Math.min(newSpeed, enginePower);
     }
 
-    public void decrementSpeed(double amount, double speedFactor) {
-        currentSpeed = Math.max(currentSpeed - speedFactor * amount, 0);
+    public void decrementSpeed(double amount, double speedFactor, IMovable vehicle) {
+        double newSpeed = vehicle.speed() - speedFactor * amount;
+        currentSpeed = Math.max(newSpeed, 0);
     }
 }
