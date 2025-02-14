@@ -1,7 +1,7 @@
 package interfaces; 
 
 public interface IMovable {
-    void move(double currentSpeed);
+    void move();
     void turnLeft();
     void turnRight();
     double getCurrentSpeed();

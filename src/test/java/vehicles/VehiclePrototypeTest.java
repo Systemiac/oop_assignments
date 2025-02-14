@@ -22,71 +22,71 @@ class VehiclePrototypeTest {
 
     @Test
     void testMoveNorth() {
-        assertEquals(0, testVehicle.getDir(), "Norr?");
+        assertEquals(0, testVehicle.getMovement().getDir(), "Norr?");
         testVehicle.getEngine().startEngine();
         testVehicle.move();
-        assertTrue(testVehicle.getPosY() < 0);
+        assertTrue(testVehicle.getMovement().getPosY() < 0);
     }
 
     @Test
     void testMoveEastAfterTurnRight() {
         testVehicle.getEngine().startEngine();
-        testVehicle.turnRight();
+        testVehicle.getMovement().turnRight();
         testVehicle.move();
-        assertTrue(testVehicle.getPosX() > 0);
+        assertTrue(testVehicle.getMovement().getPosX() > 0);
     }
 
     @Test
     void testMoveSouthAfterTwoTurns() {
         testVehicle.getEngine().startEngine();
-        testVehicle.turnRight();
-        testVehicle.turnRight();
+        testVehicle.getMovement().turnRight();
+        testVehicle.getMovement().turnRight();
         testVehicle.move();
-        assertTrue(testVehicle.getPosY() > 0);
+        assertTrue(testVehicle.getMovement().getPosY() > 0);
     }
 
     @Test
     void testTurnLeft() {
-        testVehicle.turnLeft();
-        assertEquals(3, testVehicle.getDir());
+        testVehicle.getMovement().turnLeft();
+        assertEquals(3, testVehicle.getMovement().getDir());
     }
 
     @Test
     void testTurnRight() {
-        testVehicle.turnRight();
-        assertEquals(1, testVehicle.getDir());
+        testVehicle.getMovement().turnRight();
+        assertEquals(1, testVehicle.getMovement().getDir());
     }
 
     @Test
     public void testStartEngine() {
         testVehicle.getEngine().startEngine();
-        assertEquals(testVehicle.getCurrentSpeed(), 0.1);
+        assertEquals(testVehicle.getMovement().getCurrentSpeed(), 0.1);
     }
 
     @Test
     void testStopEngine() {
         testVehicle.getEngine().startEngine();
         testVehicle.getEngine().stopEngine();
-        assertEquals(0, testVehicle.getCurrentSpeed(), 0.01);
+        assertEquals(0, testVehicle.getMovement().getCurrentSpeed(), 0.01);
     }
 
     @Test
     public void testBrake() {
         testVehicle.getEngine().startEngine();
         testVehicle.gas(1.0);
-        double speedBeforeBrake = testVehicle.getCurrentSpeed();
+        double speedBeforeBrake = testVehicle.getMovement().getCurrentSpeed();
         
         testVehicle.brake(0.5);
-        assertTrue(testVehicle.getCurrentSpeed() < speedBeforeBrake);
+        assertTrue(testVehicle.getMovement().getCurrentSpeed() < speedBeforeBrake);
         
         testVehicle.brake(1.0);
-        assertEquals(0, testVehicle.getCurrentSpeed());
+        assertEquals(0, testVehicle.getMovement().getCurrentSpeed());
 
         testVehicle.gas(2);
-        assertEquals(0, testVehicle.getCurrentSpeed());
+        assertEquals(0, testVehicle.getMovement().getCurrentSpeed());
 
         testVehicle.gas(-2);
-        assertEquals(0, testVehicle.getCurrentSpeed());
+        assertEquals(0, testVehicle.getMovement().getCurrentSpeed());
     }    
     
     @Test
@@ -94,26 +94,26 @@ class VehiclePrototypeTest {
         testVehicle.getEngine().startEngine();
         
         testVehicle.gas(0.5);
-        assertTrue(testVehicle.getCurrentSpeed() > 0.1);
+        assertTrue(testVehicle.getMovement().getCurrentSpeed() > 0.1);
         
-        double speedBeforeGas = testVehicle.getCurrentSpeed();
+        double speedBeforeGas = testVehicle.getMovement().getCurrentSpeed();
         
         testVehicle.gas(1.0); 
-        assertTrue(testVehicle.getCurrentSpeed() > speedBeforeGas);
+        assertTrue(testVehicle.getMovement().getCurrentSpeed() > speedBeforeGas);
 
-        double speedBeforeGas2 = testVehicle.getCurrentSpeed();
+        double speedBeforeGas2 = testVehicle.getMovement().getCurrentSpeed();
 
         testVehicle.brake(2);
-        assertEquals(speedBeforeGas2, testVehicle.getCurrentSpeed());
+        assertEquals(speedBeforeGas2, testVehicle.getMovement().getCurrentSpeed());
 
         testVehicle.brake(-2);
-        assertEquals(speedBeforeGas2, testVehicle.getCurrentSpeed());
+        assertEquals(speedBeforeGas2, testVehicle.getMovement().getCurrentSpeed());
     }
 
     @Test
     public void testSetPos(){
-        testVehicle.setPos(300,300);
-        assertEquals(testVehicle.getPosX(), 300);
-        assertEquals(testVehicle.getPosY(), 300);
+        testVehicle.getMovement().setPos(300,300);
+        assertEquals(testVehicle.getMovement().getPosX(), 300);
+        assertEquals(testVehicle.getMovement().getPosY(), 300);
     }
 }

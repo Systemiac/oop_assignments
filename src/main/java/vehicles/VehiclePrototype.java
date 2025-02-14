@@ -4,12 +4,12 @@ import java.awt.Color;
 import interfaces.IChassi;
 
 public abstract class VehiclePrototype implements IChassi {
-    private double speed;
     private int nrDoors;
     private Color color;
     private String modelName;
     private EngineHandler engine;
     private MovementHandler movement;
+    private double maxSpeed = calculateMaxSpeed();
 
     public VehiclePrototype(int nrDoors, Color color, double enginePower, String modelName) {
         this.nrDoors = nrDoors;
@@ -17,6 +17,7 @@ public abstract class VehiclePrototype implements IChassi {
         this.modelName = modelName;
         this.engine = new EngineHandler(enginePower);
         this.movement = new MovementHandler(engine);
+        
     }
 
     // properties
@@ -31,9 +32,9 @@ public abstract class VehiclePrototype implements IChassi {
     public MovementHandler getMovement() {
         return movement;
     }
-    
+
     public void move() {
-        movement.move(getMovement().getCurrentSpeed());
+        movement.move();
     }
 
     // methods
@@ -41,19 +42,31 @@ public abstract class VehiclePrototype implements IChassi {
 
     public void gas(double amount) {
         if (0 <= amount && amount <= 1) {
-            engine.incrementSpeed(amount, movement.getCurrentSpeed());
+            double acceleration = speedFactor() * engine.getEnginePower() * amount;
+            double newSpeed = movement.getCurrentSpeed() + acceleration;
+            if (newSpeed <= maxSpeed) {
+                movement.incrementSpeed(amount, acceleration);
+            }
         } else
             System.out.println("Invalid gas input: " + amount);
     }
-    
-    public void brake(double amount) {
 
+    public void brake(double amount) {
         if (0 <= amount && amount <= 1) {
-            engine.decrementSpeed(amount, engine.getCurrentSpeed());
+            double deceleration = speedFactor() * engine.getEnginePower() * amount;
+            movement.decrementSpeed(amount, deceleration);
         } else
             System.out.println("Invalid brake input: " + amount);
     }
 
+    public double getSpeed() {
+        return movement.getCurrentSpeed();
+    }
+
+    private double calculateMaxSpeed() {
+        return engine.getEnginePower() * 2; // Vettigt?
+    }
+    
     @Override
     public Color getColor() {
         return color;

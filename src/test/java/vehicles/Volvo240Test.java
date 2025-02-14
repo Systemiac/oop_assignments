@@ -38,7 +38,7 @@ public class Volvo240Test {
 
     @Test
     public void testGetCurrentSpeed() {
-        assertEquals(0, testVolvo240.getEngine().getCurrentSpeed());
+        assertEquals(0, testVolvo240.getMovement().getCurrentSpeed());
     }
 
     @Test

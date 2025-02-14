@@ -19,7 +19,8 @@ public class MovementHandlerTest {
 
     @Test
     public void testMove(){
-        testVehicle.move(5);
+        testVehicle.gas(1.0);
+        testVehicle.move();
         assertEquals(-5, testVehicle.getPosY());
 
         testVehicle.turnLeft();

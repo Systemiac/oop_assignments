@@ -4,7 +4,7 @@ import interfaces.IEngine;
 
 public class EngineHandler implements IEngine {
     private double enginePower;
-    private double engineOutputSpeed = 0;
+    private double engineOutputSpeed;
 
     public EngineHandler(double enginePower) {
         this.enginePower = enginePower;
@@ -15,12 +15,20 @@ public class EngineHandler implements IEngine {
         return enginePower;
     }
 
-    public void setCurrentEngineOutputSpeed(double currentSpeed) {
+    public void setCurrentRPM(double currentSpeed) {
         this.engineOutputSpeed = currentSpeed;
     }
 
-    public double getCurrentEngineOutputSpeed() {
+    public double getCurrentRPM() {
         return engineOutputSpeed;
+    }
+
+    public void increaseRPM(double amount) {
+        engineOutputSpeed = Math.min(engineOutputSpeed + amount, enginePower);
+    }
+    
+    public void decreaseRPM(double amount) {
+        engineOutputSpeed = Math.max(engineOutputSpeed - amount, 0);
     }
 
     // methods

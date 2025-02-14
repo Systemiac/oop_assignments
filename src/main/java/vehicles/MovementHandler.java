@@ -11,7 +11,7 @@ public class MovementHandler implements IMovable {
         this.posX = 0;
         this.posY = 0;
         this.dir = Direction.north;
-        this.speed = 0;
+        this.currentSpeed = 0;
     }
 
     // properties
@@ -95,5 +95,9 @@ public class MovementHandler implements IMovable {
     @Override
     public double getCurrentSpeed(){
         return currentSpeed;
+    }
+
+    public void setCurrentSpeed(double currentSpeed){
+        this.currentSpeed = currentSpeed;
     }
 }

@@ -36,9 +36,9 @@ public class CarTransportTest {
 
     @Test
     public void testRaiseCargoBed() {
-        carTransport.getEngine().setCurrentSpeed(1);
+        carTransport.getMovement().setCurrentSpeed(1);
         assertFalse(carTransport.cargoChecker());
-        carTransport.getEngine().setCurrentSpeed(0); 
+        carTransport.getMovement().setCurrentSpeed(0); 
         
         carTransport.raiseCargoBed();
         assertEquals(carTransport.getMaxAngle(), carTransport.getCargoBedAngle());

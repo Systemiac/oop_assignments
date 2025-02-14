@@ -27,7 +27,7 @@ abstract class TruckPrototype extends VehiclePrototype {
 
     // methods
     protected boolean cargoChecker() {
-        if (getEngine().getCurrentSpeed() == 0) {
+        if (getMovement().getCurrentSpeed() == 0) {
             return true;
         } else {
             System.out.println("Can't change cargoBedAngle while moving");

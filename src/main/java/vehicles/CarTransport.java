@@ -48,7 +48,7 @@ public abstract class CarTransport extends TruckPrototype {
 
     public void unloadCar() {
         if (loadedCars.size() > 0 
-                && getEngine().getCurrentSpeed() == 0
+                && getMovement().getCurrentSpeed() == 0
                 && cargoBedAngle == maxAngle) {
             loadedCars.pop();
             updateCarPositions();
