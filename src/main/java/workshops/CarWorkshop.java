@@ -6,18 +6,18 @@ import vehicles.CarPrototype;
 
 public class CarWorkshop<C extends CarPrototype> {
     private final List<C> cars;
-    private final int maxCars;
+    private final int maxCarsInWorkshop;
 
-    public CarWorkshop(int maxCars) {
+    public CarWorkshop(int maxCarsInWorkshop) {
         this.cars = new ArrayList<>();
-        this.maxCars = maxCars;
+        this.maxCarsInWorkshop = maxCarsInWorkshop;
     }
 
     public void addCarToWorkshop(C car) {
-        if (cars.size() < maxCars) {
+        if (cars.size() < maxCarsInWorkshop) {
             cars.add(car);
         } else {
-            System.out.print("Workshop can't take more cars.");
+            System.out.print(" addCarToWorkshop(): Workshop can't take more cars.");
         }
     }
 
@@ -26,7 +26,7 @@ public class CarWorkshop<C extends CarPrototype> {
             cars.remove(car);
             return car;
         } else {
-            System.out.print("Car is not in the workshop.");
+            System.out.print(" removeCarFromWorkshop() Car is not in the workshop.");
             return null;
         }
     }
@@ -36,6 +36,6 @@ public class CarWorkshop<C extends CarPrototype> {
     }
 
     public int getMaxCarsCapacity(){
-        return maxCars;
+        return maxCarsInWorkshop;
     }
 }

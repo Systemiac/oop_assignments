@@ -32,7 +32,11 @@ public class MovementHandler implements IMovable {
         return dir.ordinal();
     }
 
-    public void move(double distance) { // testing ...
+    public void setDir(Direction dir) { // for testing
+        this.dir = dir;
+    }
+
+    public void move(double distance) { // for testing ...
         if(currentSpeed == 0) {
             return;
         }

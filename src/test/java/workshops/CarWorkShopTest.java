@@ -24,8 +24,9 @@ public class CarWorkShopTest {
         assertEquals(0, testWorkshop.getCarAmountInWorkshop());
     }
 
+    
     @Test
-    public void loadCar() {
+    public void testAddCarToWorkshop() {
         testWorkshop.addCarToWorkshop(testVolvo);
         assertEquals(1, testWorkshop.getCarAmountInWorkshop());
         testWorkshop.addCarToWorkshop(testVolvo);
@@ -33,7 +34,7 @@ public class CarWorkShopTest {
     }
 
     @Test
-    void testUnloadCar() {
+    void testRemoveCarFromWorkshop() {
         volvoWorkshop.addCarToWorkshop(testVolvo);
         Volvo240 aCar = volvoWorkshop.removeCarFromWorkshop(testVolvo);
         assertNotNull(aCar);

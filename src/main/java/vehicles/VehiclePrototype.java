@@ -33,12 +33,17 @@ public abstract class VehiclePrototype implements IChassi {
         return movement;
     }
 
+    // methods
+    public abstract double speedFactor();
+
     public void move() {
         movement.move();
     }
 
-    // methods
-    public abstract double speedFactor();
+    public void stopVehicle() {
+        getEngine().stopEngine();         // Stänger av motorn
+        getMovement().setCurrentSpeed(0); // Stoppar rörelsen
+    }
 
     public void gas(double amount) {
         if (0 <= amount && amount <= 1) {

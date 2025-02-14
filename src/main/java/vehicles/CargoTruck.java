@@ -29,8 +29,8 @@ public abstract class CargoTruck extends TruckPrototype {
         } 
         if (cargoChecker()) {
             cargoBedAngle -= degree;
-            if(cargoBedAngle<minAngle){
-                cargoBedAngle=minAngle;
+            if(cargoBedAngle < minAngle){
+                cargoBedAngle = minAngle;
             }
         }
     }   

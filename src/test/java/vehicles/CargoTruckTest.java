@@ -9,7 +9,7 @@ public class CargoTruckTest {
     private CargoTruck truckPrototype;
 
     @BeforeEach
-    void setup() { 
+    void setup() {
         truckPrototype = new CargoTruck(2, Color.WHITE, 540, "TestTruck") {
             @Override
             public double speedFactor() {
@@ -17,8 +17,6 @@ public class CargoTruckTest {
             }
         };
     }
-
-    
 
     @Test
     void testLowerCargoBed() {
@@ -40,9 +38,9 @@ public class CargoTruckTest {
         truckPrototype.raiseCargoBed(50);
         assertEquals(50, truckPrototype.getCargoBedAngle());
         truckPrototype.raiseCargoBed(0);
-        assertEquals(50, truckPrototype.getCargoBedAngle()); 
+        assertEquals(50, truckPrototype.getCargoBedAngle());
         truckPrototype.raiseCargoBed(-10);
-        assertEquals(50, truckPrototype.getCargoBedAngle()); 
+        assertEquals(50, truckPrototype.getCargoBedAngle());
         truckPrototype.raiseCargoBed(40);
         assertEquals(70, truckPrototype.getCargoBedAngle());
         truckPrototype.getEngine().startEngine();
@@ -51,10 +49,12 @@ public class CargoTruckTest {
     }
 
     @Test
-    void cargoChecker() {
+    void cargoCheckerCoversAllCases() {
         assertTrue(truckPrototype.cargoChecker());
         truckPrototype.getEngine().startEngine();
         truckPrototype.gas(0.1);
         assertFalse(truckPrototype.cargoChecker());
+        truckPrototype.stopVehicle();
+        assertTrue(truckPrototype.cargoChecker());
     }
 }

@@ -4,19 +4,35 @@ import java.awt.Color;
 import java.util.Stack;
 
 public abstract class CarTransport extends TruckPrototype {
-    private int maxCars;
-
+    private int maxCarsInTruck;
+    private double offset = 0.5;
     private Stack<CarPrototype> loadedCars = new Stack<>();
 
-    public CarTransport(int nrDoors, Color color, double enginePower, String modelName, int maxCars) {
+    public CarTransport(int nrDoors, Color color, double enginePower, String modelName, int maxCarsInTruck) {
         super(nrDoors, color, enginePower, modelName);
-        this.maxCars = maxCars;
+        this.maxCarsInTruck = maxCarsInTruck;
         this.cargoBedAngle = 0;
     }
 
     public int getCarAmount() {
         return loadedCars.size();
     }
+
+    public Stack<CarPrototype> getStackContent() {
+        return loadedCars;
+    }
+
+    public double getOffset() {
+        return offset + loadedCars.size();
+    }
+
+    public boolean setOffset(double newOffset) {
+        if (newOffset <= 0) {
+            return false;
+        }
+        this.offset = newOffset;
+        return true;
+    }  
 
     public void raiseCargoBed() {
         if (cargoChecker() && cargoBedAngle == minAngle) {
@@ -31,10 +47,11 @@ public abstract class CarTransport extends TruckPrototype {
     }
 
     public void loadCar(CarPrototype car) {
-        if (loadedCars.size() < maxCars
+        if (loadedCars.size() < maxCarsInTruck
                 && getMovement().getCurrentSpeed() == 0
                 && cargoBedAngle == maxAngle
-                && calculateDistance(getMovement().getPosX(), getMovement().getPosY(), car.getMovement().getPosX(), car.getMovement().getPosY()) < 100) {
+                && calculateDistance(getMovement().getPosX(), getMovement().getPosY(), car.getMovement().getPosX(),
+                        car.getMovement().getPosY()) < 100) {
             loadedCars.push(car);
             updateCarPositions();
         }
@@ -43,11 +60,12 @@ public abstract class CarTransport extends TruckPrototype {
     private static double calculateDistance(double x1, double y1, double x2, double y2) {
         double dx = x2 - x1;
         double dy = y2 - y1;
-        return Math.sqrt(dx * dx + dy * dy);
+        double distance = Math.sqrt(dx * dx + dy * dy);
+        return distance;
     }
 
     public void unloadCar() {
-        if (loadedCars.size() > 0 
+        if (loadedCars.size() > 0
                 && getMovement().getCurrentSpeed() == 0
                 && cargoBedAngle == maxAngle) {
             loadedCars.pop();
@@ -56,37 +74,23 @@ public abstract class CarTransport extends TruckPrototype {
     }
 
     public void updateCarPositions() {
-
-        double offset = 1.5; // avstånd mellan bilar
-        double x = getMovement().getPosX();
-        double y = getMovement().getPosY();
+        double transportX = getMovement().getPosX();
+        double transportY = getMovement().getPosY();
 
         for (int i = 0; i < loadedCars.size(); i++) {
             CarPrototype car = loadedCars.get(i);
-            double newX = x;
-            double newY = y;
+            double carX = transportX;
+            double carY = transportY + (i + 1) * offset;
+            double distance = calculateDistance(transportX, transportY, carX, carY);
 
-            switch (getMovement().getDir()) {
-                case 0:
-                    newY += (i + 1) * offset;
-                    break;
-                case 1:
-                    newX -= (i + 1) * offset;
-                    break;
-                case 2:
-                    newY -= (i + 1) * offset;
-                    break;
-                case 3:
-                    newX += (i + 1) * offset;
-                    break;
-            }
-
-            if (calculateDistance(newX, newY, car.getMovement().getPosX(), car.getMovement().getPosY()) > offset) {
-                car.getMovement().setPos(newX, newY);
+            if (distance >= offset) {
+                car.getMovement().setPos(carX, carY);
+            } else {
+                System.out.println("Car " + (i + 1) + " did not move, too close to another car.");
             }
         }
     }
-    
+
     @Override
     public void move() {
         super.move();
