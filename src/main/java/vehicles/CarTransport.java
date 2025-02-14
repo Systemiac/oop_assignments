@@ -18,15 +18,15 @@ public abstract class CarTransport extends TruckPrototype {
         return loadedCars.size();
     }
 
-    public Stack<CarPrototype> getStackContent() {
+    public Stack<CarPrototype> getStackContent() { // for testing
         return loadedCars;
     }
 
-    public double getOffset() {
+    public double getOffset() { // for testing
         return offset + loadedCars.size();
     }
 
-    public boolean setOffset(double newOffset) {
+    public boolean setOffset(double newOffset) { // for testing
         if (newOffset <= 0) {
             return false;
         }
@@ -34,7 +34,7 @@ public abstract class CarTransport extends TruckPrototype {
         return true;
     }
 
-    public boolean isFull() {
+    public boolean isFull() { // for testing
         return loadedCars.size() >= maxCarsInTruck;
     }
     
@@ -80,7 +80,6 @@ public abstract class CarTransport extends TruckPrototype {
             updateCarPositions();
         }
     }
-
 
     public void updateCarPositions() {
         double transportX = getMovement().getPosX();

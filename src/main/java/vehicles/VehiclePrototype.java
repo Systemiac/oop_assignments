@@ -7,9 +7,9 @@ public abstract class VehiclePrototype implements IChassi {
     private int nrDoors;
     private Color color;
     private String modelName;
+    private double maxSpeed;
     private EngineHandler engine;
     private MovementHandler movement;
-    private double maxSpeed;
 
     public VehiclePrototype(int nrDoors, Color color, double enginePower, String modelName) {
         this.nrDoors = nrDoors;
@@ -40,11 +40,6 @@ public abstract class VehiclePrototype implements IChassi {
         movement.move();
     }
 
-    public void stopVehicle() {
-        getEngine().stopEngine();         // Stänger av motorn
-        getMovement().setCurrentSpeed(0); // Stoppar rörelsen
-    }
-
     public void gas(double amount) {
         if (0 <= amount && amount <= 1) {
             double acceleration = speedFactor() * engine.getEnginePower() * amount;
@@ -67,8 +62,9 @@ public abstract class VehiclePrototype implements IChassi {
             System.out.println("Invalid brake input: " + amount);
     }
 
-    public double getSpeed() {
-        return movement.getCurrentSpeed();
+    public void stopVehicle() { // testning
+        getEngine().stopEngine();
+        getMovement().setCurrentSpeed(0);
     }
 
     private double calculateMaxSpeed() {
