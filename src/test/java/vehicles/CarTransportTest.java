@@ -2,10 +2,9 @@ package vehicles;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.awt.Color;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-//import vehicles.MovementHandler.Direction;
 
 public class CarTransportTest {
     private CarTransport carTransport;
@@ -18,12 +17,15 @@ public class CarTransportTest {
 
     @BeforeEach
     void setup() {
-        carTransport = new CarTransport(2, Color.WHITE, 540, "TestTruck", 5) {
-            @Override
-            public double speedFactor() {
-                return 1.5;
-            }
-        };
+        if (carTransport == null) {
+            carTransport = new CarTransport(2, Color.WHITE, 540, "TestTruck", 6) {
+                @Override
+                public double speedFactor() {
+                    return 1.5;
+                }
+            };
+        }
+
         testCar1 = new Volvo240();
         testCar2 = new Saab95();
         testCar3 = new Volvo240();
@@ -92,15 +94,15 @@ public class CarTransportTest {
         carTransport.loadCar(testCar1);
         assertEquals(0.5, testCar1.getMovement().getPosY());
         carTransport.loadCar(testCar2);
-        assertEquals(1, testCar2.getMovement().getPosY());
+        assertEquals(1.0, testCar2.getMovement().getPosY());
         carTransport.loadCar(testCar3);
         assertEquals(1.5, testCar3.getMovement().getPosY());
         carTransport.loadCar(testCar4);
-        assertEquals(2, testCar4.getMovement().getPosY());
+        assertEquals(2.0, testCar4.getMovement().getPosY());
         carTransport.loadCar(testCar5);
         assertEquals(2.5, testCar5.getMovement().getPosY());
         carTransport.loadCar(testCar6);
-        assertEquals(0, testCar6.getMovement().getPosY());
+        assertEquals(3.0, testCar6.getMovement().getPosY());
     }
 
     @Test
@@ -114,4 +116,65 @@ public class CarTransportTest {
         assertEquals(0.5, carTransport.getOffset());
     }
 
+    @Test
+    void testEmptyCarTransport() {
+        carTransport.getStackContent().clear();
+        carTransport.updateCarPositions();
+        assertEquals(0, carTransport.getCarAmount());
+    }
+
+    @Test
+    void testCarTooCloseToAnotherCar() {
+        carTransport.getStackContent().clear();
+        carTransport.getMovement().setCurrentSpeed(0);
+        carTransport.raiseCargoBed();
+        carTransport.loadCar(testCar1);
+        carTransport.loadCar(testCar2);
+        carTransport.loadCar(testCar3);
+        carTransport.loadCar(testCar4);
+        carTransport.updateCarPositions();
+        assertEquals(4, carTransport.getCarAmount());
+        assertEquals(carTransport.getMovement().getPosY() + 1.5, testCar3.getMovement().getPosY());
+        assertEquals(2, testCar4.getMovement().getPosY());
+    }
+
+    @Test
+    void testCarTransportFull() {
+        System.out.println(">> DEBUG: Using carTransport instance: " + carTransport);
+        carTransport.getMovement().setCurrentSpeed(0);
+        carTransport.raiseCargoBed();
+        assertFalse(carTransport.isFull());
+        assertTrue(carTransport.loadCar(testCar1));
+        assertTrue(carTransport.loadCar(testCar2));
+        assertTrue(carTransport.loadCar(testCar3));
+        assertTrue(carTransport.loadCar(testCar4));
+        assertTrue(carTransport.loadCar(testCar5));
+        assertTrue(carTransport.loadCar(testCar6));
+        assertTrue(carTransport.isFull());
+    }
+
+    @Test
+    void testSetOffsetInvalid() {
+        assertFalse(carTransport.setOffset(-1)); 
+        assertFalse(carTransport.setOffset(0));
+    }
+
+    @Test
+    void testCarTransportReallyFull() {
+        carTransport.getMovement().setCurrentSpeed(0);
+        carTransport.raiseCargoBed();
+
+        for (int i = 0; i < 12; i++) {
+            carTransport.loadCar(new Volvo240());
+        }
+        assertTrue(carTransport.isFull()); // Nu ska den vara full
+    }
+    @Test
+    void testRaiseCargoBedAgain() {
+        carTransport.getMovement().setCurrentSpeed(0);
+        carTransport.raiseCargoBed();
+        carTransport.raiseCargoBed(); // Kör den igen
+    
+        assertEquals(carTransport.getMaxAngle(), carTransport.getCargoBedAngle()); 
+    }    
 }

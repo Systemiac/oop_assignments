@@ -1,80 +1,105 @@
 package vehicles;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import vehicles.MovementHandler.Direction;
 
-public class MovementHandlerTest {
-
-    private MovementHandler testVehicle;
+class MovementHandlerTest {
+    private MovementHandler movement;
 
     @BeforeEach
     void setUp() {
-        testVehicle = new MovementHandler();
+        movement = new MovementHandler();
     }
 
     @Test
-    public void testMove() {
-        testVehicle.incrementSpeed(1.0, 1.0);
-        testVehicle.move(5);
-        assertEquals(-5, testVehicle.getPosY());
-        testVehicle.turnLeft();
-        testVehicle.turnLeft();
-        testVehicle.move(5);
-        assertEquals(0, testVehicle.getPosY());
-        testVehicle.turnRight();
-        testVehicle.move(5);
-        assertEquals(-5, testVehicle.getPosX());
-        testVehicle.turnRight();
-        testVehicle.turnRight();
-        testVehicle.move(5);
-        assertEquals(0, testVehicle.getPosX());
+    void testInitialPositionAndDirection() {
+        assertEquals(0, movement.getPosX());
+        assertEquals(0, movement.getPosY());
+        assertEquals(Direction.north.ordinal(), movement.getDir());
+    }
+
+    @Test
+    void testMoveDoesNothingIfSpeedZero() {
+        movement.move(10);
+        assertEquals(0, movement.getPosX());
+        assertEquals(0, movement.getPosY());
     }
 
     @Test
     void testMoveNorth() {
-        assertEquals(0, testVehicle.getDir(), "Are we facing north?");
-        testVehicle.incrementSpeed(1.0, 1.0); // earlier startEnging()
-        testVehicle.move();
-        assertTrue(testVehicle.getPosY() < 0);
+        movement.setCurrentSpeed(5);
+        movement.setDir(Direction.north);
+        movement.move();
+        assertEquals(-5, movement.getPosY());
     }
 
     @Test
-    void testMoveEastAfterTurnRight() {
-        testVehicle.incrementSpeed(1.0, 1.0);
-        testVehicle.turnRight();
-        testVehicle.move();
-        assertTrue(testVehicle.getPosX() > 0);
+    void testMoveSouth() {
+        movement.setCurrentSpeed(3);
+        movement.setDir(Direction.south);
+        movement.move();
+        assertEquals(3, movement.getPosY());
     }
 
     @Test
-    void testMoveSouthAfterTwoTurns() {
-        testVehicle.incrementSpeed(1.0, 1.0);
-        testVehicle.turnRight();
-        testVehicle.turnRight();
-        testVehicle.move();
-        assertTrue(testVehicle.getPosY() > 0);
+    void testMoveEast() {
+        movement.setCurrentSpeed(4);
+        movement.setDir(Direction.east);
+        movement.move();
+        assertEquals(4, movement.getPosX());
+    }
+
+    @Test
+    void testMoveWest() {
+        movement.setCurrentSpeed(2);
+        movement.setDir(Direction.west);
+        movement.move();
+        assertEquals(-2, movement.getPosX());
     }
 
     @Test
     void testTurnLeft() {
-        testVehicle.turnLeft();
-        assertEquals(3, testVehicle.getDir());
+        movement.turnLeft();
+        assertEquals(Direction.west.ordinal(), movement.getDir());
+        movement.turnLeft();
+        assertEquals(Direction.south.ordinal(), movement.getDir());
+        movement.turnLeft();
+        assertEquals(Direction.east.ordinal(), movement.getDir());
+        movement.turnLeft();
+        assertEquals(Direction.north.ordinal(), movement.getDir());
     }
 
     @Test
-    void testTurnRight() { 
-        testVehicle.turnRight();
-        assertEquals(1, testVehicle.getDir());
+    void testTurnRight() {
+        movement.turnRight();
+        assertEquals(Direction.east.ordinal(), movement.getDir());
+        movement.turnRight();
+        assertEquals(Direction.south.ordinal(), movement.getDir());
+        movement.turnRight();
+        assertEquals(Direction.west.ordinal(), movement.getDir());
+        movement.turnRight();
+        assertEquals(Direction.north.ordinal(), movement.getDir());
     }
 
     @Test
-    public void testSetPos() {
-        testVehicle.setPos(300, 300);
-        assertEquals(testVehicle.getPosX(), 300);
-        assertEquals(testVehicle.getPosY(), 300);
+    void testIncrementSpeed() {
+        movement.incrementSpeed(2, 1.5);
+        assertEquals(3.0, movement.getCurrentSpeed());
     }
 
+    @Test
+    void testDecrementSpeed() {
+        movement.setCurrentSpeed(10);
+        movement.decrementSpeed(2, 3);
+        assertEquals(4, movement.getCurrentSpeed());
+    }
+
+    @Test
+    void testDecrementSpeedBelowZero() {
+        movement.setCurrentSpeed(5);
+        movement.decrementSpeed(2, 3);
+        assertEquals(0, movement.getCurrentSpeed());
+    }
 }

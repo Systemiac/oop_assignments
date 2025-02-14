@@ -32,7 +32,12 @@ public abstract class CarTransport extends TruckPrototype {
         }
         this.offset = newOffset;
         return true;
-    }  
+    }
+
+    public boolean isFull() {
+        return loadedCars.size() >= maxCarsInTruck;
+    }
+    
 
     public void raiseCargoBed() {
         if (cargoChecker() && cargoBedAngle == minAngle) {
@@ -46,7 +51,7 @@ public abstract class CarTransport extends TruckPrototype {
         }
     }
 
-    public void loadCar(CarPrototype car) {
+    public boolean loadCar(CarPrototype car) {
         if (loadedCars.size() < maxCarsInTruck
                 && getMovement().getCurrentSpeed() == 0
                 && cargoBedAngle == maxAngle
@@ -54,7 +59,10 @@ public abstract class CarTransport extends TruckPrototype {
                         car.getMovement().getPosY()) < 100) {
             loadedCars.push(car);
             updateCarPositions();
+
+            return true;
         }
+        return false;
     }
 
     private static double calculateDistance(double x1, double y1, double x2, double y2) {
@@ -73,6 +81,7 @@ public abstract class CarTransport extends TruckPrototype {
         }
     }
 
+
     public void updateCarPositions() {
         double transportX = getMovement().getPosX();
         double transportY = getMovement().getPosY();
@@ -81,12 +90,12 @@ public abstract class CarTransport extends TruckPrototype {
             CarPrototype car = loadedCars.get(i);
             double carX = transportX;
             double carY = transportY + (i + 1) * offset;
-            double distance = calculateDistance(transportX, transportY, carX, carY);
+            double distanceBetweenCars = calculateDistance(transportX, transportY, carX, carY);
 
-            if (distance >= offset) {
+            if (distanceBetweenCars >= offset) {
                 car.getMovement().setPos(carX, carY);
             } else {
-                System.out.println("Car " + (i + 1) + " did not move, too close to another car.");
+                System.out.println("Car " + (i + 1) + "Too close to another car.");
             }
         }
     }
