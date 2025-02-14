@@ -28,17 +28,17 @@ public class CarTransportTest {
         carTransport.loadCar(testCar2);
         carTransport.move();
 
-        assertEquals(carTransport.getPosY(), testCar1.getPosY());
-        assertEquals(carTransport.getPosX(), testCar1.getPosX());
-        assertEquals(carTransport.getPosX(), testCar2.getPosX());
-        assertEquals(carTransport.getPosY(), testCar2.getPosY());
+        assertEquals(carTransport.getMovement().getPosY(), testCar1.getMovement().getPosY());
+        assertEquals(carTransport.getMovement().getPosX(), testCar1.getMovement().getPosX());
+        assertEquals(carTransport.getMovement().getPosX(), testCar2.getMovement().getPosX());
+        assertEquals(carTransport.getMovement().getPosY(), testCar2.getMovement().getPosY());
     }
 
     @Test
     public void testRaiseCargoBed() {
-        carTransport.setCurrentSpeed(1);
+        carTransport.getEngine().setCurrentSpeed(1);
         assertFalse(carTransport.cargoChecker());
-        carTransport.setCurrentSpeed(0); 
+        carTransport.getEngine().setCurrentSpeed(0); 
         
         carTransport.raiseCargoBed();
         assertEquals(carTransport.getMaxAngle(), carTransport.getCargoBedAngle());

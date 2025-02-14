@@ -12,7 +12,7 @@ public class Saab95Test {
         Saab95 saab = new Saab95();
         assertEquals(2, saab.getNrDoors(), "Saab95 ska ha 2 dörrar");
         assertEquals(Color.red, saab.getColor(), "Saab95 ska vara röd");
-        assertEquals(125, saab.getEnginePower(), "Saab95 ska ha 125 hk");
+        assertEquals(125, saab.getEngine().getEnginePower(), "Saab95 ska ha 125 hk");
         assertEquals("Saab95", saab.getModelName(), "Modellnamnet ska vara Saab95");
     }
 
@@ -20,7 +20,7 @@ public class Saab95Test {
     public void testSetTurboOn() {
         Saab95 saab = new Saab95();
         saab.setTurboOn();
-        assertEquals(1.3, saab.speedFactor() / (saab.getEnginePower() * 0.01), 0.0001,
+        assertEquals(1.3, saab.speedFactor() / (saab.getEngine().getEnginePower() * 0.01), 0.0001,
                      "Turbo ska öka speedFactor till 1.3 gånger");
     }
 
@@ -28,7 +28,7 @@ public class Saab95Test {
     public void testSetTurboOff() {
         Saab95 saab = new Saab95();
         saab.setTurboOff();
-        assertEquals(1.0, saab.speedFactor() / (saab.getEnginePower() * 0.01), 0.0001,
+        assertEquals(1.0, saab.speedFactor() / (saab.getEngine().getEnginePower() * 0.01), 0.0001,
                      "Turbo ska vara avstängd och speedFactor ska vara normalt");
     }
 

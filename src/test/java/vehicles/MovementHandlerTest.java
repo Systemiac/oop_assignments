@@ -9,10 +9,11 @@ import org.junit.jupiter.api.Test;
 public class MovementHandlerTest {
 
     private MovementHandler testVehicle;
+    private EngineHandler engine;
 
     @BeforeEach
     void setUp() {
-        testVehicle = new MovementHandler();
+        testVehicle = new MovementHandler(engine);
     }
 
 

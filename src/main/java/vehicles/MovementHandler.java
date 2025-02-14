@@ -2,21 +2,19 @@ package vehicles;
 import interfaces.IMovable;
 
 public class MovementHandler implements IMovable {
-    private double speed;
+    private double currentSpeed;
     private double posX, posY;
-    
-    public enum Direction {
-        north, east, south, west;
-    }
+    public enum Direction { north, east, south, west; }
     private Direction dir;
 
-    public MovementHandler() {
+    public MovementHandler(EngineHandler engine) {
         this.posX = 0;
         this.posY = 0;
         this.dir = Direction.north;
         this.speed = 0;
     }
 
+    // properties
     public void setPos(double x, double y){
         posX = x;
         posY = y;
@@ -34,7 +32,7 @@ public class MovementHandler implements IMovable {
         return dir.ordinal();
     }
 
-    public void move(double currentSpeed) {
+    public void move() {
         switch (dir) {
             case north:
                 posY -= currentSpeed;        
@@ -85,29 +83,17 @@ public class MovementHandler implements IMovable {
         }
     }
 
-    public double getSpeed(){
-        return speed;
-    }
-    public void move() {
-        move(engine.getCurrentSpeed());
+    public void incrementSpeed(double amount, double speedFactor) {
+        currentSpeed = speedFactor * amount; // maxSpeed bestäms i VehiclePrototype
     }
 
+    public void decrementSpeed(double amount, double speedFactor) {
 
+        currentSpeed = Math.max(currentSpeed - speedFactor * amount, 0);
+    }
 
     @Override
-    public void gas(double amount) {
-        if (0 <= amount && amount <= 1) {
-            engine.incrementSpeed(amount, speedFactor());
-        } else
-            System.out.println("Invalid input: " + amount);
-    }
-    
-    @Override
-    public void brake(double amount) {
-
-        if (0 <= amount && amount <= 1) {
-            engine.decrementSpeed(amount, speedFactor());
-        } else
-            System.out.println("Invalid input: " + amount);
+    public double getCurrentSpeed(){
+        return currentSpeed;
     }
 }

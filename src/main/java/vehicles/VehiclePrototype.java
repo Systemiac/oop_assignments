@@ -1,9 +1,10 @@
 package vehicles;
+
 import java.awt.Color;
 import interfaces.IChassi;
 
 public abstract class VehiclePrototype implements IChassi {
-
+    private double speed;
     private int nrDoors;
     private Color color;
     private String modelName;
@@ -15,7 +16,7 @@ public abstract class VehiclePrototype implements IChassi {
         this.color = color;
         this.modelName = modelName;
         this.engine = new EngineHandler(enginePower);
-        this.movement = new MovementHandler();
+        this.movement = new MovementHandler(engine);
     }
 
     // properties
@@ -26,30 +27,31 @@ public abstract class VehiclePrototype implements IChassi {
     public EngineHandler getEngine() {
         return engine;
     }
-    
+
     public MovementHandler getMovement() {
         return movement;
     }
-
-    @Override
-    public int getNrDoors() {
-        return nrDoors;
-    }
     
-    public void setPos(double x, double y){
-        movement.setPos(x,y);
+    public void move() {
+        movement.move(getMovement().getCurrentSpeed());
     }
 
-    public double getPosX() {
-        return movement.getPosX();
+    // methods
+    public abstract double speedFactor();
+
+    public void gas(double amount) {
+        if (0 <= amount && amount <= 1) {
+            engine.incrementSpeed(amount, movement.getCurrentSpeed());
+        } else
+            System.out.println("Invalid gas input: " + amount);
     }
     
-    public double getPosY() {
-        return movement.getPosY();
-    }
-    
-    public int getDir() {
-        return movement.getDir();
+    public void brake(double amount) {
+
+        if (0 <= amount && amount <= 1) {
+            engine.decrementSpeed(amount, engine.getCurrentSpeed());
+        } else
+            System.out.println("Invalid brake input: " + amount);
     }
 
     @Override
@@ -60,6 +62,9 @@ public abstract class VehiclePrototype implements IChassi {
     public void setColor(Color clr) {
         color = clr;
     }
-    
-    public abstract double speedFactor();
+
+    @Override
+    public int getNrDoors() {
+        return nrDoors;
+    }
 }

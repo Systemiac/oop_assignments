@@ -10,7 +10,7 @@ public class Mercedes extends CarTransport {
 
      public double speedFactor() {
         if (getCargoBedAngle() == 0) {
-            return getEnginePower() * 0.01;
+            return getEngine().getEnginePower() * 0.01;
         } else {
             return 0;
         }

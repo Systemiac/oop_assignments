@@ -19,7 +19,7 @@ class ScaniaTest {
     public void testConstructor() {
         assertEquals(2, scania.getNrDoors(), "Scania ska ha 2 dörrar");
         assertEquals(Color.blue, scania.getColor(), "Scania ska vara blå");
-        assertEquals(540, scania.getEnginePower(), "Scania ska ha 540 hk");
+        assertEquals(540, scania.getEngine().getEnginePower(), "Scania ska ha 540 hk");
         assertEquals("Scania", scania.getModelName(), "Modellnamnet ska vara Scania");
     }
 

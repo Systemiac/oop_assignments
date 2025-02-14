@@ -1,43 +1,34 @@
 package vehicles;
 
 import interfaces.IEngine;
-import interfaces.IMovable;
 
 public class EngineHandler implements IEngine {
     private double enginePower;
-    private double currentSpeed;
+    private double engineOutputSpeed = 0;
 
     public EngineHandler(double enginePower) {
         this.enginePower = enginePower;
     }
 
-    public double getCurrentSpeed() {
-        return currentSpeed;
-    }
-
-    public void startEngine() {
-        currentSpeed = 0.1;
-    }
-
-    public void stopEngine() {
-        currentSpeed = 0;
-    }
-
+    // properties
     public double getEnginePower() {
         return enginePower;
     }
 
-    public void setCurrentSpeed(double currentSpeed) {
-        this.currentSpeed = currentSpeed;
+    public void setCurrentEngineOutputSpeed(double currentSpeed) {
+        this.engineOutputSpeed = currentSpeed;
     }
 
-    public void incrementSpeed(double amount, double speedFactor, IMovable vehicle) {
-        double newSpeed = vehicle.speed() + speedFactor * amount;
-        currentSpeed = Math.min(newSpeed, enginePower);
+    public double getCurrentEngineOutputSpeed() {
+        return engineOutputSpeed;
     }
 
-    public void decrementSpeed(double amount, double speedFactor, IMovable vehicle) {
-        double newSpeed = vehicle.speed() - speedFactor * amount;
-        currentSpeed = Math.max(newSpeed, 0);
+    // methods
+    public void startEngine() {
+        engineOutputSpeed = 0.1;
+    }
+
+    public void stopEngine() {
+        engineOutputSpeed = 0;
     }
 }

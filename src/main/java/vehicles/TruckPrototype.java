@@ -12,15 +12,7 @@ abstract class TruckPrototype extends VehiclePrototype {
     
     }
 
-    protected boolean cargoChecker() {
-        if (getCurrentSpeed() == 0) {
-            return true;
-        } else {
-            System.out.println("Can't change cargoBedAngle while moving");
-            return false;
-        }
-    }
-
+    // properties
     public int getCargoBedAngle(){
         return cargoBedAngle;
     }
@@ -32,4 +24,15 @@ abstract class TruckPrototype extends VehiclePrototype {
     public int getMinAngle() {
         return minAngle;
     }
+
+    // methods
+    protected boolean cargoChecker() {
+        if (getEngine().getCurrentSpeed() == 0) {
+            return true;
+        } else {
+            System.out.println("Can't change cargoBedAngle while moving");
+            return false;
+        }
+    }
+
 }

@@ -20,7 +20,7 @@ public class Volvo240Test {
     public void testConstructor() {
         assertEquals(4, testVolvo240.getNrDoors());
         assertEquals(Color.BLACK, testVolvo240.getColor());
-        assertEquals(100, testVolvo240.getEnginePower());
+        assertEquals(100, testVolvo240.getEngine().getEnginePower());
         assertEquals("Volvo240", testVolvo240.getModelName());
     }
 
@@ -38,16 +38,16 @@ public class Volvo240Test {
 
     @Test
     public void testGetCurrentSpeed() {
-        assertEquals(0, testVolvo240.getCurrentSpeed());
+        assertEquals(0, testVolvo240.getEngine().getCurrentSpeed());
     }
 
     @Test
     public void testGetPosX() {
-        assertEquals(0, testVolvo240.getPosX());
+        assertEquals(0, testVolvo240.getMovement().getPosX());
     }
 
     @Test
     public void testGetPosY() {
-        assertEquals(0, testVolvo240.getPosY());
+        assertEquals(0, testVolvo240.getMovement().getPosY());
     }
 }

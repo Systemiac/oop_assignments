@@ -1,10 +1,8 @@
 package interfaces; 
 
 public interface IMovable {
-    void move();
+    void move(double currentSpeed);
     void turnLeft();
     void turnRight();
-    void gas(double amount);
-    void brake(double amount);
-    double speed();
+    double getCurrentSpeed();
 }

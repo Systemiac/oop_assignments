@@ -11,6 +11,6 @@ public class Volvo240 extends CarPrototype {
 
     @Override
     public double speedFactor() {
-        return getEnginePower() * 0.01 * trimFactor;
+        return getEngine().getEnginePower() * 0.01 * trimFactor;
     }
 }

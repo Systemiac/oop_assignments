@@ -23,6 +23,6 @@ public class Saab95 extends CarPrototype {
         double turbo = 1;
         if (turboOn)
             turbo = 1.3;
-        return this.getEnginePower() * 0.01 * turbo;
+        return getEngine().getEnginePower() * 0.01 * turbo;
     }
 }
