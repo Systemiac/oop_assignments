@@ -9,15 +9,15 @@ public abstract class VehiclePrototype implements IChassi {
     private String modelName;
     private EngineHandler engine;
     private MovementHandler movement;
-    private double maxSpeed = calculateMaxSpeed();
+    private double maxSpeed;
 
     public VehiclePrototype(int nrDoors, Color color, double enginePower, String modelName) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.modelName = modelName;
         this.engine = new EngineHandler(enginePower);
-        this.movement = new MovementHandler(engine);
-        
+        this.movement = new MovementHandler();
+        this.maxSpeed = calculateMaxSpeed();
     }
 
     // properties
@@ -55,6 +55,9 @@ public abstract class VehiclePrototype implements IChassi {
         if (0 <= amount && amount <= 1) {
             double deceleration = speedFactor() * engine.getEnginePower() * amount;
             movement.decrementSpeed(amount, deceleration);
+            if (movement.getCurrentSpeed() < 0) {
+                movement.setCurrentSpeed(0);
+            }
         } else
             System.out.println("Invalid brake input: " + amount);
     }
@@ -64,9 +67,12 @@ public abstract class VehiclePrototype implements IChassi {
     }
 
     private double calculateMaxSpeed() {
-        return engine.getEnginePower() * 2; // Vettigt?
+        if (engine == null) {
+            throw new IllegalStateException("Engine is null when calculating max speed!");
+        }
+        return engine.getEnginePower() * 2;
     }
-    
+
     @Override
     public Color getColor() {
         return color;

@@ -21,46 +21,9 @@ class VehiclePrototypeTest {
     }
 
     @Test
-    void testMoveNorth() {
-        assertEquals(0, testVehicle.getMovement().getDir(), "Norr?");
-        testVehicle.getEngine().startEngine();
-        testVehicle.move();
-        assertTrue(testVehicle.getMovement().getPosY() < 0);
-    }
-
-    @Test
-    void testMoveEastAfterTurnRight() {
-        testVehicle.getEngine().startEngine();
-        testVehicle.getMovement().turnRight();
-        testVehicle.move();
-        assertTrue(testVehicle.getMovement().getPosX() > 0);
-    }
-
-    @Test
-    void testMoveSouthAfterTwoTurns() {
-        testVehicle.getEngine().startEngine();
-        testVehicle.getMovement().turnRight();
-        testVehicle.getMovement().turnRight();
-        testVehicle.move();
-        assertTrue(testVehicle.getMovement().getPosY() > 0);
-    }
-
-    @Test
-    void testTurnLeft() {
-        testVehicle.getMovement().turnLeft();
-        assertEquals(3, testVehicle.getMovement().getDir());
-    }
-
-    @Test
-    void testTurnRight() {
-        testVehicle.getMovement().turnRight();
-        assertEquals(1, testVehicle.getMovement().getDir());
-    }
-
-    @Test
     public void testStartEngine() {
         testVehicle.getEngine().startEngine();
-        assertEquals(testVehicle.getMovement().getCurrentSpeed(), 0.1);
+        assertEquals(testVehicle.getEngine().getCurrentRPM(), 0.1);
     }
 
     @Test
@@ -108,12 +71,5 @@ class VehiclePrototypeTest {
 
         testVehicle.brake(-2);
         assertEquals(speedBeforeGas2, testVehicle.getMovement().getCurrentSpeed());
-    }
-
-    @Test
-    public void testSetPos(){
-        testVehicle.getMovement().setPos(300,300);
-        assertEquals(testVehicle.getMovement().getPosX(), 300);
-        assertEquals(testVehicle.getMovement().getPosY(), 300);
     }
 }

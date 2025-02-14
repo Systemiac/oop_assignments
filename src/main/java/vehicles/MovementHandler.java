@@ -7,7 +7,7 @@ public class MovementHandler implements IMovable {
     public enum Direction { north, east, south, west; }
     private Direction dir;
 
-    public MovementHandler(EngineHandler engine) {
+    public MovementHandler() {
         this.posX = 0;
         this.posY = 0;
         this.dir = Direction.north;
@@ -30,6 +30,16 @@ public class MovementHandler implements IMovable {
 
     public int getDir(){
         return dir.ordinal();
+    }
+
+    public void move(double distance) { // testing ...
+        if(currentSpeed == 0) {
+            return;
+        }
+        while (distance > 0) {
+            move();
+            distance -= Math.min(currentSpeed, 1.0);
+        }
     }
 
     public void move() {
@@ -84,7 +94,7 @@ public class MovementHandler implements IMovable {
     }
 
     public void incrementSpeed(double amount, double speedFactor) {
-        currentSpeed = speedFactor * amount; // maxSpeed bestäms i VehiclePrototype
+        currentSpeed += speedFactor * amount; // maxSpeed bestäms i VehiclePrototype
     }
 
     public void decrementSpeed(double amount, double speedFactor) {
