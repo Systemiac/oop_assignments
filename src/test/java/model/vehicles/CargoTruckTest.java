@@ -1,4 +1,4 @@
-package vehicles;
+package model.vehicles;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.awt.Color;

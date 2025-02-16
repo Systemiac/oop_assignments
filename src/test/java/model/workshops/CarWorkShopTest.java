@@ -1,7 +1,7 @@
-package workshops;
+package model.workshops;
 
-import vehicles.CarPrototype;
-import vehicles.Volvo240;
+import model.vehicles.CarPrototype;
+import model.vehicles.Volvo240;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,16 +21,16 @@ public class CarWorkShopTest {
 
     @Test
     public void testConstructor() {
-        assertEquals(0, testWorkshop.getCarAmountInWorkshop());
+        assertEquals(0, testWorkshop.getCurrentCarsInWorkshop());
     }
 
     
     @Test
     public void testAddCarToWorkshop() {
         testWorkshop.addCarToWorkshop(testVolvo);
-        assertEquals(1, testWorkshop.getCarAmountInWorkshop());
+        assertEquals(1, testWorkshop.getCurrentCarsInWorkshop());
         testWorkshop.addCarToWorkshop(testVolvo);
-        assertEquals(1, testWorkshop.getCarAmountInWorkshop());
+        assertEquals(1, testWorkshop.getCurrentCarsInWorkshop());
     }
 
     @Test
@@ -46,11 +46,11 @@ public class CarWorkShopTest {
         volvoWorkshop.addCarToWorkshop(testVolvo);
         Volvo240 aCar = volvoWorkshop.removeCarFromWorkshop(testVolvo);
         volvoWorkshop.addCarToWorkshop(aCar);
-        assertEquals(1, volvoWorkshop.getCarAmountInWorkshop());
+        assertEquals(1, volvoWorkshop.getCurrentCarsInWorkshop());
     }
 
     @Test
     void testMaxCarsCapacity() {
-        assertEquals(20, volvoWorkshop.getMaxCarsCapacity());
+        assertEquals(20, volvoWorkshop.getMaxCarsInWorkshop());
     }
 }

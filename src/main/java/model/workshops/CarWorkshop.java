@@ -31,11 +31,11 @@ public class CarWorkshop<C extends CarPrototype> {
         }
     }
 
-    public int getCarAmountInWorkshop() {
+    public int getCurrentCarsInWorkshop() {
         return cars.size();
     }
 
-    public int getMaxCarsCapacity(){
+    public int getMaxCarsInWorkshop(){
         return maxCarsInWorkshop;
     }
 }

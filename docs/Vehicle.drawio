@@ -294,12 +294,12 @@
     </mxGraphModel>
   </diagram>
   <diagram id="v0VSRYgXnLr8QSpMbGO5" name="carworkshop">
-    <mxGraphModel dx="899" dy="1180" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="899" dy="1020" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="ct_j0YYtIJTD5bHNjSBZ-1" value="CarWorkShop&lt;div&gt;&lt;/div&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="220" y="220" width="237.5" height="120" as="geometry">
+          <mxGeometry x="220" y="220" width="237.5" height="150" as="geometry">
             <mxRectangle x="40" y="370" width="140" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -309,8 +309,8 @@
         <mxCell id="ct_j0YYtIJTD5bHNjSBZ-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="ct_j0YYtIJTD5bHNjSBZ-1" vertex="1">
           <mxGeometry y="70" width="237.5" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="ct_j0YYtIJTD5bHNjSBZ-4" value="&lt;div&gt;+ addCarToWorkshop() : void&lt;/div&gt;&lt;div&gt;+ removeCarFromWorkshop : void&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ct_j0YYtIJTD5bHNjSBZ-1" vertex="1">
-          <mxGeometry y="78" width="237.5" height="42" as="geometry" />
+        <mxCell id="ct_j0YYtIJTD5bHNjSBZ-4" value="&lt;div&gt;+ addCarToWorkshop() : void&lt;/div&gt;&lt;div&gt;+ removeCarFromWorkshop : void&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ getCurrentCarsInWorkshop() : int&lt;/div&gt;&lt;div&gt;+ getMaxCarsInWorkshop() : int&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ct_j0YYtIJTD5bHNjSBZ-1" vertex="1">
+          <mxGeometry y="78" width="237.5" height="72" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

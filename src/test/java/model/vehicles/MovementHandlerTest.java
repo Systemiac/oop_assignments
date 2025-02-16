@@ -1,9 +1,9 @@
-package vehicles;
+package model.vehicles;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import vehicles.MovementHandler.Direction;
+import model.vehicles.MovementHandler.Direction;
 
 class MovementHandlerTest {
     private MovementHandler movement;
