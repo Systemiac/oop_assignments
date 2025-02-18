@@ -42,7 +42,7 @@ public abstract class VehiclePrototype implements IChassi {
 
     public void gas(double amount) {
         if (0 <= amount && amount <= 1) {
-            double acceleration = speedFactor() * engine.getEnginePower() * amount;
+            double acceleration = speedFactor() * engine.getEnginePower() * amount*engine.engineOn;
             double newSpeed = movement.getCurrentSpeed() + acceleration;
             if (newSpeed <= maxSpeed) {
                 movement.incrementSpeed(amount, acceleration);

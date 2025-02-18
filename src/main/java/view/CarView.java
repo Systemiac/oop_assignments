@@ -8,6 +8,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Method;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -53,11 +54,7 @@ public class CarView extends JFrame {
     public CarView(String framename) {
         initComponents(framename);
     }
-/*
-    public void setController(CarController cc) {
-        this.carC = cc;
-    }
-   */
+
     // Sets everything in place and fits everything
     // TODO: Take a good look and make sure you understand how these methods and components work
     private void initComponents(String title) {
@@ -67,8 +64,6 @@ public class CarView extends JFrame {
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
-
-
 
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
@@ -118,6 +113,67 @@ public class CarView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.gas(gasAmount);
+            }
+        });
+
+        brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.brake(gasAmount);
+            } 
+        });
+
+        turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+            
+            Method method = carC.getClass().getMethod("setTurboOn");
+
+            method.invoke(carC);
+
+        } catch (NoSuchMethodException ex) {
+            // Handle the case where the method is not found
+            System.out.println("Method 'myMethod' not found!");
+        } catch (Exception ex) {
+            // Handle other exceptions (like IllegalAccessException, InvocationTargetException, etc.)
+            ex.printStackTrace();
+        }
+            }
+        });
+
+        turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.turboOff();
+            }
+        });
+
+        liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                carC.liftTruckBed();
+            }
+        });
+
+        lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.lowerTruckBed();
+            }
+        });
+
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.startAllCars();
+            }
+        });
+
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.startAllCars();
             }
         });
 

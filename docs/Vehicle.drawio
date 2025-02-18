@@ -147,7 +147,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="WH4NMiV-duokyLQOgl1B" name="truck">
-    <mxGraphModel dx="934" dy="1020" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="901" dy="837" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -176,7 +176,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="PVjT71qjY1YHtSRI9RyA-10" value="Mercedes" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="455.13" y="860" width="170" height="90" as="geometry" />
+          <mxGeometry x="455.13" y="797" width="170" height="90" as="geometry" />
         </mxCell>
         <mxCell id="PVjT71qjY1YHtSRI9RyA-11" value="&lt;font style=&quot;color: rgb(255, 255, 255);&quot;&gt;+ field1: Type&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="PVjT71qjY1YHtSRI9RyA-10" vertex="1">
           <mxGeometry y="26" width="170" height="26" as="geometry" />

@@ -4,9 +4,9 @@ import model.vehicles.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import view.CarView;
-
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -26,36 +26,38 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    ArrayList<CarPrototype> cars = new ArrayList<>();
+    ArrayList<VehiclePrototype> vehicles = new ArrayList<>();
 
-    //methods:
+    // methods:
 
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.cars.add(new Volvo240());
+        cc.vehicles.add(new Volvo240());
+        cc.vehicles.add(new Saab95());
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
-       // cc.frame.setController(cc);
+        // cc.frame.setController(cc);
 
         // Start the timer
         cc.timer.start();
     }
 
-    /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
+    /*
+     * Each step the TimerListener moves all the cars in the list and tells the
+     * view to update its images. Change this method to your needs.
+     */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-           for (CarPrototype car : cars) {
+            for (VehiclePrototype car : vehicles) {
                 car.move();
                 int x = (int) Math.round(car.getMovement().getPosX());
                 int y = (int) Math.round(car.getMovement().getPosY());
                 frame.drawPanel.moveit(x, y);
                 // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();               
+                frame.drawPanel.repaint();
             }
         }
     }
@@ -63,9 +65,92 @@ public class CarController {
     // Calls the gas method for each car once
     public void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (CarPrototype car : cars
-                ) {
+        for (VehiclePrototype car : vehicles) {
             car.gas(gas);
+        }
+    }
+
+    public void brake(int amount) {
+        double brake = ((double) amount) / 100;
+        for (VehiclePrototype car : vehicles) {
+            car.brake(brake);
+        }
+    }
+
+    public void turboOn() {
+        for (VehiclePrototype car : vehicles) {
+
+            try {
+
+                Method method = car.getClass().getMethod("setTurboOn");
+
+                method.invoke(car);
+
+            } catch (NoSuchMethodException ex) {
+                // Handle the case where the method is not found
+
+                System.out.println(car.getModelName() + "does not have method 'setTurboOff'");
+            } catch (Exception ex) {
+                // Handle other exceptions (like IllegalAccessException,
+                // InvocationTargetException, etc.)
+                ex.printStackTrace();
+            }
+        }
+
+    }
+
+    public void turboOff() {
+        for (VehiclePrototype car : vehicles) {
+
+            try {
+
+                Method method = car.getClass().getMethod("setTurboOff");
+
+                method.invoke(car);
+
+            } catch (NoSuchMethodException ex) {
+                // Handle the case where the method is not found
+                // TODO: Fix better name on car
+                System.out.println(car.getModelName() + "does not have method 'setTurboOff'");
+            } catch (Exception ex) {
+                // Handle other exceptions (like IllegalAccessException,
+                // InvocationTargetException, etc.)
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public void liftTruckBed() {
+        for (VehiclePrototype truck : vehicles) {
+            if (truck instanceof CargoTruck) {
+                ((CargoTruck) truck).raiseCargoBed(70);
+            }
+            else if (truck instanceof CarTransport) {
+                ((CarTransport) truck).raiseCargoBed();
+            }
+        }
+    }
+
+    public void lowerTruckBed() {
+        for (VehiclePrototype truck : vehicles) {
+            if(truck instanceof CargoTruck){
+                ((CargoTruck)truck).lowerCargoBed(70);
+            }
+            else if(truck instanceof CarTransport){
+                ((CarTransport)truck).lowerCargoBed();
+            }
+        }
+    }
+
+    public void startAllCars () {
+        for (VehiclePrototype car : vehicles) {
+            car.getEngine().startEngine();
+        }
+    }
+
+    public void stopAllCars () {
+        for (VehiclePrototype car : vehicles) {
+            car.getEngine().stopEngine();
         }
     }
 }

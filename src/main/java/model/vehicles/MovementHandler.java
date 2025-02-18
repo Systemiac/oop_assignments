@@ -99,11 +99,10 @@ public class MovementHandler implements IMovable {
     }
 
     public void incrementSpeed(double amount, double speedFactor) {
-        currentSpeed += speedFactor * amount; // maxSpeed bestäms i VehiclePrototype
+        currentSpeed += speedFactor * amount;
     }
 
     public void decrementSpeed(double amount, double speedFactor) {
-
         currentSpeed = Math.max(currentSpeed - speedFactor * amount, 0);
     }
 
