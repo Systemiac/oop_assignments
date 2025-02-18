@@ -14,7 +14,8 @@ public class MovementHandler implements IMovable {
         this.currentSpeed = 0;
     }
 
-    // properties
+    // properties 
+    // TODO använd container istället
     public void setPos(double x, double y){
         posX = x;
         posY = y;

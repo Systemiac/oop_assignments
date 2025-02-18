@@ -92,7 +92,7 @@ public abstract class CarTransport extends TruckPrototype {
             double distanceBetweenCars = calculateDistance(transportX, transportY, carX, carY);
 
             if (distanceBetweenCars >= offset) {
-                car.getMovement().setPos(carX, carY);
+                car.getMovement().setPos(carX, carY); // använd en container istället för setPos
             } else {
                 System.out.println("Car " + (i + 1) + "Too close to another car.");
             }

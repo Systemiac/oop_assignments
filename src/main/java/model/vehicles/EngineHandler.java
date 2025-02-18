@@ -35,7 +35,9 @@ public class EngineHandler implements IEngine {
 
     // methods
     public void startEngine() {
-        engineSpeed = 0.1; 
+        if(engineSpeed == 0) {
+            engineSpeed = 0.1; 
+        }
     }
 
     public void stopEngine() {

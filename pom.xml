@@ -24,6 +24,19 @@
     </dependencies>
 
     <build>
+        <resources>
+            <!-- Default resources folder -->
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+
+            <!-- Additional resources can be included here -->
+            <!-- Example: -->
+            <!-- <resource> -->
+            <!--    <directory>src/main/extra-resources</directory> -->
+            <!-- </resource> -->
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

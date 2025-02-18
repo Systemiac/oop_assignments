@@ -1,6 +1,7 @@
 package view;
 
-import controller.*;
+import view.CarView;
+import controller.CarController;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -23,7 +24,7 @@ public class CarView extends JFrame {
     // The controller member
     CarController carC;
 
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
+    public DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
     JPanel controlPanel = new JPanel();
 
@@ -43,11 +44,20 @@ public class CarView extends JFrame {
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
+    
     public CarView(String framename, CarController cc){
         this.carC = cc;
         initComponents(framename);
     }
-
+    
+    public CarView(String framename) {
+        initComponents(framename);
+    }
+/*
+    public void setController(CarController cc) {
+        this.carC = cc;
+    }
+   */
     // Sets everything in place and fits everything
     // TODO: Take a good look and make sure you understand how these methods and components work
     private void initComponents(String title) {
