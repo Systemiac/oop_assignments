@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /*
 * This class represents the Controller part in the MVC pattern.
 * It's responsibilities is to listen to the View and responds in a appropriate manner by
-* modifying the model state [mainly VehiclePrototyp, in our projekt] and the updating the view.
+* modifying the model state [mainly VehiclePrototyp, in our project] and the updating the view.
  */
 
 public class CarController {
