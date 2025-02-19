@@ -56,9 +56,5 @@ class EngineHandlerTest {
         assertEquals(0, engine.getCurrentRPM(), "RPM should not go below zero.");
     }
 
-    @Test
-    void testSetCurrentRPM() {
-        engine.setCurrentRPM(45);
-        assertEquals(45, engine.getCurrentRPM(), "Current RPM should be set correctly.");
-    }
+    
 }

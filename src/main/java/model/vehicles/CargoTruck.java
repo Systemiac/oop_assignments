@@ -1,11 +1,12 @@
 package model.vehicles;
 
 import java.awt.Color;
+import java.awt.Point;
 
 public abstract class CargoTruck extends TruckPrototype {
 
-    public CargoTruck(int nrDoors, Color color, double enginePower, String modelName) {
-        super(nrDoors, color, enginePower, modelName);
+    public CargoTruck(int nrDoors, Color color, double enginePower, String modelName, Point initialPosition) {
+        super(nrDoors, color, enginePower, modelName, initialPosition);
     }
  
     // methods

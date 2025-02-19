@@ -1,12 +1,13 @@
 package model.vehicles;
+
 import java.awt.*;
 
 public class Saab95 extends CarPrototype {
 
     private boolean turboOn;
 
-    public Saab95() {
-        super(2, Color.RED, 125, "Saab95");
+    public Saab95(Point initialPosition) {
+        super(2, Color.RED, 125, "Saab95", initialPosition);
         turboOn = false;
     }
 

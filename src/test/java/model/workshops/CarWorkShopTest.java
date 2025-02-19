@@ -4,6 +4,9 @@ import model.vehicles.CarPrototype;
 import model.vehicles.Volvo240;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.awt.Point;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +18,7 @@ public class CarWorkShopTest {
     @BeforeEach
     void setUp() {
         testWorkshop = new CarWorkshop<>(1);
-        testVolvo = new Volvo240();
+        testVolvo = new Volvo240(new Point(0,0));
         volvoWorkshop = new CarWorkshop<>(20);
     }
 

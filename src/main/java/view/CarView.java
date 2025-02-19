@@ -126,19 +126,7 @@ public class CarView extends JFrame {
         turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-            
-            Method method = carC.getClass().getMethod("setTurboOn");
-
-            method.invoke(carC);
-
-        } catch (NoSuchMethodException ex) {
-            // Handle the case where the method is not found
-            System.out.println("Method 'myMethod' not found!");
-        } catch (Exception ex) {
-            // Handle other exceptions (like IllegalAccessException, InvocationTargetException, etc.)
-            ex.printStackTrace();
-        }
+               carC.turboOn();
             }
         });
 
@@ -173,7 +161,7 @@ public class CarView extends JFrame {
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.startAllCars();
+                carC.stopAllCars();
             }
         });
 

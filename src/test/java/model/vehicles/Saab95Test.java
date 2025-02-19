@@ -1,15 +1,18 @@
 package model.vehicles;
 
 import java.awt.Color;
+import java.awt.Point;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public class Saab95Test {
 
+    Point p = new Point(0,0);
+
     @Test
     public void testConstructor() {
-        Saab95 saab = new Saab95();
+        Saab95 saab = new Saab95(p);
         assertEquals(2, saab.getNrDoors(), "Saab95 ska ha 2 dörrar");
         assertEquals(Color.red, saab.getColor(), "Saab95 ska vara röd");
         assertEquals(125, saab.getEngine().getEnginePower(), "Saab95 ska ha 125 hk");
@@ -18,7 +21,7 @@ public class Saab95Test {
 
     @Test
     public void testSetTurboOn() {
-        Saab95 saab = new Saab95();
+        Saab95 saab = new Saab95(p);
         saab.setTurboOn();
         assertEquals(1.3, saab.speedFactor() / (saab.getEngine().getEnginePower() * 0.01), 0.0001,
                      "Turbo ska öka speedFactor till 1.3 gånger");
@@ -26,7 +29,7 @@ public class Saab95Test {
 
     @Test
     public void testSetTurboOff() {
-        Saab95 saab = new Saab95();
+        Saab95 saab = new Saab95(p);
         saab.setTurboOff();
         assertEquals(1.0, saab.speedFactor() / (saab.getEngine().getEnginePower() * 0.01), 0.0001,
                      "Turbo ska vara avstängd och speedFactor ska vara normalt");
@@ -34,7 +37,7 @@ public class Saab95Test {
 
     @Test
     public void testSpeedFactorWithTurbo() {
-        Saab95 saab = new Saab95();
+        Saab95 saab = new Saab95(p);
         saab.setTurboOn();
         double expectedFactor = 125 * 0.01 * 1.3;
         assertEquals(expectedFactor, saab.speedFactor(), 0.0001,
@@ -43,7 +46,7 @@ public class Saab95Test {
 
     @Test
     public void testSpeedFactorWithoutTurbo() {
-        Saab95 saab = new Saab95();
+        Saab95 saab = new Saab95(p);
         saab.setTurboOff();
         double expectedFactor = 125 * 0.01 * 1.0;
         assertEquals(expectedFactor, saab.speedFactor(), 0.0001,

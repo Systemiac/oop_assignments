@@ -1,11 +1,13 @@
 package model.vehicles;
 
 import java.awt.Color;
+import java.awt.Point;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 
 public class Volvo240Test {
 
@@ -13,7 +15,7 @@ public class Volvo240Test {
 
     @BeforeEach
     void setUp() {
-        testVolvo240 = new Volvo240();
+        testVolvo240 = new Volvo240(new Point(0,0));
     }
 
     @Test

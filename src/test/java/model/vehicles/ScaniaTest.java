@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.awt.Color;
+import java.awt.Point;
 
 class ScaniaTest {
 
@@ -12,7 +13,7 @@ class ScaniaTest {
 
     @BeforeEach
     void setUp() {
-        scania = new Scania();
+        scania = new Scania(new Point(0,0));
     }
 
     @Test

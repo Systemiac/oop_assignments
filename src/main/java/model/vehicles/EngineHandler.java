@@ -17,9 +17,7 @@ public class EngineHandler implements IEngine {
         return enginePower;
     }
     
-    public void setCurrentRPM(double engineSpeed) {
-        this.engineSpeed = Math.max(engineSpeed, 0);
-    }
+    
 
     public double getCurrentRPM() {
         return engineSpeed;

@@ -1,6 +1,9 @@
 package model.vehicles;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.awt.Point;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +14,7 @@ class MercedesTest {
 
     @BeforeEach
     void setUp() {
-        mercedes = new Mercedes();
+        mercedes = new Mercedes(new Point(0,0));
     }
 
     @Test

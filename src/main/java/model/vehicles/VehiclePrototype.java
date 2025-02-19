@@ -1,6 +1,8 @@
 package model.vehicles;
 
 import java.awt.Color;
+import java.awt.Point;
+
 import model.interfaces.IChassi;
 
 public abstract class VehiclePrototype implements IChassi {
@@ -11,12 +13,13 @@ public abstract class VehiclePrototype implements IChassi {
     private EngineHandler engine;
     private MovementHandler movement;
 
-    public VehiclePrototype(int nrDoors, Color color, double enginePower, String modelName) {
+
+    public VehiclePrototype(int nrDoors, Color color, double enginePower, String modelName, Point initialPosition) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.modelName = modelName;
         this.engine = new EngineHandler(enginePower);
-        this.movement = new MovementHandler();
+        this.movement = new MovementHandler(initialPosition);
         this.maxSpeed = calculateMaxSpeed();
     }
 
@@ -41,8 +44,8 @@ public abstract class VehiclePrototype implements IChassi {
     }
 
     public void gas(double amount) {
-        if (0 <= amount && amount <= 1) {
-            double acceleration = speedFactor() * engine.getEnginePower() * amount*engine.engineOn;
+        if (betweenZeroAndOne(amount)) {
+            double acceleration = speedFactor() * engine.getEnginePower() * amount * engine.engineOn;
             double newSpeed = movement.getCurrentSpeed() + acceleration;
             if (newSpeed <= maxSpeed) {
                 movement.incrementSpeed(amount, acceleration);
@@ -51,8 +54,10 @@ public abstract class VehiclePrototype implements IChassi {
             System.out.println("Invalid gas input: " + amount);
     }
 
+   
+
     public void brake(double amount) {
-        if (0 <= amount && amount <= 1) {
+        if (betweenZeroAndOne(amount)) {
             double deceleration = speedFactor() * engine.getEnginePower() * amount;
             movement.decrementSpeed(amount, deceleration);
             if (movement.getCurrentSpeed() < 0) {
@@ -60,6 +65,10 @@ public abstract class VehiclePrototype implements IChassi {
             }
         } else
             System.out.println("Invalid brake input: " + amount);
+    }
+
+    private boolean betweenZeroAndOne(double amount) {
+        return (0 <= amount && amount <= 1);
     }
 
     public void stopVehicle() { // testning

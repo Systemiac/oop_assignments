@@ -2,6 +2,8 @@ package model.vehicles;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.awt.Color;
+import java.awt.Point;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +12,7 @@ public class CargoTruckTest {
 
     @BeforeEach
     void setup() {
-        truckPrototype = new CargoTruck(2, Color.WHITE, 540, "TestTruck") {
+        truckPrototype = new CargoTruck(2, Color.WHITE, 540, "TestTruck", new Point(0,0)) {
             @Override
             public double speedFactor() {
                 return 1.5;

@@ -1,6 +1,9 @@
 package model.vehicles;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.awt.Point;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import model.vehicles.MovementHandler.Direction;
@@ -10,7 +13,7 @@ class MovementHandlerTest {
 
     @BeforeEach
     void setUp() {
-        movement = new MovementHandler();
+        movement = new MovementHandler(new Point(0,0));
     }
 
     @Test

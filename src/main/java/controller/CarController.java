@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import view.CarView;
+import java.awt.Point;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -30,12 +31,15 @@ public class CarController {
 
     // methods:
 
+    // TODO: need to add cars into the lists in drawPanel when creating instances
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
+        Point volvoStart = new Point(0,0);
+        Point saabStart = new Point(0,100);
 
-        cc.vehicles.add(new Volvo240());
-        cc.vehicles.add(new Saab95());
+        cc.vehicles.add(new Volvo240(volvoStart));
+        cc.vehicles.add(new Saab95((saabStart)));
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -52,6 +56,8 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (VehiclePrototype car : vehicles) {
+                System.out.println(car.getMovement().getPosX() + " " + car.getMovement().getPosY());
+
                 car.move();
                 int x = (int) Math.round(car.getMovement().getPosX());
                 int y = (int) Math.round(car.getMovement().getPosY());

@@ -1,6 +1,7 @@
 package model.vehicles;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.util.Stack;
 
 public abstract class CarTransport extends TruckPrototype {
@@ -8,8 +9,8 @@ public abstract class CarTransport extends TruckPrototype {
     private double offset = 0.5;
     private Stack<CarPrototype> loadedCars = new Stack<>();
 
-    public CarTransport(int nrDoors, Color color, double enginePower, String modelName, int maxCarsInTruck) {
-        super(nrDoors, color, enginePower, modelName);
+    public CarTransport(int nrDoors, Color color, double enginePower, String modelName, int maxCarsInTruck, Point initialPosition) {
+        super(nrDoors, color, enginePower, modelName, initialPosition);
         this.maxCarsInTruck = maxCarsInTruck;
         this.cargoBedAngle = 0;
     }

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.awt.Color;
+import java.awt.Point;
 
 class VehiclePrototypeTest {
 
@@ -12,7 +13,7 @@ class VehiclePrototypeTest {
 
     @BeforeEach
     void setUp() {
-        testVehicle = new VehiclePrototype(2, Color.WHITE, 100, "TestVehicle") {
+        testVehicle = new VehiclePrototype(2, Color.WHITE, 100, "TestVehicle", new Point(0,0)) {
             @Override
             public double speedFactor() {
                 return 1.5;

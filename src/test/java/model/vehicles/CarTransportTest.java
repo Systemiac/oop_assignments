@@ -2,6 +2,7 @@ package model.vehicles;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.awt.Color;
+import java.awt.Point;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ public class CarTransportTest {
     @BeforeEach
     void setup() {
         if (carTransport == null) {
-            carTransport = new CarTransport(2, Color.WHITE, 540, "TestTruck", 6) {
+            carTransport = new CarTransport(2, Color.WHITE, 540, "TestTruck", 6, new Point(0,0)) {
                 @Override
                 public double speedFactor() {
                     return 1.5;
@@ -26,12 +27,13 @@ public class CarTransportTest {
             };
         }
 
-        testCar1 = new Volvo240();
-        testCar2 = new Saab95();
-        testCar3 = new Volvo240();
-        testCar4 = new Volvo240();
-        testCar5 = new Saab95();
-        testCar6 = new Volvo240();
+        Point p = new Point(0,0);
+        testCar1 = new Volvo240(p);
+        testCar2 = new Saab95(p);
+        testCar3 = new Volvo240(p);
+        testCar4 = new Volvo240(p);
+        testCar5 = new Saab95(p);
+        testCar6 = new Volvo240(p);
     }
 
     @Test
@@ -165,7 +167,7 @@ public class CarTransportTest {
         carTransport.raiseCargoBed();
 
         for (int i = 0; i < 12; i++) {
-            carTransport.loadCar(new Volvo240());
+            carTransport.loadCar(new Volvo240(new Point(0,0)));
         }
         assertTrue(carTransport.isFull()); // Nu ska den vara full
     }

@@ -1,10 +1,11 @@
 package model.vehicles;
 
 import java.awt.Color;
+import java.awt.Point;
 
 public class Scania extends CargoTruck {
-    public Scania() {
-        super(2, Color.BLUE, 540, "Scania");
+    public Scania(Point initialPoint) {
+        super(2, Color.BLUE, 540, "Scania", initialPoint);
     }
 
     @Override

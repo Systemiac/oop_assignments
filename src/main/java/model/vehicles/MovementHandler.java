@@ -1,4 +1,6 @@
 package model.vehicles;
+import java.awt.Point;
+
 import model.interfaces.IMovable;
 
 public class MovementHandler implements IMovable {
@@ -6,10 +8,11 @@ public class MovementHandler implements IMovable {
     private double posX, posY;
     public enum Direction { north, east, south, west; }
     private Direction dir;
+    
 
-    public MovementHandler() {
-        this.posX = 0;
-        this.posY = 0;
+    public MovementHandler(Point initialPosition) {
+        this.posX = initialPosition.getX();
+        this.posY = initialPosition.getY();
         this.dir = Direction.north;
         this.currentSpeed = 0;
     }
