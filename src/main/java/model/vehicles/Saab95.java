@@ -13,10 +13,12 @@ public class Saab95 extends CarPrototype {
 
     public void setTurboOn() {
         turboOn = true;
+        System.out.println("sigma");
     }
 
     public void setTurboOff() {
         turboOn = false;
+        System.out.println("beta");
     }
 
     @Override

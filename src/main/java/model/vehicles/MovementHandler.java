@@ -13,7 +13,7 @@ public class MovementHandler implements IMovable {
     public MovementHandler(Point initialPosition) {
         this.posX = initialPosition.getX();
         this.posY = initialPosition.getY();
-        this.dir = Direction.north;
+        this.dir = Direction.east;
         this.currentSpeed = 0;
     }
 

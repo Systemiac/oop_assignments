@@ -10,39 +10,42 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import model.vehicles.VehiclePrototype;
+import model.workshops.CarWorkshop;
 
 // This panel represents the animated part of the view with the car images.
 
 public class DrawPanel extends JPanel {
-    // TODO: link cars, images and points somehow.
-    // Just a single image, TODO: Generalize
+    // Just a single image,
     private ArrayList<BufferedImage> carImages = new ArrayList<>();
     // To keep track of a single car's position
     private ArrayList<Point> carPoints = new ArrayList<>();
     private ArrayList<VehiclePrototype> vehicles = new ArrayList<>();
+    private ArrayList<CarWorkshop> workshops = new ArrayList<>();
 
     BufferedImage carWorkshopImage;
-    Point carWorkshopPoint = new Point(300, 300);
 
-    // TODO: Make this general for all cars
-    public void moveit(int x, int y) {
-
+    public void avoidWall(VehiclePrototype vehicle, int x, int y) {
+        if (outOfMap(x, y)) {
+            for (int index = 0; index < 2; index++) {
+                vehicle.getMovement().turnLeft();
+            }
+        }
     }
 
-    // TODO add the cars to the arraylists
-    public void addCar() {
-
+    private boolean outOfMap(int x, int y) {
+        return (x < 0 || y < 0 || x > 800 || y > 500);
     }
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y, ArrayList<VehiclePrototype> vehicles) {
+    public DrawPanel(int x, int y, ArrayList<VehiclePrototype> vehicles, ArrayList<CarWorkshop> workshops) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
         this.vehicles = vehicles;
-        System.out.println(vehicles);
+        this.workshops = workshops;
+        //System.out.println(vehicles);
         // Print an error message in case file is not found with a try/catch block
-        
+
         loadCarImages();
     }
 
@@ -54,8 +57,7 @@ public class DrawPanel extends JPanel {
                     carImages.add(ImageIO.read(DrawPanel.class.getResourceAsStream(vehicle.getImagePath())));
                 }
             }
-            //carImages.add(ImageIO.read(DrawPanel.class.getResourceAsStream("/pics/Volvo240.jpg")));
-            //carImages.add(ImageIO.read(DrawPanel.class.getResourceAsStream("/pics/Saab95.jpg")));
+            carWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("/pics/VolvoBrand.jpg"));
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -63,13 +65,15 @@ public class DrawPanel extends JPanel {
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (int i = 0; i < vehicles.size(); i++) {
-            g.drawImage(carImages.get(i),(int)vehicles.get(i).getMovement().getPosX(), (int)vehicles.get(i).getMovement().getPosY(), null);
+            g.drawImage(carImages.get(i), (int) vehicles.get(i).getMovement().getPosX(),
+                    (int) vehicles.get(i).getMovement().getPosY(), null);
         }
-        g.drawImage(carWorkshopImage, carWorkshopPoint.x, carWorkshopPoint.y, null);
+        for(CarWorkshop workshop:workshops){
+        g.drawImage(carWorkshopImage, workshop.getPos().x,  workshop.getPos().y, null);
+        }
     }
 }

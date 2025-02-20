@@ -1,6 +1,8 @@
 package controller;
 
 import model.vehicles.*;
+import model.workshops.CarWorkshop;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,18 +30,21 @@ public class CarController {
     CarView frame;
     // A list of cars, modify if needed
     public ArrayList<VehiclePrototype> vehicles = new ArrayList<>();
+    public ArrayList<CarWorkshop> workshops = new ArrayList<>();
 
     // methods:
 
-    // TODO: need to add cars into the lists in drawPanel when creating instances
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
-        Point volvoStart = new Point(0,0);
-        Point saabStart = new Point(0,100);
+        Point volvoStart = new Point(0, 0);
+        Point saabStart = new Point(0, 100);
 
         cc.vehicles.add(new Volvo240(volvoStart));
         cc.vehicles.add(new Saab95((saabStart)));
+        cc.vehicles.add(new Scania(new Point(0, 200)));
+
+        cc.workshops.add(new CarWorkshop<Volvo240>(2, new Point(200, 0), Volvo240.class));
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -56,12 +61,27 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (VehiclePrototype car : vehicles) {
-                System.out.println(car.getMovement().getPosX() + " " + car.getMovement().getPosY());
+                // System.out.println(car.getMovement().getPosX() + " " +
+                // car.getMovement().getPosY());
 
                 car.move();
                 int x = (int) Math.round(car.getMovement().getPosX());
                 int y = (int) Math.round(car.getMovement().getPosY());
-                frame.drawPanel.moveit(x, y);
+                frame.drawPanel.avoidWall(car, x, y);
+
+                for (CarWorkshop workshop : workshops) {
+
+                    if (workshop.getType().isInstance(car)) {
+                        if (!workshop.getCars().contains(car)) {
+                            workshop.addCarToWorkshop((CarPrototype) car);
+
+                        } else if (workshop.getCars().contains(car)) {
+                            car.brake(1);
+                            car.getEngine().stopEngine();
+                        }
+                    }
+                }
+                //System.out.println(workshops.get(0).getCars());
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
@@ -86,21 +106,11 @@ public class CarController {
     public void turboOn() {
         for (VehiclePrototype car : vehicles) {
 
-            try {
+            if (car instanceof Saab95) {
+                ((Saab95) car).setTurboOn();
+            } else
+                System.out.println("Not saab95");
 
-                Method method = car.getClass().getMethod("setTurboOn");
-
-                method.invoke(car);
-
-            } catch (NoSuchMethodException ex) {
-                // Handle the case where the method is not found
-
-                System.out.println(car.getModelName() + "does not have method 'setTurboOff'");
-            } catch (Exception ex) {
-                // Handle other exceptions (like IllegalAccessException,
-                // InvocationTargetException, etc.)
-                ex.printStackTrace();
-            }
         }
 
     }
@@ -108,21 +118,10 @@ public class CarController {
     public void turboOff() {
         for (VehiclePrototype car : vehicles) {
 
-            try {
-
-                Method method = car.getClass().getMethod("setTurboOff");
-
-                method.invoke(car);
-
-            } catch (NoSuchMethodException ex) {
-                // Handle the case where the method is not found
-                // TODO: Fix better name on car
-                System.out.println(car.getModelName() + "does not have method 'setTurboOff'");
-            } catch (Exception ex) {
-                // Handle other exceptions (like IllegalAccessException,
-                // InvocationTargetException, etc.)
-                ex.printStackTrace();
-            }
+            if (car instanceof Saab95) {
+                ((Saab95) car).setTurboOff();
+            } else
+                System.out.println("Not saab95");
         }
     }
 
@@ -130,8 +129,7 @@ public class CarController {
         for (VehiclePrototype truck : vehicles) {
             if (truck instanceof CargoTruck) {
                 ((CargoTruck) truck).raiseCargoBed(70);
-            }
-            else if (truck instanceof CarTransport) {
+            } else if (truck instanceof CarTransport) {
                 ((CarTransport) truck).raiseCargoBed();
             }
         }
@@ -139,22 +137,21 @@ public class CarController {
 
     public void lowerTruckBed() {
         for (VehiclePrototype truck : vehicles) {
-            if(truck instanceof CargoTruck){
-                ((CargoTruck)truck).lowerCargoBed(70);
-            }
-            else if(truck instanceof CarTransport){
-                ((CarTransport)truck).lowerCargoBed();
+            if (truck instanceof CargoTruck) {
+                ((CargoTruck) truck).lowerCargoBed(70);
+            } else if (truck instanceof CarTransport) {
+                ((CarTransport) truck).lowerCargoBed();
             }
         }
     }
 
-    public void startAllCars () {
+    public void startAllCars() {
         for (VehiclePrototype car : vehicles) {
             car.getEngine().startEngine();
         }
     }
 
-    public void stopAllCars () {
+    public void stopAllCars() {
         for (VehiclePrototype car : vehicles) {
             car.getEngine().stopEngine();
         }

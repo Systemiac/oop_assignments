@@ -17,9 +17,9 @@ public class CarWorkShopTest {
 
     @BeforeEach
     void setUp() {
-        testWorkshop = new CarWorkshop<>(1);
+        testWorkshop = new CarWorkshop<>(1,null,null);
         testVolvo = new Volvo240(new Point(0,0));
-        volvoWorkshop = new CarWorkshop<>(20);
+        volvoWorkshop = new CarWorkshop<>(20,null,null);
     }
 
     @Test

@@ -3,6 +3,7 @@ package view;
 import view.CarView;
 import controller.CarController;
 import model.vehicles.VehiclePrototype;
+import model.workshops.CarWorkshop;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
  * It initializes with being center on the screen and attaching it's controller in it's state.
  * It communicates with the Controller by calling methods of it when an action fires of in
  * each of it's components.
- * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
 public class CarView extends JFrame {
@@ -28,6 +28,7 @@ public class CarView extends JFrame {
     // The controller member
     CarController carC;
     ArrayList<VehiclePrototype> vehicles;
+    ArrayList<CarWorkshop> workshops;
 
     public DrawPanel drawPanel;
 
@@ -53,7 +54,8 @@ public class CarView extends JFrame {
     public CarView(String framename, CarController cc){
         this.carC = cc;
         this.vehicles=cc.vehicles;
-        drawPanel=new DrawPanel(X, Y-240, vehicles);
+        this.workshops=cc.workshops;
+        drawPanel=new DrawPanel(X, Y-240, vehicles, workshops);
         initComponents(framename);
     }
     
@@ -62,7 +64,6 @@ public class CarView extends JFrame {
     }*/
 
     // Sets everything in place and fits everything
-    // TODO: Take a good look and make sure you understand how these methods and components work
     private void initComponents(String title) {
 
         this.setTitle(title);
@@ -114,7 +115,6 @@ public class CarView extends JFrame {
         this.add(stopButton);
 
         // This actionListener is for the gas button only
-        // TODO: Create more for each component as necessary
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
