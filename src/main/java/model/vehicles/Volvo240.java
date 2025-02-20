@@ -10,7 +10,7 @@ public class Volvo240 extends CarPrototype {
    
 
     public Volvo240(Point initialPosition) {
-        super(4, Color.black, 100, "Volvo240", initialPosition);
+        super(4, Color.black, 100, "Volvo240", initialPosition,"/pics/Volvo240.jpg");
         
     }
 
@@ -18,4 +18,6 @@ public class Volvo240 extends CarPrototype {
     public double speedFactor() {
         return getEngine().getEnginePower() * 0.01 * trimFactor;
     }
+
+    
 }

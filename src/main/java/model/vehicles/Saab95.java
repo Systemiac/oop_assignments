@@ -7,7 +7,7 @@ public class Saab95 extends CarPrototype {
     private boolean turboOn;
 
     public Saab95(Point initialPosition) {
-        super(2, Color.RED, 125, "Saab95", initialPosition);
+        super(2, Color.RED, 125, "Saab95", initialPosition, "/pics/Saab95.jpg");
         turboOn = false;
     }
 

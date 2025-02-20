@@ -5,7 +5,7 @@ import java.awt.Point;
 
 public class Scania extends CargoTruck {
     public Scania(Point initialPoint) {
-        super(2, Color.BLUE, 540, "Scania", initialPoint);
+        super(2, Color.BLUE, 540, "Scania", initialPoint, "/pics/Scania.jpg");
     }
 
     @Override

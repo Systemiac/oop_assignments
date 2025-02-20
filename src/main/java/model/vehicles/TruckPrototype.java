@@ -7,8 +7,8 @@ abstract class TruckPrototype extends VehiclePrototype {
     protected static final int maxAngle =70;
     protected static final int minAngle = 0;
     
-    public TruckPrototype(int nrDoors, Color color, double enginePower, String modelName, Point initialPosition) {
-        super(nrDoors, color, enginePower, modelName, initialPosition);
+    public TruckPrototype(int nrDoors, Color color, double enginePower, String modelName, Point initialPosition, String imagePath) {
+        super(nrDoors, color, enginePower, modelName, initialPosition, imagePath);
         this.cargoBedAngle=0;
     
     }

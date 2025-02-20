@@ -9,8 +9,8 @@ public abstract class CarTransport extends TruckPrototype {
     private double offset = 0.5;
     private Stack<CarPrototype> loadedCars = new Stack<>();
 
-    public CarTransport(int nrDoors, Color color, double enginePower, String modelName, int maxCarsInTruck, Point initialPosition) {
-        super(nrDoors, color, enginePower, modelName, initialPosition);
+    public CarTransport(int nrDoors, Color color, double enginePower, String modelName, int maxCarsInTruck, Point initialPosition, String imagePath) {
+        super(nrDoors, color, enginePower, modelName, initialPosition, imagePath);
         this.maxCarsInTruck = maxCarsInTruck;
         this.cargoBedAngle = 0;
     }

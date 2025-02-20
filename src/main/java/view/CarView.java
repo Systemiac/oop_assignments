@@ -2,6 +2,8 @@ package view;
 
 import view.CarView;
 import controller.CarController;
+import model.vehicles.VehiclePrototype;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -9,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -24,8 +27,9 @@ public class CarView extends JFrame {
 
     // The controller member
     CarController carC;
+    ArrayList<VehiclePrototype> vehicles;
 
-    public DrawPanel drawPanel = new DrawPanel(X, Y-240);
+    public DrawPanel drawPanel;
 
     JPanel controlPanel = new JPanel();
 
@@ -48,12 +52,14 @@ public class CarView extends JFrame {
     
     public CarView(String framename, CarController cc){
         this.carC = cc;
+        this.vehicles=cc.vehicles;
+        drawPanel=new DrawPanel(X, Y-240, vehicles);
         initComponents(framename);
     }
     
-    public CarView(String framename) {
+    /*public CarView(String framename) {
         initComponents(framename);
-    }
+    }*/
 
     // Sets everything in place and fits everything
     // TODO: Take a good look and make sure you understand how these methods and components work

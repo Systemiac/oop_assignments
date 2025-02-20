@@ -6,7 +6,7 @@ import java.awt.Point;
 public class Mercedes extends CarTransport {
 
     public Mercedes(Point initialPosition){
-        super(2, Color.WHITE, 428 , "Mercedes-Benz Actros 1843", 10, initialPosition);
+        super(2, Color.WHITE, 428 , "Mercedes-Benz Actros 1843", 10, initialPosition, null);
     }
 
      public double speedFactor() {

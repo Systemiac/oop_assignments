@@ -13,7 +13,7 @@ class VehiclePrototypeTest {
 
     @BeforeEach
     void setUp() {
-        testVehicle = new VehiclePrototype(2, Color.WHITE, 100, "TestVehicle", new Point(0,0)) {
+        testVehicle = new VehiclePrototype(2, Color.WHITE, 100, "TestVehicle", new Point(0,0), null) {
             @Override
             public double speedFactor() {
                 return 1.5;

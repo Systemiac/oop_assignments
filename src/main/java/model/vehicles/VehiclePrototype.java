@@ -12,15 +12,17 @@ public abstract class VehiclePrototype implements IChassi {
     private double maxSpeed;
     private EngineHandler engine;
     private MovementHandler movement;
+    private String imagePath;
 
 
-    public VehiclePrototype(int nrDoors, Color color, double enginePower, String modelName, Point initialPosition) {
+    public VehiclePrototype(int nrDoors, Color color, double enginePower, String modelName, Point initialPosition, String imagePath) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.modelName = modelName;
         this.engine = new EngineHandler(enginePower);
         this.movement = new MovementHandler(initialPosition);
         this.maxSpeed = calculateMaxSpeed();
+        this.imagePath=imagePath;
     }
 
     // properties
@@ -95,5 +97,9 @@ public abstract class VehiclePrototype implements IChassi {
     @Override
     public int getNrDoors() {
         return nrDoors;
+    }
+
+    public String getImagePath(){
+        return imagePath;
     }
 }

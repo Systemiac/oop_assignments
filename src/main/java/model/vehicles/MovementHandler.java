@@ -24,6 +24,7 @@ public class MovementHandler implements IMovable {
         posY = y;
     }
 
+
     public double getPosX(){
         return posX;
     }
