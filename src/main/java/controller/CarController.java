@@ -63,6 +63,7 @@ public class CarController {
             for (VehiclePrototype car : vehicles) {
                 // System.out.println(car.getMovement().getPosX() + " " +
                 // car.getMovement().getPosY());
+                
 
                 car.move();
                 int x = (int) Math.round(car.getMovement().getPosX());
@@ -73,6 +74,7 @@ public class CarController {
                     if (workshop.getType() == Volvo240.class && car instanceof Volvo240) {
                         if (!workshop.getCars().contains(car)) {
                             workshop.addCarToWorkshop((CarPrototype) car);
+                            System.out.println(workshop.getCars());
                         } else {
                             car.brake(1);
                             car.getEngine().stopEngine();
