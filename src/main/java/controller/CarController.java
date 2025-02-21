@@ -150,6 +150,7 @@ public class CarController {
     public void stopAllCars() {
         for (VehiclePrototype car : vehicles) {
             car.getEngine().stopEngine();
+            car.getMovement().setCurrentSpeed(0);
         }
         timer.stop();
     }

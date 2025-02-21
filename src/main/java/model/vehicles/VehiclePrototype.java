@@ -57,18 +57,6 @@ public abstract class VehiclePrototype implements IChassi {
     }
 
    
-/*
-    public void brake(double amount) {
-        if (betweenZeroAndOne(amount)) {
-            double deceleration = speedFactor() * engine.getEnginePower() * amount;
-            movement.decrementSpeed(amount, deceleration);
-            if (movement.getCurrentSpeed() < 0) {
-                movement.setCurrentSpeed(0);
-            }
-        } else
-            System.out.println("Invalid brake input: " + amount);
-    }
- */
     public void brake(double amount) {
         if (betweenZeroAndOne(amount)) {
             double deceleration = speedFactor() * engine.getEnginePower() * amount;
@@ -84,7 +72,7 @@ public abstract class VehiclePrototype implements IChassi {
         return (0 <= amount && amount <= 1);
     }
 
-    public void stopVehicle() { // testning
+    public void stopVehicle() { 
         getEngine().stopEngine();
         getMovement().setCurrentSpeed(0);
     }
