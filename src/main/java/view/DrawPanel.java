@@ -1,13 +1,15 @@
 package view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JPanel;
 
 import model.vehicles.VehiclePrototype;
 import model.workshops.CarWorkshop;
@@ -16,7 +18,7 @@ import model.workshops.CarWorkshop;
 
 public class DrawPanel extends JPanel {
     // Just a single image,
-    private ArrayList<BufferedImage> carImages = new ArrayList<>();
+    private final ArrayList<BufferedImage> carImages = new ArrayList<>();
     // To keep track of a single car's position
     private ArrayList<Point> carPoints = new ArrayList<>();
     private ArrayList<VehiclePrototype> vehicles = new ArrayList<>();
@@ -25,16 +27,18 @@ public class DrawPanel extends JPanel {
     BufferedImage carWorkshopImage;
 
     public void avoidWall(VehiclePrototype vehicle, int x, int y) {
-        if (outOfMap(x, y)) {
-            for (int index = 0; index < 2; index++) {
-                vehicle.getMovement().turnLeft();
-            }
+        if (outOfMap(x, y)) { 
+            vehicle.getEngine().stopEngine(); 
+            vehicle.getMovement().turnLeft();
+            vehicle.getMovement().turnLeft(); 
+            vehicle.getEngine().startEngine();
         }
     }
+    
 
     private boolean outOfMap(int x, int y) {
-        return (x < 0 || y < 0 || x > 800 || y > 500);
-    }
+        return (x < 0 || y < 0 || x > 685 || y > 450);
+    }  
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y, ArrayList<VehiclePrototype> vehicles, ArrayList<CarWorkshop> workshops) {

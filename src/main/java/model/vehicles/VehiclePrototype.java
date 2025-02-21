@@ -6,13 +6,13 @@ import java.awt.Point;
 import model.interfaces.IChassi;
 
 public abstract class VehiclePrototype implements IChassi {
-    private int nrDoors;
+    private final int nrDoors;
     private Color color;
-    private String modelName;
-    private double maxSpeed;
-    private EngineHandler engine;
-    private MovementHandler movement;
-    private String imagePath;
+    private final String modelName;
+    private final double maxSpeed;
+    private final EngineHandler engine;
+    private final MovementHandler movement;
+    private final String imagePath;
 
 
     public VehiclePrototype(int nrDoors, Color color, double enginePower, String modelName, Point initialPosition, String imagePath) {
@@ -57,7 +57,7 @@ public abstract class VehiclePrototype implements IChassi {
     }
 
    
-
+/*
     public void brake(double amount) {
         if (betweenZeroAndOne(amount)) {
             double deceleration = speedFactor() * engine.getEnginePower() * amount;
@@ -68,6 +68,17 @@ public abstract class VehiclePrototype implements IChassi {
         } else
             System.out.println("Invalid brake input: " + amount);
     }
+ */
+    public void brake(double amount) {
+        if (betweenZeroAndOne(amount)) {
+            double deceleration = speedFactor() * engine.getEnginePower() * amount;
+            deceleration = Math.min(deceleration, movement.getCurrentSpeed() / 0.2); // Begränsa bromsningen per steg
+            movement.decrementSpeed(amount, deceleration);
+        } else {
+            System.out.println("Invalid brake input: " + amount);
+        }
+    }
+    
 
     private boolean betweenZeroAndOne(double amount) {
         return (0 <= amount && amount <= 1);

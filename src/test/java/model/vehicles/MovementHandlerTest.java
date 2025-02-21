@@ -1,11 +1,11 @@
 package model.vehicles;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.awt.Point;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import model.vehicles.MovementHandler.Direction;
 
 class MovementHandlerTest {
@@ -20,7 +20,7 @@ class MovementHandlerTest {
     void testInitialPositionAndDirection() {
         assertEquals(0, movement.getPosX());
         assertEquals(0, movement.getPosY());
-        assertEquals(Direction.north.ordinal(), movement.getDir());
+        assertEquals(Direction.east.ordinal(), movement.getDir());
     }
 
     @Test
@@ -65,13 +65,13 @@ class MovementHandlerTest {
     @Test
     void testTurnLeft() {
         movement.turnLeft();
+        assertEquals(Direction.north.ordinal(), movement.getDir());
+        movement.turnLeft();
         assertEquals(Direction.west.ordinal(), movement.getDir());
         movement.turnLeft();
         assertEquals(Direction.south.ordinal(), movement.getDir());
         movement.turnLeft();
         assertEquals(Direction.east.ordinal(), movement.getDir());
-        movement.turnLeft();
-        assertEquals(Direction.north.ordinal(), movement.getDir());
     }
 
     @Test

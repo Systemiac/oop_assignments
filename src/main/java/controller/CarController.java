@@ -6,7 +6,6 @@ import model.workshops.CarWorkshop;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import view.CarView;
 import java.awt.Point;
@@ -24,7 +23,7 @@ public class CarController {
     private final int delay = 50;
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
+    private final Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
@@ -59,6 +58,7 @@ public class CarController {
      * view to update its images. Change this method to your needs.
      */
     private class TimerListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             for (VehiclePrototype car : vehicles) {
                 // System.out.println(car.getMovement().getPosX() + " " +
@@ -70,17 +70,16 @@ public class CarController {
                 frame.drawPanel.avoidWall(car, x, y);
 
                 for (CarWorkshop workshop : workshops) {
-
-                    if (workshop.getType().isInstance(car)) {
+                    if (workshop.getType() == Volvo240.class && car instanceof Volvo240) {
                         if (!workshop.getCars().contains(car)) {
                             workshop.addCarToWorkshop((CarPrototype) car);
-
-                        } else if (workshop.getCars().contains(car)) {
+                        } else {
                             car.brake(1);
                             car.getEngine().stopEngine();
                         }
                     }
                 }
+                
                 //System.out.println(workshops.get(0).getCars());
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
@@ -105,42 +104,35 @@ public class CarController {
 
     public void turboOn() {
         for (VehiclePrototype car : vehicles) {
-
-            if (car instanceof Saab95) {
-                ((Saab95) car).setTurboOn();
-            } else
-                System.out.println("Not saab95");
-
-        }
-
-    }
-
-    public void turboOff() {
-        for (VehiclePrototype car : vehicles) {
-
-            if (car instanceof Saab95) {
-                ((Saab95) car).setTurboOff();
-            } else
-                System.out.println("Not saab95");
-        }
-    }
-
-    public void liftTruckBed() {
-        for (VehiclePrototype truck : vehicles) {
-            if (truck instanceof CargoTruck) {
-                ((CargoTruck) truck).raiseCargoBed(70);
-            } else if (truck instanceof CarTransport) {
-                ((CarTransport) truck).raiseCargoBed();
+            if (car instanceof Saab95 saab) {
+                saab.setTurboOn();
             }
         }
     }
-
+    
+    public void turboOff() {
+        for (VehiclePrototype car : vehicles) {
+            if (car instanceof Saab95 saab) {
+                saab.setTurboOff();
+            }
+        }
+    }
+    public void liftTruckBed() {
+        for (VehiclePrototype truck : vehicles) {
+            if (truck instanceof CargoTruck cargoTruck) {
+                cargoTruck.raiseCargoBed(70);
+            } else if (truck instanceof CarTransport truckTransport) {
+                truckTransport.raiseCargoBed();
+            }
+        }
+    }
+    
     public void lowerTruckBed() {
         for (VehiclePrototype truck : vehicles) {
-            if (truck instanceof CargoTruck) {
-                ((CargoTruck) truck).lowerCargoBed(70);
-            } else if (truck instanceof CarTransport) {
-                ((CarTransport) truck).lowerCargoBed();
+            if (truck instanceof CargoTruck cargoTruck) {
+                cargoTruck.lowerCargoBed(70);
+            } else if (truck instanceof CarTransport truckTransport) {
+                truckTransport.lowerCargoBed();
             }
         }
     }
@@ -149,11 +141,16 @@ public class CarController {
         for (VehiclePrototype car : vehicles) {
             car.getEngine().startEngine();
         }
+        if (!timer.isRunning()) {
+            timer.start();
+        }
     }
+    
 
     public void stopAllCars() {
         for (VehiclePrototype car : vehicles) {
             car.getEngine().stopEngine();
         }
+        timer.stop();
     }
 }

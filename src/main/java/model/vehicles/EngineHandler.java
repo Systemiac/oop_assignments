@@ -3,7 +3,7 @@ package model.vehicles;
 import model.interfaces.IEngine;
 
 public class EngineHandler implements IEngine {
-    private double enginePower;
+    private final double enginePower;
     private double engineSpeed;
     public int engineOn;
 
@@ -13,6 +13,7 @@ public class EngineHandler implements IEngine {
     }
 
     // properties
+    @Override
     public double getEnginePower() {
         return enginePower;
     }
@@ -34,6 +35,7 @@ public class EngineHandler implements IEngine {
     }
 
     // methods
+    @Override
     public void startEngine() {
         if(engineSpeed == 0) {
             engineSpeed = 0.1; 
@@ -41,6 +43,7 @@ public class EngineHandler implements IEngine {
         }
     }
 
+    @Override
     public void stopEngine() {
         engineSpeed = 0;
         engineOn=0;

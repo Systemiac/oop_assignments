@@ -51,6 +51,7 @@ public class MovementHandler implements IMovable {
         }
     }
 
+    @Override
     public void move() {
         switch (dir) {
             case north:
@@ -68,6 +69,7 @@ public class MovementHandler implements IMovable {
         }
     }
 
+    @Override
     public void turnLeft() {
         switch (dir) {
             case north:
@@ -85,6 +87,7 @@ public class MovementHandler implements IMovable {
         }
     }
 
+    @Override
     public void turnRight() {
         switch (dir) {
             case north:
