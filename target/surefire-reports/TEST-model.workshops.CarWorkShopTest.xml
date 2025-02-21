@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="model.workshops.CarWorkShopTest" time="0.021" tests="5" errors="3" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="model.workshops.CarWorkShopTest" time="0.019" tests="5" errors="1" skipped="0" failures="2">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="SE"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-23\bin"/>
-    <property name="sun.java.command" value="C:\Users\sewilius.berg\AppData\Local\Temp\surefire15902480260559490922\surefirebooter-20250221014637035_3.jar C:\Users\sewilius.berg\AppData\Local\Temp\surefire15902480260559490922 2025-02-21T01-46-36_871-jvmRun1 surefire-20250221014637035_1tmp surefire_0-20250221014637035_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\sewilius.berg\AppData\Local\Temp\surefire17790364111207449202\surefirebooter-20250221044512767_3.jar C:\Users\sewilius.berg\AppData\Local\Temp\surefire17790364111207449202 2025-02-21T04-45-12_673-jvmRun1 surefire-20250221044512767_1tmp surefire_0-20250221044512767_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\oop\oop_assignments\target\test-classes;C:\oop\oop_assignments\target\classes;C:\Users\sewilius.berg\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\sewilius.berg\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\sewilius.berg\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\sewilius.berg\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\sewilius.berg\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\sewilius.berg\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\sewilius.berg\AppData\Local\Temp\surefire15902480260559490922\surefirebooter-20250221014637035_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\sewilius.berg\AppData\Local\Temp\surefire17790364111207449202\surefirebooter-20250221044512767_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="23.0.1+11-39"/>
@@ -59,8 +59,13 @@
     <property name="java.class.version" value="67.0"/>
   </properties>
   <testcase name="testAddCarToWorkshop" classname="model.workshops.CarWorkShopTest" time="0.003">
-    <error message="Cannot read field &quot;x&quot; because &quot;this.location&quot; is null" type="java.lang.NullPointerException"><![CDATA[java.lang.NullPointerException: Cannot read field "x" because "this.location" is null
-	at model.workshops.CarWorkshop.addCarToWorkshop(CarWorkshop.java:25)
+    <failure message="expected: &lt;1&gt; but was: &lt;0&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <1> but was: <0>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:528)
 	at model.workshops.CarWorkShopTest.testAddCarToWorkshop(CarWorkShopTest.java:33)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
@@ -131,12 +136,17 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-]]></error>
+]]></failure>
   </testcase>
-  <testcase name="testRemoveCarFromWorkshop" classname="model.workshops.CarWorkShopTest" time="0.003">
-    <error message="Cannot read field &quot;x&quot; because &quot;this.location&quot; is null" type="java.lang.NullPointerException"><![CDATA[java.lang.NullPointerException: Cannot read field "x" because "this.location" is null
-	at model.workshops.CarWorkshop.addCarToWorkshop(CarWorkshop.java:25)
-	at model.workshops.CarWorkShopTest.testRemoveCarFromWorkshop(CarWorkShopTest.java:41)
+  <testcase name="testRemoveCarFromWorkshop" classname="model.workshops.CarWorkShopTest" time="0.0">
+    <failure message="expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: not <null>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertNotNull.failNull(AssertNotNull.java:49)
+	at org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:35)
+	at org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:30)
+	at org.junit.jupiter.api.Assertions.assertNotNull(Assertions.java:301)
+	at model.workshops.CarWorkShopTest.testRemoveCarFromWorkshop(CarWorkShopTest.java:42)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
@@ -206,12 +216,13 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-]]></error>
+]]></failure>
+    <system-out><![CDATA[ removeCarFromWorkshop() Car is not in the workshop.]]></system-out>
   </testcase>
   <testcase name="testCarAmount" classname="model.workshops.CarWorkShopTest" time="0.001">
-    <error message="Cannot read field &quot;x&quot; because &quot;this.location&quot; is null" type="java.lang.NullPointerException"><![CDATA[java.lang.NullPointerException: Cannot read field "x" because "this.location" is null
-	at model.workshops.CarWorkshop.addCarToWorkshop(CarWorkshop.java:25)
-	at model.workshops.CarWorkShopTest.testCarAmount(CarWorkShopTest.java:49)
+    <error message="Cannot invoke &quot;model.vehicles.CarPrototype.getMovement()&quot; because &quot;car&quot; is null" type="java.lang.NullPointerException"><![CDATA[java.lang.NullPointerException: Cannot invoke "model.vehicles.CarPrototype.getMovement()" because "car" is null
+	at model.workshops.CarWorkshop.addCarToWorkshop(CarWorkshop.java:29)
+	at model.workshops.CarWorkShopTest.testCarAmount(CarWorkShopTest.java:50)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
@@ -282,7 +293,8 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 ]]></error>
+    <system-out><![CDATA[ removeCarFromWorkshop() Car is not in the workshop.]]></system-out>
   </testcase>
-  <testcase name="testMaxCarsCapacity" classname="model.workshops.CarWorkShopTest" time="0.002"/>
-  <testcase name="testConstructor" classname="model.workshops.CarWorkShopTest" time="0.0"/>
+  <testcase name="testMaxCarsCapacity" classname="model.workshops.CarWorkShopTest" time="0.001"/>
+  <testcase name="testConstructor" classname="model.workshops.CarWorkShopTest" time="0.001"/>
 </testsuite>

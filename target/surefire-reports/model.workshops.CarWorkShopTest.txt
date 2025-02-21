@@ -1,10 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: model.workshops.CarWorkShopTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.021 s <<< FAILURE! -- in model.workshops.CarWorkShopTest
-model.workshops.CarWorkShopTest.testAddCarToWorkshop -- Time elapsed: 0.003 s <<< ERROR!
-java.lang.NullPointerException: Cannot read field "x" because "this.location" is null
-	at model.workshops.CarWorkshop.addCarToWorkshop(CarWorkshop.java:25)
+Tests run: 5, Failures: 2, Errors: 1, Skipped: 0, Time elapsed: 0.019 s <<< FAILURE! -- in model.workshops.CarWorkShopTest
+model.workshops.CarWorkShopTest.testAddCarToWorkshop -- Time elapsed: 0.003 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <0>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:528)
 	at model.workshops.CarWorkShopTest.testAddCarToWorkshop(CarWorkShopTest.java:33)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
@@ -76,10 +81,15 @@ java.lang.NullPointerException: Cannot read field "x" because "this.location" is
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-model.workshops.CarWorkShopTest.testRemoveCarFromWorkshop -- Time elapsed: 0.003 s <<< ERROR!
-java.lang.NullPointerException: Cannot read field "x" because "this.location" is null
-	at model.workshops.CarWorkshop.addCarToWorkshop(CarWorkshop.java:25)
-	at model.workshops.CarWorkShopTest.testRemoveCarFromWorkshop(CarWorkShopTest.java:41)
+model.workshops.CarWorkShopTest.testRemoveCarFromWorkshop -- Time elapsed: 0 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: not <null>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertNotNull.failNull(AssertNotNull.java:49)
+	at org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:35)
+	at org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:30)
+	at org.junit.jupiter.api.Assertions.assertNotNull(Assertions.java:301)
+	at model.workshops.CarWorkShopTest.testRemoveCarFromWorkshop(CarWorkShopTest.java:42)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
@@ -151,9 +161,9 @@ java.lang.NullPointerException: Cannot read field "x" because "this.location" is
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
 model.workshops.CarWorkShopTest.testCarAmount -- Time elapsed: 0.001 s <<< ERROR!
-java.lang.NullPointerException: Cannot read field "x" because "this.location" is null
-	at model.workshops.CarWorkshop.addCarToWorkshop(CarWorkshop.java:25)
-	at model.workshops.CarWorkShopTest.testCarAmount(CarWorkShopTest.java:49)
+java.lang.NullPointerException: Cannot invoke "model.vehicles.CarPrototype.getMovement()" because "car" is null
+	at model.workshops.CarWorkshop.addCarToWorkshop(CarWorkshop.java:29)
+	at model.workshops.CarWorkShopTest.testCarAmount(CarWorkShopTest.java:50)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)

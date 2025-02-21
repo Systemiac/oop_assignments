@@ -16,9 +16,7 @@ public class EngineHandler implements IEngine {
     @Override
     public double getEnginePower() {
         return enginePower;
-    }
-    
-    
+    }    
 
     public double getCurrentRPM() {
         return engineSpeed;

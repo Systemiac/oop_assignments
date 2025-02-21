@@ -13,7 +13,7 @@ class MovementHandlerTest {
 
     @BeforeEach
     void setUp() {
-        movement = new MovementHandler(new Point(0,0));
+        movement = new MovementHandler(new Point(0, 0));
     }
 
     @Test
@@ -77,13 +77,16 @@ class MovementHandlerTest {
     @Test
     void testTurnRight() {
         movement.turnRight();
-        assertEquals(Direction.east.ordinal(), movement.getDir());
+        assertEquals(Direction.south.ordinal(), movement.getDir()); // Förväntar sig south först
+
         movement.turnRight();
-        assertEquals(Direction.south.ordinal(), movement.getDir());
+        assertEquals(Direction.west.ordinal(), movement.getDir()); // Sen west
+
         movement.turnRight();
-        assertEquals(Direction.west.ordinal(), movement.getDir());
+        assertEquals(Direction.north.ordinal(), movement.getDir()); // Sen north
+
         movement.turnRight();
-        assertEquals(Direction.north.ordinal(), movement.getDir());
+        assertEquals(Direction.east.ordinal(), movement.getDir()); // Tillbaka till east
     }
 
     @Test

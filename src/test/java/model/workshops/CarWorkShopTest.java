@@ -1,14 +1,14 @@
 package model.workshops;
 
-import model.vehicles.CarPrototype;
-import model.vehicles.Volvo240;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.awt.Point;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import model.vehicles.CarPrototype;
+import model.vehicles.Volvo240;
 
 public class CarWorkShopTest {
     private CarWorkshop<CarPrototype> testWorkshop;
@@ -17,9 +17,9 @@ public class CarWorkShopTest {
 
     @BeforeEach
     void setUp() {
-        testWorkshop = new CarWorkshop<>(1,null,null);
-        testVolvo = new Volvo240(new Point(0,0));
-        volvoWorkshop = new CarWorkshop<>(20,null,null);
+        testWorkshop = new CarWorkshop<>(1, new Point(100, 100), CarPrototype.class);
+        testVolvo = new Volvo240(new Point(0, 0));
+        volvoWorkshop = new CarWorkshop<>(20, new Point(200, 200), Volvo240.class);
     }
 
     @Test
@@ -27,7 +27,6 @@ public class CarWorkShopTest {
         assertEquals(0, testWorkshop.getCurrentCarsInWorkshop());
     }
 
-    
     @Test
     public void testAddCarToWorkshop() {
         testWorkshop.addCarToWorkshop(testVolvo);

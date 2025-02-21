@@ -1,8 +1,9 @@
 package model.workshops;
 
-import java.util.List;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
+
 import model.vehicles.CarPrototype;
 
 public class CarWorkshop<C extends CarPrototype> {
@@ -12,6 +13,9 @@ public class CarWorkshop<C extends CarPrototype> {
     private final Class<C> carType;
 
     public CarWorkshop(int maxCarsInWorkshop, Point location, Class<C> carType) {
+        if (location == null) {
+            throw new IllegalArgumentException("Location cannot be null!");
+        }
         this.cars = new ArrayList<>();
         this.maxCarsInWorkshop = maxCarsInWorkshop;
         this.location = location;
