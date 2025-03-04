@@ -17,7 +17,7 @@ public abstract class CargoTruck extends TruckPrototype {
         }
         if (cargoChecker() && degree > 0) {
             cargoBedAngle += degree;
-            System.out.println("CargoBed has BEEN Rasied");
+            System.out.println("CargoBed has been rasied");
             if(cargoBedAngle > maxAngle){
                 cargoBedAngle = maxAngle;
             }

@@ -22,6 +22,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import controller.CarController;
+import controller.TruckController;
+import model.vehicles.CarPrototype;
+import model.vehicles.TruckPrototype;
 import model.vehicles.VehiclePrototype;
 import model.workshops.CarWorkshop;
 
@@ -37,8 +40,11 @@ public class CarView extends JFrame {
     private static final int Y = 800;
 
     // The controller member
-    CarController carC;
-    List<VehiclePrototype> vehicles;
+    CarController carController;
+    TruckController truckController;
+    TruckPrototype truckPrototype;
+    CarPrototype carPrototype;
+    //List<VehiclePrototype> vehicles;
     List<CarWorkshop> workshops;
 
     public DrawPanel drawPanel;
@@ -62,13 +68,20 @@ public class CarView extends JFrame {
 
     // Constructor
     
-    public CarView(String framename, CarController cc){
-        this.carC = cc;
-        this.vehicles=cc.vehicleManager.getVehicles();
-        this.workshops=cc.workshopManager.getWorkshops();
-        drawPanel=new DrawPanel(X, Y-240, vehicles, workshops);
+    public CarView(String framename, CarController carController, TruckController truckController) {
+        this.carController = carController;
+        this.truckController = truckController;
+        this.workshops = carController.workshopManager.getWorkshops();
+    
+        List<VehiclePrototype> allVehicles = new ArrayList<>();
+        allVehicles.addAll(carController.carManager.getVehicles());
+        allVehicles.addAll(truckController.truckManager.getVehicles());
+    
+        drawPanel = new DrawPanel(X, Y - 240, allVehicles, workshops);
+    
         initComponents(framename);
     }
+    
     
     /*public CarView(String framename) {
         initComponents(framename);
@@ -130,56 +143,69 @@ public class CarView extends JFrame {
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.gas(gasAmount);
+                double gas = ((double) gasAmount) / 100;
+        
+                // Gasa alla bilar
+                for (VehiclePrototype car : carController.carManager.getVehicles()) {
+                    car.gas(gas);
+                }
+        
+                // Gasa alla lastbilar ?
+                for (VehiclePrototype truck : truckController.truckManager.getVehicles()) {
+                    truck.gas(gas);
+                }
             }
         });
+        
 
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.brake(gasAmount);
+                carController.brake(gasAmount);
             } 
         });
 
         turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               carC.turboOn();
+                carController.turboOn();
             }
         });
 
         turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.turboOff();
+                carController.turboOff();
             }
         });
 
         liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                carC.liftTruckBed();
+                truckController.liftTruckBed(70);
             }
         });
 
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.lowerTruckBed();
+                truckController.lowerTruckBed(70);
             }
         });
 
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.startAllCars();
+                carController.startAllCars();
+                truckController.startAllTrucks();
             }
         });
 
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.stopAllCars();
+                carController.stopAllCars();
+                truckController.stopAllTrucks();
             }
         });
 

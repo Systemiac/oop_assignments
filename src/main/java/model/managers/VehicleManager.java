@@ -1,61 +1,53 @@
 package model.managers;
 
-import model.interfaces.IVehicleManager;
+import model.vehicles.CarPrototype;
 import model.vehicles.VehiclePrototype;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class VehicleManager implements IVehicleManager {
-    private final List<VehiclePrototype> vehicles;
+public abstract class VehicleManager<T extends VehiclePrototype> {
+    protected final List<T> vehicles;
     
-    public VehicleManager(List<VehiclePrototype> vehicles){
+    public VehicleManager(List<T> vehicles){
         this.vehicles = vehicles;
     }
 
-    public VehicleManager(){
-        this.vehicles = new ArrayList<>();
-    }
-
-    public List<VehiclePrototype> getVehicles(){
-        return vehicles;
-    }
-    public void addVehicle(VehiclePrototype vehicle){
-        vehicles.add(vehicle);
+    public List<T> getVehicles(){
+        return List.copyOf(vehicles);
     }
 
     public void startAllEngines(){
-        for(VehiclePrototype vehicle : vehicles) {
+        for(T vehicle : vehicles) {
             vehicle.getEngine().startEngine();
         }
     }
 
     public void stopAllEngines() {
-        for(VehiclePrototype vehicle : vehicles){
-            vehicle.getEngine().startEngine();
+        for(T vehicle : vehicles){
+            vehicle.getEngine().stopEngine();
         }
     }
 
     public void accelerateAll(double amount){
-        for(VehiclePrototype vehicle : vehicles){
+        for(T vehicle : vehicles){
             vehicle.gas(amount);
         }
     }
 
     public void brakeAll(double amount) {
-        for (VehiclePrototype vehicle : vehicles) {
+        for (T vehicle : vehicles) {
             vehicle.brake(amount);
         }
     }
 
     public void moveAllVehicles(){
-        for(VehiclePrototype vehicle : vehicles) {
+        for(T vehicle : vehicles) {
             vehicle.move();
         }
     }
 
     public void stopAllVehicles() {
-        for(VehiclePrototype vehicle : vehicles){
+        for(T vehicle : vehicles){
             vehicle.stopVehicle();
         }
     }

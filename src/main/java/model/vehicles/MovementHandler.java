@@ -55,7 +55,7 @@ public class MovementHandler implements IMovable {
     public void move() {
         switch (dir) {
             case north:
-                posY -= currentSpeed;        
+                posY -= currentSpeed;
                 break;
             case west:
                 posX -= currentSpeed;
@@ -68,6 +68,7 @@ public class MovementHandler implements IMovable {
                 break;
         }
     }
+    
 
     @Override
     public void turnLeft() {

@@ -49,6 +49,7 @@ public abstract class VehiclePrototype implements IChassi {
         if (betweenZeroAndOne(amount)) {
             double acceleration = speedFactor() * engine.getEnginePower() * amount * engine.engineOn;
             double newSpeed = movement.getCurrentSpeed() + acceleration;
+
             if (newSpeed <= maxSpeed) {
                 movement.incrementSpeed(amount, acceleration);
             }
