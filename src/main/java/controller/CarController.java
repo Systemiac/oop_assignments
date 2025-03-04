@@ -2,8 +2,13 @@ package controller;
 
 import model.vehicles.*;
 import model.workshops.CarWorkshop;
+import model.managers.VehicleManager;
+import model.managers.WorkshopManager;
 
 import javax.swing.*;
+
+import application.SimulationManager;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -23,35 +28,24 @@ public class CarController {
     private final int delay = 50;
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
-    private final Timer timer = new Timer(delay, new TimerListener());
+    public final Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
-    CarView frame;
+    public CarView frame;
     // A list of cars, modify if needed
-    public ArrayList<VehiclePrototype> vehicles = new ArrayList<>();
-    public ArrayList<CarWorkshop> workshops = new ArrayList<>();
+
+    
+    
+    
+    public WorkshopManager workshopManager = new WorkshopManager();
+
+    public VehicleManager vehicleManager = new VehicleManager();
+
+    public SimulationManager simulationManager = new SimulationManager();
 
     // methods:
 
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-        Point volvoStart = new Point(0, 0);
-        Point saabStart = new Point(0, 100);
-
-        cc.vehicles.add(new Volvo240(volvoStart));
-        cc.vehicles.add(new Saab95((saabStart)));
-        cc.vehicles.add(new Scania(new Point(0, 200)));
-
-        cc.workshops.add(new CarWorkshop<Volvo240>(2, new Point(200, 0), Volvo240.class));
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-        // cc.frame.setController(cc);
-
-        // Start the timer
-        cc.timer.start();
-    }
+    
 
     /*
      * Each step the TimerListener moves all the cars in the list and tells the
@@ -60,7 +54,7 @@ public class CarController {
     private class TimerListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            for (VehiclePrototype car : vehicles) {
+            for (VehiclePrototype car : vehicleManager.getVehicles()) {
                 // System.out.println(car.getMovement().getPosX() + " " +
                 // car.getMovement().getPosY());
                 
@@ -68,10 +62,10 @@ public class CarController {
                 car.move();
                 int x = (int) Math.round(car.getMovement().getPosX());
                 int y = (int) Math.round(car.getMovement().getPosY());
-                frame.drawPanel.avoidWall(car, x, y);
+                frame.drawPanel.getGameHandler().avoidWall(car, x, y);
 
-                for (CarWorkshop workshop : workshops) {
-                    if (workshop.getType() == Volvo240.class && car instanceof Volvo240) {
+                for (CarWorkshop workshop : workshopManager.getWorkshops()) {
+                    if (workshop.getType() == car.getClass()) {
                         if (!workshop.getCars().contains(car)) {
                             workshop.addCarToWorkshop((CarPrototype) car);
                             System.out.println(workshop.getCars());
@@ -90,22 +84,23 @@ public class CarController {
     }
 
     // Calls the gas method for each car once
+    // Detta ska ju bort härifrån, men jag är inte helt klar än
     public void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (VehiclePrototype car : vehicles) {
+        for (VehiclePrototype car : vehicleManager.getVehicles()) {
             car.gas(gas);
         }
     }
 
     public void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (VehiclePrototype car : vehicles) {
+        for (VehiclePrototype car : vehicleManager.getVehicles()) {
             car.brake(brake);
         }
     }
 
     public void turboOn() {
-        for (VehiclePrototype car : vehicles) {
+        for (VehiclePrototype car : vehicleManager.getVehicles()) {
             if (car instanceof Saab95 saab) {
                 saab.setTurboOn();
             }
@@ -113,14 +108,14 @@ public class CarController {
     }
     
     public void turboOff() {
-        for (VehiclePrototype car : vehicles) {
+        for (VehiclePrototype car : vehicleManager.getVehicles()) {
             if (car instanceof Saab95 saab) {
                 saab.setTurboOff();
             }
         }
     }
     public void liftTruckBed() {
-        for (VehiclePrototype truck : vehicles) {
+        for (VehiclePrototype truck : vehicleManager.getVehicles()) {
             if (truck instanceof CargoTruck cargoTruck) {
                 cargoTruck.raiseCargoBed(70);
             } else if (truck instanceof CarTransport truckTransport) {
@@ -130,7 +125,7 @@ public class CarController {
     }
     
     public void lowerTruckBed() {
-        for (VehiclePrototype truck : vehicles) {
+        for (VehiclePrototype truck : vehicleManager.getVehicles()) {
             if (truck instanceof CargoTruck cargoTruck) {
                 cargoTruck.lowerCargoBed(70);
             } else if (truck instanceof CarTransport truckTransport) {
@@ -140,7 +135,7 @@ public class CarController {
     }
 
     public void startAllCars() {
-        for (VehiclePrototype car : vehicles) {
+        for (VehiclePrototype car : vehicleManager.getVehicles()) {
             car.getEngine().startEngine();
         }
         if (!timer.isRunning()) {
@@ -150,7 +145,7 @@ public class CarController {
     
 
     public void stopAllCars() {
-        for (VehiclePrototype car : vehicles) {
+        for (VehiclePrototype car : vehicleManager.getVehicles()) {
             car.getEngine().stopEngine();
             car.getMovement().setCurrentSpeed(0);
         }

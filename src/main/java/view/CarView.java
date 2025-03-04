@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -37,8 +38,8 @@ public class CarView extends JFrame {
 
     // The controller member
     CarController carC;
-    ArrayList<VehiclePrototype> vehicles;
-    ArrayList<CarWorkshop> workshops;
+    List<VehiclePrototype> vehicles;
+    List<CarWorkshop> workshops;
 
     public DrawPanel drawPanel;
 
@@ -63,8 +64,8 @@ public class CarView extends JFrame {
     
     public CarView(String framename, CarController cc){
         this.carC = cc;
-        this.vehicles=cc.vehicles;
-        this.workshops=cc.workshops;
+        this.vehicles=cc.vehicleManager.getVehicles();
+        this.workshops=cc.workshopManager.getWorkshops();
         drawPanel=new DrawPanel(X, Y-240, vehicles, workshops);
         initComponents(framename);
     }

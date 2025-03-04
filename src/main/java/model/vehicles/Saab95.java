@@ -1,9 +1,10 @@
 package model.vehicles;
 
+import model.interfaces.ITurbo;
 import java.awt.Color;
 import java.awt.Point;
 
-public class Saab95 extends CarPrototype {
+public class Saab95 extends CarPrototype implements ITurbo {
 
     private boolean turboOn;
     private final double turboMultiplier = 5;

@@ -71,4 +71,6 @@ public class CarWorkshop<C extends CarPrototype> {
         double distance = Math.sqrt(dx * dx + dy * dy);
         return distance;
     }
+
+
 }

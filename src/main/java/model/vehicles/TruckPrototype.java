@@ -2,7 +2,7 @@ package model.vehicles;
 import java.awt.Color;
 import java.awt.Point;
 
-abstract class TruckPrototype extends VehiclePrototype {
+public abstract class TruckPrototype extends VehiclePrototype {
     protected int cargoBedAngle;
     protected static final int maxAngle =70;
     protected static final int minAngle = 0;
