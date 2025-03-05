@@ -10,7 +10,11 @@ public class Scania extends CargoTruck {
 
     @Override
     public double speedFactor() {
-        double factor = (getCargoBedAngle() == 0) ? getEngine().getEnginePower() * 0.01 : 0;
-        return factor;
-    } 
+        if (getCargoBedAngle() == 0) {
+            return getEngine().getEnginePower() * 0.01;
+        } 
+        else {
+            return 0;
+        }
+    }
 }

@@ -61,7 +61,6 @@ public abstract class VehiclePrototype implements IChassi {
     public void brake(double amount) {
         if (betweenZeroAndOne(amount)) {
             double deceleration = speedFactor() * engine.getEnginePower() * amount;
-            deceleration = Math.min(deceleration, movement.getCurrentSpeed() / 0.2); // Begränsa bromsningen per steg
             movement.decrementSpeed(amount, deceleration);
         } else {
             System.out.println("Invalid brake input: " + amount);

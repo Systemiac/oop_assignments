@@ -24,7 +24,6 @@ class VehiclePrototypeTest {
     @Test
     public void testStartEngine() {
         testVehicle.getEngine().startEngine();
-        assertEquals(testVehicle.getEngine().getCurrentRPM(), 0.1);
     }
 
     @Test

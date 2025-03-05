@@ -1,12 +1,12 @@
-package view;
+package model.gamelogic;
 
 import model.vehicles.VehiclePrototype;
 
 public class GameHandler {
     
 
-    public void avoidWall(VehiclePrototype vehicle, int x, int y) {
-        if (outOfMap(x, y)) {
+    public void avoidWall(VehiclePrototype vehicle) {
+        if (outOfMap(vehicle.getMovement().getPosX(), vehicle.getMovement().getPosY())) {
             vehicle.getEngine().stopEngine();
             vehicle.getMovement().turnLeft();
             vehicle.getMovement().turnLeft();
@@ -14,7 +14,7 @@ public class GameHandler {
         }
     }
 
-    private boolean outOfMap(int x, int y) {
+    private boolean outOfMap(double x, double y) {
         return (x < 0 || y < 0 || x > 685 || y > 450);
     }
 }

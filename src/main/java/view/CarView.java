@@ -23,10 +23,10 @@ import javax.swing.event.ChangeListener;
 
 import controller.CarController;
 import controller.TruckController;
+import model.managers.WorkshopManager;
 import model.vehicles.CarPrototype;
 import model.vehicles.TruckPrototype;
 import model.vehicles.VehiclePrototype;
-import model.workshops.CarWorkshop;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -45,7 +45,6 @@ public class CarView extends JFrame {
     TruckPrototype truckPrototype;
     CarPrototype carPrototype;
     //List<VehiclePrototype> vehicles;
-    List<CarWorkshop> workshops;
 
     public DrawPanel drawPanel;
 
@@ -68,16 +67,15 @@ public class CarView extends JFrame {
 
     // Constructor
     
-    public CarView(String framename, CarController carController, TruckController truckController) {
+    public CarView(String framename, CarController carController, TruckController truckController, WorkshopManager workshopManager) {
         this.carController = carController;
         this.truckController = truckController;
-        this.workshops = carController.workshopManager.getWorkshops();
     
         List<VehiclePrototype> allVehicles = new ArrayList<>();
         allVehicles.addAll(carController.carManager.getVehicles());
         allVehicles.addAll(truckController.truckManager.getVehicles());
     
-        drawPanel = new DrawPanel(X, Y - 240, allVehicles, workshops);
+        drawPanel = new DrawPanel(X, Y - 240, truckController.truckManager, carController.carManager, workshopManager);
     
         initComponents(framename);
     }
@@ -152,6 +150,7 @@ public class CarView extends JFrame {
         
                 // Gasa alla lastbilar ?
                 for (VehiclePrototype truck : truckController.truckManager.getVehicles()) {
+                    System.out.println(truck.toString());
                     truck.gas(gas);
                 }
             }
@@ -162,6 +161,7 @@ public class CarView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carController.brake(gasAmount);
+                truckController.brake(gasAmount);
             } 
         });
 

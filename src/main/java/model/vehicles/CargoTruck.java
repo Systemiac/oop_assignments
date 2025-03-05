@@ -31,7 +31,7 @@ public abstract class CargoTruck extends TruckPrototype {
         } 
         if (cargoChecker()) {
             cargoBedAngle -= degree;
-            System.out.println("CargoBEd has been lowered");
+            System.out.println("CargoBed has been lowered");
             if(cargoBedAngle < minAngle){
                 cargoBedAngle = minAngle;
             }

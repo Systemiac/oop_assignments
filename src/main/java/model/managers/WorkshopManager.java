@@ -3,8 +3,8 @@ package model.managers;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.vehicles.CarPrototype;
 import model.workshops.CarWorkshop;
-
 
 public class WorkshopManager {
 
@@ -26,4 +26,17 @@ public class WorkshopManager {
         workshops.add(workshop);
     }
 
+    public void handleWorkshopLogic(CarPrototype car) {
+        for (CarWorkshop workshop : workshops) {
+            if (workshop.getType() == car.getClass()) {
+                if (!workshop.getCars().contains(car)) {
+                    workshop.addCarToWorkshop(car);
+                    // System.out.println(workshop.getCars());
+                } else {
+                    car.brake(1);
+                    car.getEngine().stopEngine();
+                }
+            }
+        }
+    }
 }

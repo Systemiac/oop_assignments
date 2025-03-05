@@ -1,11 +1,10 @@
 package model.managers;
 
-import model.vehicles.CarPrototype;
 import model.vehicles.VehiclePrototype;
 
 import java.util.List;
 
-public abstract class VehicleManager<T extends VehiclePrototype> {
+public abstract class VehicleManager<T extends VehiclePrototype>  {
     protected final List<T> vehicles;
     
     public VehicleManager(List<T> vehicles){
@@ -13,7 +12,7 @@ public abstract class VehicleManager<T extends VehiclePrototype> {
     }
 
     public List<T> getVehicles(){
-        return List.copyOf(vehicles);
+        return vehicles;
     }
 
     public void startAllEngines(){

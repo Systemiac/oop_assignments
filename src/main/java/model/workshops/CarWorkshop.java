@@ -25,10 +25,10 @@ public class CarWorkshop<C extends CarPrototype> {
     public void addCarToWorkshop(C car) {
     
         if (cars.size() >= maxCarsInWorkshop) {
-            //System.out.println("Workshop is FULL");
+            //System.out.println("Workshop is FULL ;)");
         } else if (calculateDistance(location.x, location.y, car.getMovement().getPosX(),
                 car.getMovement().getPosY()) > 50) {
-            //System.out.println("Car is too far away to be added to the workshop :> 8=====D");
+            //System.out.println("Car is too far away to be added to the workshop :>");
 
         } else {
             cars.add(car);

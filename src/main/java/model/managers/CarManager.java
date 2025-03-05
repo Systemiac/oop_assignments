@@ -25,4 +25,6 @@ public class CarManager extends VehicleManager<CarPrototype> {
             }
         }
     }
+
+    
 }
