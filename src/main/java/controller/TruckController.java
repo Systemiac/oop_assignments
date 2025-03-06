@@ -32,4 +32,8 @@ public class TruckController {
     public void brake(int amount) {
         truckManager.brakeAll(amount / 100.0);
     }
+
+    public void gas(int amount) {
+        truckManager.accelerateAll(amount / 100.0);
+    }
 }

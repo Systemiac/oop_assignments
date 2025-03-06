@@ -27,6 +27,7 @@ import model.managers.WorkshopManager;
 import model.vehicles.CarPrototype;
 import model.vehicles.TruckPrototype;
 import model.vehicles.VehiclePrototype;
+import model.timer.SimulationManager;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -44,6 +45,7 @@ public class CarView extends JFrame {
     TruckController truckController;
     TruckPrototype truckPrototype;
     CarPrototype carPrototype;
+    SimulationManager SimulationManager;
     //List<VehiclePrototype> vehicles;
 
     public DrawPanel drawPanel;
@@ -67,7 +69,7 @@ public class CarView extends JFrame {
 
     // Constructor
     
-    public CarView(String framename, CarController carController, TruckController truckController, WorkshopManager workshopManager) {
+    public CarView(String framename, CarController carController, TruckController truckController, WorkshopManager workshopManager, SimulationManager simulationManager) {
         this.carController = carController;
         this.truckController = truckController;
     
@@ -75,17 +77,13 @@ public class CarView extends JFrame {
         allVehicles.addAll(carController.carManager.getVehicles());
         allVehicles.addAll(truckController.truckManager.getVehicles());
     
-        drawPanel = new DrawPanel(X, Y - 240, truckController.truckManager, carController.carManager, workshopManager);
+        drawPanel = new DrawPanel(X, Y - 240, truckController.truckManager, carController.carManager, workshopManager, simulationManager);
     
         initComponents(framename);
     }
     
     
-    /*public CarView(String framename) {
-        initComponents(framename);
-    }*/
-
-    // Sets everything in place and fits everything
+  
     private void initComponents(String title) {
 
         this.setTitle(title);
@@ -95,10 +93,10 @@ public class CarView extends JFrame {
         this.add(drawPanel);
 
         SpinnerModel spinnerModel =
-                new SpinnerNumberModel(0, //initial value
-                        0, //min
-                        100, //max
-                        1);//step
+                new SpinnerNumberModel(0, 
+                        0, 
+                        100, 
+                        1);
         gasSpinner = new JSpinner(spinnerModel);
         gasSpinner.addChangeListener(new ChangeListener() {
             @Override
@@ -137,22 +135,17 @@ public class CarView extends JFrame {
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
 
-        // This actionListener is for the gas button only
+      
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                double gas = ((double) gasAmount) / 100;
+                double gas = ((double) gasAmount);
         
-                // Gasa alla bilar
-                for (VehiclePrototype car : carController.carManager.getVehicles()) {
-                    car.gas(gas);
-                }
+           
+                carController.gas((int)gas);
         
-                // Gasa alla lastbilar ?
-                for (VehiclePrototype truck : truckController.truckManager.getVehicles()) {
-                    System.out.println(truck.toString());
-                    truck.gas(gas);
-                }
+           
+                truckController.gas((int)gas);
             }
         });
         
@@ -209,16 +202,16 @@ public class CarView extends JFrame {
             }
         });
 
-        // Make the frame pack all it's components by respecting the sizes if possible.
+       
         this.pack();
 
-        // Get the computer screen resolution
+       
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        // Center the frame
+     
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        // Make the frame visible
+       
         this.setVisible(true);
-        // Make sure the frame exits when "x" is pressed
+        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

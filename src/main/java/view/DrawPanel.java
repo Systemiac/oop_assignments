@@ -13,19 +13,22 @@ import model.managers.WorkshopManager;
 import model.vehicles.CarPrototype;
 import model.vehicles.TruckPrototype;
 import model.workshops.CarWorkshop;
+import model.interfaces.IObserver;
+import model.timer.SimulationManager;
 
-// This panel represents the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel {
-    // Just a single image, to keep track of a single car's position
+
+public class DrawPanel extends JPanel implements IObserver {
+   
 
     private ImageHandler imageHandler;
     private GameHandler gameHandler;
     private TruckManager truckManager;
     private CarManager carManager;
     private WorkshopManager workshopManager;
+    private SimulationManager simulationManager;
 
-    public DrawPanel(int x, int y, TruckManager truckManager, CarManager carManager, WorkshopManager workshopManager) {
+    public DrawPanel(int x, int y, TruckManager truckManager, CarManager carManager, WorkshopManager workshopManager, SimulationManager simulationManager) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
@@ -34,6 +37,8 @@ public class DrawPanel extends JPanel {
         this.workshopManager = workshopManager;
         this.imageHandler = new ImageHandler(carManager.getVehicles(), truckManager.getVehicles());
         this.gameHandler = new GameHandler();
+        this.simulationManager = simulationManager;
+        this.simulationManager.addObserver(this);
     }
 
     @Override
@@ -58,4 +63,11 @@ public class DrawPanel extends JPanel {
     public GameHandler getGameHandler() {
         return gameHandler;
     }
+
+    @Override
+    public void update() {
+        repaint();
+    }
+
+	
 }
