@@ -24,10 +24,11 @@ import javax.swing.event.ChangeListener;
 import controller.CarController;
 import controller.TruckController;
 import model.managers.WorkshopManager;
+import model.timer.SimulationManager;
 import model.vehicles.CarPrototype;
 import model.vehicles.TruckPrototype;
 import model.vehicles.VehiclePrototype;
-import model.timer.SimulationManager;
+import model.interfaces.ICarControllerListener;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -36,7 +37,7 @@ import model.timer.SimulationManager;
  * each of it's components.
  **/
 
-public class CarView extends JFrame {
+public class CarView extends JFrame implements ICarControllerListener {
     private static final int X = 800;
     private static final int Y = 800;
 
@@ -59,15 +60,20 @@ public class CarView extends JFrame {
 
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
-    JButton turboOnButton = new JButton("Saab Turbo on");
-    JButton turboOffButton = new JButton("Saab Turbo off");
-    JButton liftBedButton = new JButton("Scania Lift Bed");
-    JButton lowerBedButton = new JButton("Lower Lift Bed");
-
+    JButton turboOnButton = new JButton("<html>Saab<br>Turbo on</html>");
+    JButton turboOffButton = new JButton("<html>Saab<br>Turbo off</html>");
+    JButton liftBedButton = new JButton("<html>Scania<br>Lift Bed</html>");
+    JButton lowerBedButton = new JButton("<html>Lower<br>Lift Bed</html>");
+    JButton addCarButton = new JButton("<html>Add<br>Car</html>");
+    JButton removeCarButton = new JButton("<html>Remove<br>Car</html>");
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
-    // Constructor
+    @Override
+    public void onCarListUpdated(List<CarPrototype> cars) {
+        drawPanel.repaint();
+    }
+
     
     public CarView(String framename, CarController carController, TruckController truckController, WorkshopManager workshopManager, SimulationManager simulationManager) {
         this.carController = carController;
@@ -111,14 +117,16 @@ public class CarView extends JFrame {
 
         this.add(gasPanel);
 
-        controlPanel.setLayout(new GridLayout(2,4));
+        controlPanel.setLayout(new GridLayout(2,5));
 
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
         controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
-        controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(addCarButton, 3);
+        controlPanel.add(brakeButton, 4);
+        controlPanel.add(turboOffButton, 5);
+        controlPanel.add(lowerBedButton, 6);     
+        controlPanel.add(removeCarButton, 7);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
@@ -126,13 +134,13 @@ public class CarView extends JFrame {
 
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X/5-15,200));
+        startButton.setPreferredSize(new Dimension(X/6-15,200));
         this.add(startButton);
 
 
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X/5-15,200));
+        stopButton.setPreferredSize(new Dimension(X/6-15,200));
         this.add(stopButton);
 
       
@@ -200,6 +208,22 @@ public class CarView extends JFrame {
                 carController.stopAllCars();
                 truckController.stopAllTrucks();
             }
+        });
+
+        addCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                carController.addCar();
+                drawPanel.repaint();
+            }
+        });
+
+        removeCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carController.removeCar();
+                drawPanel.repaint();
+            }        
         });
 
        

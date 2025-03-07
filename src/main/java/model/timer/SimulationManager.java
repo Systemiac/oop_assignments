@@ -1,15 +1,18 @@
 package model.timer;
 
 
-import model.gamelogic.GameHandler;
-import model.managers.*;
-import model.vehicles.*;
-import model.observer.Observable;
-import javax.swing.Timer;
-
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
+import model.gamelogic.GameHandler;
+import model.managers.CarManager;
+import model.managers.TruckManager;
+import model.managers.WorkshopManager;
+import model.observer.Observable;
+import model.vehicles.CarPrototype;
+import model.vehicles.TruckPrototype;
 
 public class SimulationManager extends Observable{
     private final int delay = 50;
@@ -26,14 +29,21 @@ public class SimulationManager extends Observable{
         this.workshopManager = workshopManager;
     }
 
-    public void startSimulation() {
+    public void updateUI() {
+        notifyObservers();
+    }
+    
 
-      
+    public void startSimulation() {     
         carManager.startAllEngines();
         truckManager.startAllEngines();
         timer.start();
     }
 
+    public CarManager getCarManager() {
+        return carManager;
+    }
+    
     public void stopSimulation() {
         carManager.stopAllEngines();
         truckManager.stopAllEngines();

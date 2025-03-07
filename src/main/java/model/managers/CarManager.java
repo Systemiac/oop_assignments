@@ -1,8 +1,9 @@
 package model.managers;
 
-import model.vehicles.CarPrototype;
-import model.interfaces.ITurbo;
 import java.util.List;
+
+import model.interfaces.ITurbo;
+import model.vehicles.CarPrototype;
 
 public class CarManager extends VehicleManager<CarPrototype> {
 
@@ -25,6 +26,11 @@ public class CarManager extends VehicleManager<CarPrototype> {
             }
         }
     }
-
-    
+    public void update(List<CarPrototype> newCars) {
+        for (CarPrototype car : newCars) {
+            if (!vehicles.contains(car)) {
+                vehicles.add(car);
+            }
+        }
+    }
 }

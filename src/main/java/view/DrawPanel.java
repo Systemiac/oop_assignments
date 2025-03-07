@@ -3,23 +3,22 @@ package view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.List;
+
 import javax.swing.JPanel;
 
 import model.gamelogic.GameHandler;
+import model.interfaces.IObserver;
 import model.managers.CarManager;
 import model.managers.ImageHandler;
 import model.managers.TruckManager;
 import model.managers.WorkshopManager;
+import model.timer.SimulationManager;
 import model.vehicles.CarPrototype;
 import model.vehicles.TruckPrototype;
 import model.workshops.CarWorkshop;
-import model.interfaces.IObserver;
-import model.timer.SimulationManager;
-
-
 
 public class DrawPanel extends JPanel implements IObserver {
-   
 
     private ImageHandler imageHandler;
     private GameHandler gameHandler;
@@ -28,7 +27,8 @@ public class DrawPanel extends JPanel implements IObserver {
     private WorkshopManager workshopManager;
     private SimulationManager simulationManager;
 
-    public DrawPanel(int x, int y, TruckManager truckManager, CarManager carManager, WorkshopManager workshopManager, SimulationManager simulationManager) {
+    public DrawPanel(int x, int y, TruckManager truckManager, CarManager carManager, WorkshopManager workshopManager,
+            SimulationManager simulationManager) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
@@ -41,18 +41,27 @@ public class DrawPanel extends JPanel implements IObserver {
         this.simulationManager.addObserver(this);
     }
 
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (CarPrototype car : carManager.getVehicles()) {
-            g.drawImage(imageHandler.getCarImages().get(carManager.getVehicles().indexOf(car)),
-                    (int) car.getMovement().getPosX(),
-                    (int) car.getMovement().getPosY(), null);
+
+        List<CarPrototype> cars = carManager.getVehicles();
+        for (int i = 0; i < cars.size(); i++) {
+            if (i < imageHandler.getCarImages().size()) {
+                g.drawImage(imageHandler.getCarImages().get(i),
+                        (int) cars.get(i).getMovement().getPosX(),
+                        (int) cars.get(i).getMovement().getPosY(), null);
+            }
         }
-        for (TruckPrototype truck : truckManager.getVehicles()) {
-            g.drawImage(imageHandler.getTruckImages().get(truckManager.getVehicles().indexOf(truck)),
-                    (int) truck.getMovement().getPosX(),
-                    (int) truck.getMovement().getPosY(), null);
+
+        List<TruckPrototype> trucks = truckManager.getVehicles();
+        for (int i = 0; i < trucks.size(); i++) {
+            if (i < imageHandler.getTruckImages().size()) { 
+                g.drawImage(imageHandler.getTruckImages().get(i),
+                        (int) trucks.get(i).getMovement().getPosX(),
+                        (int) trucks.get(i).getMovement().getPosY(), null);
+            }
         }
 
         for (CarWorkshop workshop : workshopManager.getWorkshops()) {
@@ -69,5 +78,4 @@ public class DrawPanel extends JPanel implements IObserver {
         repaint();
     }
 
-	
 }
