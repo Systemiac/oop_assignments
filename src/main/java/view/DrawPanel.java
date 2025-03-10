@@ -45,11 +45,12 @@ public class DrawPanel extends JPanel implements IObserver {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        imageHandler.loadAllImages();
 
         List<CarPrototype> cars = carManager.getVehicles();
         for (int i = 0; i < cars.size(); i++) {
             if (i < imageHandler.getCarImages().size()) {
-                g.drawImage(imageHandler.getCarImages().get(i),
+                g.drawImage(imageHandler.getCarImages().get(cars.get(i)),
                         (int) cars.get(i).getMovement().getPosX(),
                         (int) cars.get(i).getMovement().getPosY(), null);
             }
@@ -58,7 +59,7 @@ public class DrawPanel extends JPanel implements IObserver {
         List<TruckPrototype> trucks = truckManager.getVehicles();
         for (int i = 0; i < trucks.size(); i++) {
             if (i < imageHandler.getTruckImages().size()) { 
-                g.drawImage(imageHandler.getTruckImages().get(i),
+                g.drawImage(imageHandler.getTruckImages().get(trucks.get(i)),
                         (int) trucks.get(i).getMovement().getPosX(),
                         (int) trucks.get(i).getMovement().getPosY(), null);
             }

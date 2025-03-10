@@ -3,6 +3,7 @@ package model.managers;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -15,25 +16,28 @@ import view.DrawPanel;
 public class ImageHandler {
     private List<CarPrototype> cars;
     private List<TruckPrototype> trucks;
-    private List<BufferedImage> carImages = new ArrayList<>();
-    private List<BufferedImage> truckImages = new ArrayList<>();
+    private HashMap<CarPrototype,BufferedImage> carImages = new HashMap<>();
+    private HashMap<TruckPrototype,BufferedImage> truckImages = new HashMap<>();
     private BufferedImage workshopImage;
 
     public ImageHandler(List<CarPrototype> cars, List<TruckPrototype> trucks){
         this.cars=cars;
         this.trucks=trucks;
+    }
+
+    public void loadAllImages(){
         loadCarImages();
         loadTruckImages();
         loadWorkshopImage();
     }
 
 
-    private void loadCarImages() {
+    public void loadCarImages() {
         try {
             if (!cars.isEmpty()) {
 
-                for (VehiclePrototype vehicle : cars) {
-                    carImages.add(ImageIO.read(DrawPanel.class.getResourceAsStream(vehicle.getImagePath())));
+                for (CarPrototype car : cars) {
+                    carImages.put(car,ImageIO.read(DrawPanel.class.getResourceAsStream(car.getImagePath())));
                 }
             }
 
@@ -42,12 +46,12 @@ public class ImageHandler {
         }
     }
 
-    private void loadTruckImages() {
+    public void loadTruckImages() {
         try {
             if (!trucks.isEmpty()) {
 
-                for (VehiclePrototype vehicle : trucks) {
-                    truckImages.add(ImageIO.read(DrawPanel.class.getResourceAsStream(vehicle.getImagePath())));
+                for (TruckPrototype truck : trucks) {
+                    truckImages.put(truck,ImageIO.read(DrawPanel.class.getResourceAsStream(truck.getImagePath())));
                 }
             }
 
@@ -56,7 +60,7 @@ public class ImageHandler {
         }
     }
 
-    private void loadWorkshopImage(){
+    public void loadWorkshopImage(){
         try {
             workshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("/pics/VolvoBrand.jpg"));
 
@@ -65,11 +69,11 @@ public class ImageHandler {
         }
     }
 
-    public List<BufferedImage> getCarImages(){
+    public HashMap<CarPrototype,BufferedImage> getCarImages(){
         return carImages;
     }
 
-    public List<BufferedImage> getTruckImages(){
+    public HashMap<TruckPrototype,BufferedImage> getTruckImages(){
         return truckImages;
     }
 

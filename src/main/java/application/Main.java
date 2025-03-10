@@ -24,8 +24,8 @@ public class Main {
         List<CarPrototype> cars = new ArrayList<>();
         List<TruckPrototype> trucks = new ArrayList<>();
 
-        cars.add(CarFactory.createCar());
-        cars.add(CarFactory.createCar());
+        cars.add(CarFactory.createCar(0));
+        cars.add(CarFactory.createCar(1));
 
         trucks.add(new Scania(new Point(0, 200)));
 
